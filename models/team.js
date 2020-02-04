@@ -7,7 +7,12 @@ const teamSchema = new Schema({
   fullName: {type:String},
   teamId:{type:String},
   log:{type:String},
-  favorites:{type:Boolean}
+  favorites:{type:Boolean},
+  user: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Account'
+  }
 });
 
 const Team = mongoose.model("Team", teamSchema);
