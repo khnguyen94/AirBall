@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src="./Air_Ball_Logo.jpg" className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to Air Ball</h2>
         </div>
 
