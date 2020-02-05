@@ -25,15 +25,22 @@ module.exports = {
       })
     )
   },
-  // Deletes the book with the given id
-  deleteBook: function(id) {
-    return axios.delete("/api/books/" + id);
+  getStats: function(gameId) {
+    return (
+      unirest.get(`https://api-nba-v1.p.rapidapi.com/statistics/games/gameId/${gameId}`)
+      .headers({
+	    "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+	    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+      })
+    )
   },
-  // Saves a book to the database
-  saveBook: function(bookData) {
-    return axios.post("/api/books", bookData);
-  },
-  searchBook: function(title) {
-    return axios.get(`https://www.googleapis.com/books/v1/volumes?q=${title}`);
+  getTeamFromId: function(teamId) {
+    return (
+      unirest.get(`https://api-nba-v1.p.rapidapi.com/teams/teamId/${teamId}`)
+      .headers({
+	    "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+	    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+      })
+    )
   }
 };
