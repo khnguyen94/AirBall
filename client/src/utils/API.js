@@ -3,34 +3,39 @@ import sportAPI from "./sportAPI";
 
 export default{
 
+  // get all teams from api
   getAllTeam: function(){
-    sportAPI.getAllTeams();
+    return sportAPI.getAllTeams();
   },
 
+  // get favorite team from database
   getFavoriteTeam: function(){
-    // routing
+    return axios.get("/api/team");
   },
 
+  // Add team to favorite
   addTeamToFavorite: function(teamData){
-    // Add teamId to database
+    return axios.post("/api/team", teamData);
   },
 
-  removeTeamFromFavorite: function(teamId){
-    // REMOVE team from favorite
+  // remove team from favorite
+  removeTeamFromFavorite: function(id){
+    return axios.delete("/api/team/" + id);
   },
 
+  // get all games of one team from api
   getAllGames: function(teamId){
-    sportAPI.getAllGames(teamId);
+    return sportAPI.getAllGames(teamId);
   },
 
+  // add game to favorite
   addGameToFavorite: function(gameData){
-    // database call
+    return axios.post("/api/game", gameData);
   },
 
-  removeGameFromFavorite: function(gameId){
-    // database call
+  // remove game from favorite
+  removeGameFromFavorite: function(id){
+    return axios.delete("/api/game" + id);
   },
 
-  // create user 
-  
 }

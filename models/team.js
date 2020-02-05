@@ -8,11 +8,11 @@ const teamSchema = new Schema({
   teamId:{type:String},
   log:{type:String},
   favorites:{type:Boolean},
-  user: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Account'
-  }
+  // user: {
+  //   type: Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'Account'
+  // }
 });
 
 const Team = mongoose.model("Team", teamSchema);

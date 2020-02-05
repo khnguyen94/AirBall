@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default{
     getAllTeams: function(){
-
+        
     },
 
     getTeamWithId: function(teamId){
