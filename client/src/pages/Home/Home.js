@@ -25,7 +25,10 @@ class Home extends Component {
 
             <Jumbotron>
               <div>
-                <SimpleImageSlider width={896} height={504} images={images} />
+                <SimpleImageSlider 
+                width={896} 
+                height={504} 
+                images={images} />
               </div>
             </Jumbotron>
           </Col>
