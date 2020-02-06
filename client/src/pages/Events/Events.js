@@ -16,7 +16,7 @@ class Events extends Component {
 
   // When the component mounts, load all Events and save them to this.state.events
   componentDidMount() {
-    // this.loadEvents();
+    this.loadEvents();
   }
 
   // Loads all events and sets them to this.state.events
@@ -46,7 +46,7 @@ class Events extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>Air Ball - {name_of_webpage_here} </h1>
+              <h1>Air Ball - {name_of_webpage_here} </h1> 
             </Jumbotron>
 
             {this.state.events.length ? (
