@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import logo from "./logo.jpg";
+import Events from "./pages/Events";
+import Nav from "./components/Nav";
 import "./App.css";
 
 class App extends Component {
@@ -8,11 +10,14 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Welcome to Air Ball</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+
+        <div>
+          <Nav />
+          <Events />
+        </div>
+
       </div>
     );
   }
