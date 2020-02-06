@@ -3,6 +3,9 @@ import logo from "./logo.jpg";
 import Events from "./pages/Events";
 import Nav from "./components/Nav";
 import "./App.css";
+import { Login } from "./components/Login/login";
+import { Register } from "./components/Login/register";
+
 
 class App extends Component {
   render() {
@@ -16,6 +19,14 @@ class App extends Component {
         <div>
           <Nav />
           <Events />
+
+        </div>
+
+        <div className="Login">
+          <div className="container">
+            {isLogginActive && <Login containerRef={(ref) => this.current = ref} />} {!isLogginActive && <Register containerRef={(ref) => this.current = ref} />}
+          </div>
+          {/* <rightLogin current={current} containerRef={ref => this.rightLogin = ref} onCLick={this.changeState.bind(this)} /> */}
         </div>
 
       </div>
