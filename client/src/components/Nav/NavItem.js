@@ -1,13 +1,13 @@
 import React from "react";
 
-class ListItem extends React.Component {
+class NavItem extends React.Component {
   render({children}) {
     return (
       <div>
-        <li className="listItem">{children}</li>
+        <li className="navItem">{children}</li>
       </div>
     );
   }
 }
 
-export default ListItem; 
+export default NavItem; 
