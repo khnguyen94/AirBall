@@ -1,5 +1,5 @@
 import React from "react";
-import ListItem from "../Nav/NavItem"; 
+import NavItem from "../Nav/NavItem"; 
 
 class Nav extends React.Component {
   constructor(props) {
@@ -10,29 +10,16 @@ class Nav extends React.Component {
     this.faveTeams = []
   }
 
-
-<List>
-                {this.state.books.map(book => {
-                  return (
-                    <ListItem key={book._id}>
-                      <a href={"/books/" + book._id}>
-                        <strong>
-                          {book.title} by {book.author}
-                        </strong>
-                      </a>
-                      <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-                    </ListItem>
-                  );
-                })}
-              </List>
-
-
   render() {
     return (
-      <div class="nav">
+      <div className="nav">
         {this.state.allTeams.map(team => {
           return (
-
+            <NavItem key={team._id}>
+              <a href={"/teams/" + team._id}>
+                {team.name} 
+              </a>
+            </NavItem>
           )
         })}
 
