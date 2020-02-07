@@ -41,6 +41,7 @@ class Home extends Component {
                 We are pioneering sports analytics into being more more than a game of numbers. Stay up to date with AirBall's visual game summaries. Fans can see their favorite teams and players performance in a simple, graphic presentation.
                 </p>
               </div>
+              </div>
             </Jumbotron>
           </Col>
         </Row>

@@ -1,9 +1,9 @@
 import React from "react";
 
-function Jumbotron(children) {
+function Jumbotron({ children }) {
   return (
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
+    <div className="jumbotron jumbotron-fluid">
+      <div className="container">
         
         {children}
         
