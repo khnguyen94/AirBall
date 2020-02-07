@@ -1,18 +1,53 @@
 import React from "react";
+import ListItem from "../Nav/NavItem"; 
 
 class Nav extends React.Component {
-  constructor(props) {}
+  constructor(props) {
+    super(props); 
+    this.allTeams = {
+
+    }; 
+    this.faveTeams = []
+  }
+
+
+<List>
+                {this.state.books.map(book => {
+                  return (
+                    <ListItem key={book._id}>
+                      <a href={"/books/" + book._id}>
+                        <strong>
+                          {book.title} by {book.author}
+                        </strong>
+                      </a>
+                      <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+                    </ListItem>
+                  );
+                })}
+              </List>
+
 
   render() {
     return (
       <div class="nav">
-        <ul>
+        {this.state.allTeams.map(team => {
+          return (
+
+          )
+        })}
+
+
+
+        
+        {/* <ul>
           <li className="nav-link">
             <a href="#">Home</a>
           </li>
 
           <li className="nav-link dropdown-toggle">
             <a href="#">Favorites</a>
+
+
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" href="#">
@@ -34,7 +69,7 @@ class Nav extends React.Component {
           <li className="nav-link">
             <a href="#">Calendars</a>
           </li>
-        </ul>
+        </ul> */}
       </div>
     );
   }
