@@ -21,8 +21,21 @@ class Home extends Component {
         <Row>
           <Col size="md-9 sm-12">
             <Jumbotron>
+<<<<<<< HEAD
               <div className="sliderDiv">
                 <SimpleImageSlider width={896} height={504} images={images} />
+=======
+              <h1>Air Ball - {name_of_webpage_here} </h1>
+            </Jumbotron>
+
+            <Jumbotron>
+              <div className="sliderDiv">
+              <div>
+                <SimpleImageSlider 
+                width={896} 
+                height={504} 
+                images={images} />
+>>>>>>> 011b6cec09274b7b1fb0465843c59af0f2f92d84
               </div>
 
               <div className="summaryDiv">
@@ -42,6 +55,10 @@ class Home extends Component {
                   performance in a simple, graphic presentation.
                 </p>
               </div>
+<<<<<<< HEAD
+=======
+              </div>
+>>>>>>> 011b6cec09274b7b1fb0465843c59af0f2f92d84
             </Jumbotron>
           </Col>
         </Row>

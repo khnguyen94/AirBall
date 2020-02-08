@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from "react";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
@@ -98,6 +99,21 @@ class Nav extends Component {
       </Container>
     );
   }
+=======
+import React from "react";
+
+function Nav() {
+  return (
+    <div className="nav">
+    <ul>
+      <li className="home"><a href="#">Home</a></li>
+      <li className="tutorials"><a href="#">Favorites</a></li>
+      <li className="about"><a href="#">All Teams</a></li>
+      <li className="news"><a href="#">Calendars</a></li>
+    </ul>
+  </div>
+  );
+>>>>>>> 011b6cec09274b7b1fb0465843c59af0f2f92d84
 }
 
 export default Nav;

@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import logo from "./Logo/Air_Ball_Logo.jpg";
+<<<<<<< HEAD
 import { Col, Row, Container } from "../src/components/Grid";
+=======
+import Events from "./pages/Events/Events";
+import Nav from "./components/Nav";
+>>>>>>> 011b6cec09274b7b1fb0465843c59af0f2f92d84
 import "./App.css";
 import Nav from "./components/Nav";
 import Jumbotron from "./components/Jumbotron";
@@ -21,6 +26,7 @@ const sliderImages = [
   }
 ];
 
+<<<<<<< HEAD
 class App extends Component {
   render() {
     const settings = {
@@ -104,6 +110,21 @@ class App extends Component {
       </Container>
     );
   }
+=======
+function App() {
+  return (
+      <div className="App">
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h2>Welcome to Air Ball</h2>
+        </div>
+        <div>
+          <Nav />
+          <Events />
+        </div>
+      </div>
+  );
+>>>>>>> 011b6cec09274b7b1fb0465843c59af0f2f92d84
 }
 
 export default App;
