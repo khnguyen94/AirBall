@@ -1,11 +1,11 @@
 import React from "react";
 
-function Jumbotron({props}) {
+function Jumbotron({children}) {
   return (
     <div
       className="jumbotron"
     >
-      {props}
+      {children}
     </div>
   );
 }

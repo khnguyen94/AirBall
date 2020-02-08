@@ -1,119 +1,90 @@
-<<<<<<< HEAD
 import React, { Component } from "react";
+import "./Nav.css";
 import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
-import NavItem from "../Nav/NavItem";
-
-class NavItem extends Component {
-  render() {
-    return (
-      <div>
-        <li className="navItem">{this.props.teamName}</li>
-      </div>
-    );
-  }
-}
 
 class Nav extends Component {
-  // Set initial state of our Navigation component
-  state = {
-    allTeamsList: [],
-    allTeamName: "",
-    faveTeamsList: [],
-    faveTeamName: ""
-  };
+  // Set initial states for: showAllTeams and showFavoriteTeams
+  constructor(props) {
+    super(props);
+    this.state = {
+      showAllTeams: false,
+      showFavoriteTeams: false
+    };
+  }
 
   // Function for when the component mounts, load all the faveTeams to this.state.faveTeams
   // Then load all the the rest of the teams to this.state.allTeams
   componentDidMount() {
     this.loadFaveTeams();
-    this.loadAllTeams();
+    // this.loadAllTeams();
   }
 
-  // Function to load all Favorite Teams and set them to this.state.faveTeams
+  // Function to loadFavoriteTeams from DB
   loadFaveTeams = () => {
-    API.getFaveTeams()
-      .then(res => this.setState({ faveTeamsList: res.data, faveTeamName: "" }))
+    API.getFavoriteTeam()
+      .then(res => this.setState({ allTeam: res.data }))
       .catch(err => console.log(err));
   };
 
-  // Function to load all Remaining Teams and set them to this.state.allTeams
-  loadAllTeams = () => {
-    API.getAllTeams()
-      .then(res => this.setState({ allTeamsList: res.data, allTeamName: "" }))
-      .catch(err => console.log(err));
-  };
+  // Function to loadAllTeams from DB
+  // loadAllTeams = () => {
+  //   API.getAllTeam()
+  //     .then(res => this.setState({ faveTeams: res.data }))
+  //     .catch(err => console.log(err));
+  // };
 
-  // Function to delete a faveTeam from faveTeamsLists
-  deleteFaveTeam = id => {
-    API.deleteFaveTeam(id).then(res => this.loadFaveTeams())
-    .catch(err => console.log(err));
-  };
-
-  // Function to handle saveFaveTeam, save the faveTeam 
-  // Then reload the faveTeams from the database
-  handleSaveFaveTeam = event => {
-    event.preventDefault();
-    API.saveFaveTeam({
-      teamName: this.state.faveTeamName
-    })
-    .then(res => this.loadFaveTeams())
-    .catch(err => console.log(err));
-
+  // Function to change state of showAllTeams property
+  showAllTeams() {
+    this.setState({
+      showAllTeams: !this.state.showAllTeams
+    });
   }
 
-  render(props) {
-    const navLinks = [
-      { label: "Home", link: "#home", active: true },
-      { label: "Favorite Teams", link: "#" },
-      { label: "All Teams", link: "#" },
-      { label: "Calendar", link: "#" }
-    ];
+  // Function to change state of showFaveTeams property
+  showFaveTeams() {
+    this.setState({
+      showFavoriteTeams: !this.state.showFavoriteTeams
+    });
+  }
 
-    const allTeams = {
-      lakers: {
-        location: "Los Angeles",
-        teamName: "Lakers"
-      },
-      timberwolves: {
-        location: "Minnesota",
-        teamName: "Timberwolves"
-      }
-    };
+  // Render function
+  render() {
+    // Define variable that will create html markups of each link
+    let navLinksMarkup = this.props.links.map((link, index) => {
+      let navLinkMarkupActive = link.active ? (
+        <a className="navLink navLink-Active" href={link.link}>
+          {link.label}
+        </a>
+      ) : (
+        <a className="navLink" href={link.link}>
+          {link.label}
+        </a>
+      );
+
+      return (
+        <li key={index} className="navListItem">
+          {navLinkMarkupActive}
+        </li>
+      );
+    });
 
     return (
-      <Container fluid>
-        <Row>
-          <Col size="md-4 sm-12">
-            <NavItem teamName={} />
-          </Col>
-        </Row>
+      <nav className="nav">
+        <h1
+          style={{
+            backgroundImage: "url(" + this.props.logo + ")"
+          }}
+          className="navLogo"
+        >
+          Epic Co.
+        </h1>
 
-        {this.state.teams.map(team => {
-          return (
-            <NavItem key={team._id}>
-              <a href={"/teams/" + team._id}>{team.name}</a>
-            </NavItem>
-          );
-        })}
-      </Container>
+        <div className="navRight">
+          <ul className="navList">{navLinksMarkup}</ul>
+        </div>
+      </nav>
     );
   }
-=======
-import React from "react";
-
-function Nav() {
-  return (
-    <div className="nav">
-    <ul>
-      <li className="home"><a href="#">Home</a></li>
-      <li className="tutorials"><a href="#">Favorites</a></li>
-      <li className="about"><a href="#">All Teams</a></li>
-      <li className="news"><a href="#">Calendars</a></li>
-    </ul>
-  </div>
-  );
->>>>>>> 011b6cec09274b7b1fb0465843c59af0f2f92d84
 }
 
 export default Nav;
