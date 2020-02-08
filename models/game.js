@@ -24,6 +24,6 @@ const gameSchema = new Schema({
   // }
 });
 
-const Game = mongoose.model("Team", gameSchema);
+const Game = mongoose.model("Game", gameSchema);
 
 module.exports = Game;

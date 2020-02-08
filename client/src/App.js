@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./logo.jpg";
+import logo from "./Logo/Air_Ball_Logo.jpg";
 import Events from "./pages/Events";
 import Nav from "./components/Nav";
 import "./App.css";
