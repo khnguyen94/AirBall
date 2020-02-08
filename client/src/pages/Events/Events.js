@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
-import DeleteBtn from "../../components/DeleteBtn";
+//import DeleteBtn from "../../components/DeleteBtn";
 import API from "../../utils/API";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
@@ -8,7 +8,7 @@ import { List, ListItem } from "../../components/List";
 class Events extends Component {
   // Setting our component's initial state
   state = {
-    event: [],
+    eventArray: [],
     awayTeam: "",
     homeTeam: "",
     gameDateTime: ""
@@ -16,15 +16,15 @@ class Events extends Component {
 
   // When the component mounts, load all Events and save them to this.state.events
   componentDidMount() {
-    this.loadEvents();
+    //this.loadEvents();
   }
 
   // Loads all events and sets them to this.state.events
   loadEvents = () => {
-    API.getEvents()
+    API.getAllGames()
       .then(res =>
         this.setState({
-          events: res.data,
+          eventArray: res.data,
           awayTeam: "",
           homeTeam: "",
           gameDateTime: ""
@@ -46,12 +46,12 @@ class Events extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>Air Ball - {name_of_webpage_here} </h1> 
+              <h1>Air Ball</h1>
             </Jumbotron>
 
-            {this.state.events.length ? (
+            {this.state.eventArray.length ? (
               <List>
-                {this.state.events.map(event => {
+                {this.state.eventArray.map(event => {
                   return (
                     <ListItem key={event._id}>
                       <a href={"/events/" + event._id}>
@@ -59,14 +59,13 @@ class Events extends Component {
                           {event.awayTeam} vs.  {event.homeTeam} @ {event.gameDateTime}
                         </strong>
                       </a>
-                      <DeleteBtn onClick={() => this.deleteEvent(event._id)} />
                     </ListItem>
                   );
                 })}
               </List>
             ) : (
-              <h3>No Event Results to Display</h3>
-            )}
+                <h3>No Event Results to Display</h3>
+              )}
 
           </Col>
         </Row>
