@@ -8,7 +8,6 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-const nbaTeams = require("./data/nbaTeams.json");
 
 
 // Create an array to hold all slider Images
@@ -70,6 +69,8 @@ class App extends Component {
   render() {
     return (
       <Container fluid>
+        <br />
+        
         <Nav logo={logo} links={navLinks} />
 
         <br />

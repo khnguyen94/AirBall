@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./Nav.css";
 import API from "../../utils/API";
+import NavList from "./NavList";
+var nbaTeams = require("../../data/nbaTeams.json");
 
 class Nav extends Component {
   // Set initial states for: showAllTeams and showFavoriteTeams
@@ -49,9 +51,23 @@ class Nav extends Component {
 
   // Render function
   render() {
-    // Define variable that will create html markups of each link
+    // Define function that will render the list of NBA teams only if state.showAllTeams is true
+    let displayAllTeamsList = this.state.showAllTeams ? (
+      <NavList teams={nbaTeams} />
+    ) : (
+      ""
+    );
+
+    // Define function that will render the list of NBA teams only if state.showFaveTeams is true
+    let displayFaveTeamsList = this.state.showFavoriteTeams ? (
+      <NavList teams={nbaTeams} />
+    ) : (
+      ""
+    );
+
+    // Define function that will create html markups of each link
     let navLinksMarkup = this.props.links.map((link, index) => {
-      let navLinkMarkupActive = link.active ? (
+      let navLinkMarkupActive = link.hasList ? (
         <a className="navLink navLink-Active" href={link.link}>
           {link.label}
         </a>
@@ -76,7 +92,7 @@ class Nav extends Component {
           }}
           className="navLogo"
         >
-          Epic Co.
+          Air Ball
         </h1>
 
         <div className="navRight">
