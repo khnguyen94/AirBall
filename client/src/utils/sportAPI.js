@@ -3,9 +3,6 @@ import unirest from "unirest";
 
 export default {
 
-    getaAllTeam: function () {
-
-    },
     // Get the Team Info
     getTeam: function (name) {
         return (

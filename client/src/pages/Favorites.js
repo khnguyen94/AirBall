@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import Jumbotron from "../../components/Jumbotron";
-import DeleteBtn from "../../components/DeleteBtn";
-import API from "../../utils/API";
-import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
+import Jumbotron from "../components/Jumbotron";
+import DeleteBtn from "../components/DeleteBtn";
+import API from "../utils/API";
+import { Col, Row, Container } from "../components/Grid";
+import { List, ListItem } from "../components/List";
 
 class Events extends Component {
     // Setting our component's initial state
@@ -16,20 +16,24 @@ class Events extends Component {
 
     // When the component mounts, load all Events and save them to this.state.events
     componentDidMount() {
-        //this.loadEvents();
+        this.loadEvents();
     }
 
     // Loads all events and sets them to this.state.events
     loadEvents = () => {
-        API.getAllGames()
-            .then(res =>
-                this.setState({
-                    eventArray: res.data,
-                    awayTeam: "",
-                    homeTeam: "",
-                    gameDateTime: ""
-                })
-            )
+        API.getAllGames(6)
+            .then((res) => {
+                let lastGameIndex = this.findLastGame(res.body.api.games);
+                for (let i = 0; i < 5; i++) {
+                    this.setState({
+                        eventArray: this.eventArray.push(res.body.api.games[lastGameIndex + i]),
+                        awayTeam: "",
+                        homeTeam: "",
+                        gameDateTime: ""
+                    })
+                }
+                console.log(this.eventArray);
+            })
             .catch(err => console.log(err));
     };
 
@@ -47,6 +51,8 @@ class Events extends Component {
           }
         }
     }
+
+
 
     render() {
         return (
