@@ -59,15 +59,18 @@
 
 
 .navLogo {
-    text-indent: -9999999px;
     display: inline-block;
-    height: 60px;
-    width: 60px;
+    height: 80px;
+    width: 80px;
     background-size: cover 100%;
     background-repeat: no-repeat;
     background-position: center;
-    margin: 0;
-    float: left;
+    margin-left: 0px;
+}
+
+h3 {
+    text-align: center;
+    margin-top: 20px;
 }
 
 .navSearchBtn {

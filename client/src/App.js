@@ -76,6 +76,10 @@ class App extends Component {
         <br />
 
         <Row>
+          <Col size="md-4 sm-12">
+            <Jumbotron>FILLER</Jumbotron>
+          </Col>
+
           <Col size="md-8 sm-12">
             <Jumbotron
               style={{

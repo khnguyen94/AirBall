@@ -92,8 +92,9 @@ class Nav extends Component {
           }}
           className="navLogo"
         >
-          Air Ball
         </h1>
+
+        <h3> Air Ball</h3>
 
         <div className="navRight">
           <ul className="navList">{navLinksMarkup}</ul>
