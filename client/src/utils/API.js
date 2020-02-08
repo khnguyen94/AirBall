@@ -3,11 +3,6 @@ import sportAPI from "./sportAPI";
 
 export default{
 
-  // get all teams from api
-  getAllTeam: function(){
-    return sportAPI.getAllTeam();
-  },
-
   // get favorite team from database
   getFavoriteTeam: function(){
     return axios.get("/api/team");
