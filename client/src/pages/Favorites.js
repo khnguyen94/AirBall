@@ -4,6 +4,9 @@ import DeleteBtn from "../components/DeleteBtn";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
+import EventCard from "../components/EventCard";
+import Moment from "moment";
+import moment from "moment";
 
 class Events extends Component {
     // Setting our component's initial state
@@ -21,18 +24,21 @@ class Events extends Component {
 
     // Loads all events and sets them to this.state.events
     loadEvents = () => {
+        console.log("in loadEvents");
         API.getAllGames(6)
             .then((res) => {
+                console.log(res.body.api.games);
                 let lastGameIndex = this.findLastGame(res.body.api.games);
-                for (let i = 0; i < 5; i++) {
+                console.log(`Last Game Index: ${lastGameIndex}`)
+                let tempArray = res.body.api.games.slice(lastGameIndex, lastGameIndex + 4)
+                console.log(`temp array: ${tempArray}`);
                     this.setState({
-                        eventArray: this.eventArray.push(res.body.api.games[lastGameIndex + i]),
+                        eventArray: [...this.state.eventArray, ...tempArray],
                         awayTeam: "",
                         homeTeam: "",
                         gameDateTime: ""
                     })
-                }
-                console.log(this.eventArray);
+                console.log(JSON.stringify(this.state.eventArray));
             })
             .catch(err => console.log(err));
     };
@@ -64,19 +70,20 @@ class Events extends Component {
                         </Jumbotron>
 
                         {this.state.eventArray.length ? (
-                            <List>
+                            <div>
                                 {this.state.eventArray.map(event => {
+
                                     return (
-                                        <ListItem key={event._id}>
-                                            <a href={"/events/" + event._id}>
-                                                <strong>
-                                                    {event.awayTeam} vs.  {event.homeTeam} @ {event.gameDateTime}
-                                                </strong>
-                                            </a>
-                                        </ListItem>
+                                        <EventCard 
+                                            key={event.gameId}
+                                            homeTeam={event.vTeam.nickName}
+                                            awayTeam={event.hTeam.nickName}
+                                            gameTime={moment.utc(event.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
+                                        >
+                                        </EventCard>
                                     );
                                 })}
-                            </List>
+                            </div>
                         ) : (
                                 <h3>No Event Results to Display</h3>
                             )}
