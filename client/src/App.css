@@ -22,3 +22,40 @@
   font-size: large;
 }
 
+.Slider-div {
+  width: 60%; 
+  text-align: center;
+  display: inline-block;
+}
+
+.Slider-image {
+  width: 100%;
+}
+
+.slides .slick-prev,
+.slides .slick-next {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+}
+
+
+.slides {
+  position: relative;
+}
+
+.slides .slick-prev,
+.slides .slick-next {
+  position: absolute;
+  top: 50%;
+  z-index:1;
+}
+
+.slides .slick-prev {
+  left: 5%;
+}
+
+.slides .slick-next {
+  right: 5%;
+}
+
