@@ -38,5 +38,9 @@ export default{
     return axios.delete("/api/game" + id);
   },
 
+  // create account
+  addAccount:function(accountData){
+    return axios.post("/api/account");
+  }
 }
 

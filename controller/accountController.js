@@ -8,7 +8,5 @@ module.exports = {
       .create(req.body)
       .then(dbAccount => res.json(dbAccount))
       .catch(err => res.status(422).json(err));
-  },
-
-  
+  }
 }
