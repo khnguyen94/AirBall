@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import logo from "./Logo/Air_Ball_Logo.jpg";
-import Events from "./pages/Events";
+import Events from "./pages/Events/Events";
 import Nav from "./components/Nav";
 import "./App.css";
 import { Login } from "./components/Login/login";
 import { Register } from "./components/Login/register";
 
 
-class App extends Component {
-  render() {
-    return (
+function App() {
+  return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to Air Ball</h2>
         </div>
-
         <div>
           <Nav />
           <Events />
@@ -28,10 +26,8 @@ class App extends Component {
           </div>
           {/* <rightLogin current={current} containerRef={ref => this.rightLogin = ref} onCLick={this.changeState.bind(this)} /> */}
         </div>
-
       </div>
-    );
-  }
+  );
 }
 
 export default App;
