@@ -22,12 +22,9 @@
     "axios": "^0.19.2",
     "express": "^4.16.3",
     "if-env": "^1.0.4",
-<<<<<<< HEAD
-    "passport": "^0.4.1"
-=======
     "mongoose": "^5.8.11",
+    "passport": "^0.4.1",
     "react-simple-image-slider": "^1.0.2",
     "unirest": "^0.6.0"
->>>>>>> 594dda4521233dd4ce513fa52a011adf53e29f83
   }
 }
