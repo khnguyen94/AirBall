@@ -8,7 +8,9 @@
 }
 
 .App-appname {
-  text-align: center;
+  float: left;
+  margin: 20px;
+  padding: 10px;
 }
 
 .App-header {
@@ -24,12 +26,18 @@
 
 .Slider-div {
   width: 60%; 
+  height: 50%;
   text-align: center;
+}
+
+.slick-slider {
   display: inline-block;
 }
 
 .Slider-image {
   width: 100%;
+  height: auto;
+  object-fit: cover;
 }
 
 .slides .slick-prev,
@@ -41,7 +49,7 @@
 
 
 .slides {
-  position: relative;
+  position: center;
 }
 
 .slides .slick-prev,

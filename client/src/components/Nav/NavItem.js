@@ -1,13 +1,7 @@
 import React from "react";
 
-class NavItem extends React.Component {
-  render({children}) {
-    return (
-      <div>
-        <li className="navItem">{children}</li>
-      </div>
-    );
-  }
+NavItem = ({children}) => {
+    return <li className="list-group-item">{children}</li>;
 }
 
-export default NavItem; 
+export default NavItem;

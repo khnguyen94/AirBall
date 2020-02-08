@@ -2,36 +2,22 @@ import React, { Component } from "react";
 import logo from "./Logo/Air_Ball_Logo.jpg";
 import { Col, Row, Container } from "../src/components/Grid";
 import "./App.css";
+import Nav from "./components/Nav";
 import Jumbotron from "./components/Jumbotron";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const sliderImages = [
   {
     name: "Image 1",
-    url:
-      "https://images.unsplash.com/photo-1532040683343-edbde6dd500d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80"
+    url: "https://wallpaperfm.com/img/original/3/6/a/49159.jpg"
   },
   {
     name: "Image 2",
     url:
-      "https://images.unsplash.com/photo-1574290139543-b3adb08494c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-  },
-  {
-    name: "Image 3",
-    url:
-      "https://www.si.com/.image/t_share/MTY4MTY3NzE0Njc2ODExMDI1/kobe-lebron-scoringjpg.jpg"
-  },
-  {
-    name: "Image 4",
-    url:
-      "https://img.bleacherreport.net/img/images/photos/002/485/178/97032933_crop_north.jpg?h=533&w=800&q=70&crop_x=center&crop_y=top"
-  },
-  {
-    name: "Image 5",
-    url:
-      "https://usatftw.files.wordpress.com/2018/05/ap_aptopix_heat_bucks_basketball.jpg?w=1000&h=600&crop=1"
+      "https://images.wallpaperscraft.com/image/paul_pierce_washington_wizards_basketball_nba_103099_1280x720.jpg"
   }
 ];
 
@@ -56,28 +42,46 @@ class App extends Component {
               <img src={logo} className="App-logo" alt="logo" />
             </Col>
 
-            <Col size="md-4 sm-9">
+            <Col size="md-2 sm-3">
               <h2 className="App-appname">Air Ball</h2>
+            </Col>
+
+            <Col size="md-9 sm-12">
+              <ul className="navBarList">
+                <li className="navBarItem">
+                  <a className="navBarItemLink" href="#">Home</a>
+                </li>
+              </ul>
             </Col>
           </div>
         </Row>
 
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+
         <Row>
-          <Col size="md-9 sm-12">
+          <Col size="md-6 sm-12">
             <Jumbotron>
               <div className="Slider-div">
                 <Slider {...settings}>
                   {sliderImages.map(image => {
                     return (
                       <div>
-                        <img className="Slider-image" src={image.url} alt="image"/>
+                        <img
+                          className="Slider-image"
+                          src={image.url}
+                          alt="image"
+                        />
                       </div>
                     );
                   })}
                 </Slider>
               </div>
 
-              <div className="summaryDiv">
+              <div className="Summary-div">
                 <p>
                   AirBall is the premiere sports notification system. Game
                   summaries can be delivered straight to your email at a
