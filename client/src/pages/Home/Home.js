@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import { Col, Row, Container } from "../../components/Grid";
+import Nav from "../../components/Nav/Nav"; 
 import SimpleImageSlider from "react-simple-image-slider";
 
 class Home extends Component {
@@ -18,23 +19,20 @@ class Home extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
-            <Jumbotron>
-              <h1>Air Ball - {name_of_webpage_here} </h1>
-            </Jumbotron>
+          <Col size="md-3 sm-12">
+            <Nav>
 
-            <Jumbotron>
-<<<<<<< HEAD
+            </Nav>
+          </Col>
+
+          <Col size="md-9 sm-12">
+          <Jumbotron>
               <div className="sliderDiv">
-=======
-              <div>
->>>>>>> 60863ab7244d73e356fdf9352bb424cd8922c432
                 <SimpleImageSlider 
                 width={896} 
                 height={504} 
                 images={images} />
               </div>
-<<<<<<< HEAD
 
               <div className="summaryDiv">
                 <p>
@@ -45,14 +43,13 @@ class Home extends Component {
                 We are pioneering sports analytics into being more more than a game of numbers. Stay up to date with AirBall's visual game summaries. Fans can see their favorite teams and players performance in a simple, graphic presentation.
                 </p>
               </div>
-=======
->>>>>>> 60863ab7244d73e356fdf9352bb424cd8922c432
             </Jumbotron>
           </Col>
+        
         </Row>
       </Container>
     );
   }
 }
 
-export default Events;
+export default Home;

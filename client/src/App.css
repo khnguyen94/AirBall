@@ -4,11 +4,16 @@
 
 .App-logo {
   height: 80px;
+  float: left;
+}
+
+.App-appname {
+  text-align: center;
 }
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 100px;
   padding: 20px;
   color: white;
 }

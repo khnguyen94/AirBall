@@ -1,31 +1,22 @@
 import React from "react";
-import NavItem from "../Nav/NavItem"; 
+import NavItem from "../Nav/NavItem";
 
 class Nav extends React.Component {
-  constructor(props) {
-    super(props); 
-    this.allTeams = {
-
-    }; 
-    this.faveTeams = []
-  }
+  state = {
+    teams: []
+  };
 
   render() {
     return (
       <div className="nav">
-        {this.state.allTeams.map(team => {
+        {this.state.teams.map(team => {
           return (
             <NavItem key={team._id}>
-              <a href={"/teams/" + team._id}>
-                {team.name} 
-              </a>
+              <a href={"/teams/" + team._id}>{team.name}</a>
             </NavItem>
-          )
+          );
         })}
 
-
-
-        
         {/* <ul>
           <li className="nav-link">
             <a href="#">Home</a>
