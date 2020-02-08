@@ -8,7 +8,7 @@ import "./FavoriteTeamBtn.css";
 class FavoriteTeamBtn extends Component {
   // Set initial state for this component
   state = {
-    isFavorite: false
+    isFavoriteTeam: false
   };
 
   // Funtion to switch isFavorite to the other option depending on current state
@@ -20,14 +20,14 @@ class FavoriteTeamBtn extends Component {
       isFavorite: marked
     };
 
-    this.setState({ isFavorite: true })
+    this.setState({ isFavoriteTeam: true })
       .then(API.addTeamToFavorite(newFavoriteTeam))
       .catch(err => console.log(err));
   };
 
   render() {
     // destructure isFavorite
-    const { isFavorite } = this.state;
+    const { isFavoriteTeam } = this.state;
 
     return (
       <Container>
