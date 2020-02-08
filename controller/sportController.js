@@ -31,11 +31,5 @@ module.exports = {
       .then(dbGame => dbGame.remove())
       .then(dbGame => res.json(dbGame))
       .catch(err => res.status(422).json(err));
-  },
-  createUser: function(req, res){
-    db.Account
-      .create(req.body)
-      .then(dbAccount => res.json(dbAccount))
-      .catch(err => res.status(422).json(err));
   }
 }
