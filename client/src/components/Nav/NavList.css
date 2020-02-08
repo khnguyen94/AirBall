@@ -1,0 +1,14 @@
+.nav__submenu {
+    font-weight: 300;
+    text-transform: none;
+    display: none;
+    position: absolute;
+    width: $submenu-width;
+    background-color: $color-blue;
+  }
+      
+  .nav__submenu-item {
+    &:hover {
+      background: rgba(#000, 0.1);
+    }
+  }
