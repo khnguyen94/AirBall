@@ -6,8 +6,14 @@ const teamSchema = new Schema({
   city: {type:String},
   fullName: {type:String},
   teamId:{type:String},
-  log:{type:String},
+  logo:{type:String},
   favorites:{type:Boolean},
+  shortName:{type:String},
+  nickName:{type:String},
+  favorite:{
+    type:Boolean,
+    default:false
+  }
   // user: {
   //   type: Schema.Types.ObjectId,
   //   required: true,

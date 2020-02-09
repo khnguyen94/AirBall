@@ -8,7 +8,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import API from "./utils/API";
+import { set } from "mongoose";
+import { PageItem } from "react-bootstrap";
 
 // Create an array to hold all slider Images
 const sliderImages = [
@@ -66,12 +68,87 @@ const settings = {
 };
 
 class App extends Component {
+  componentDidMount() {
+
+  }
+
+
+  initializeData = () => {
+    /** use set to ensure unique team is inserted to database, as sportAPI might return duplicate team */
+    let setTeamId = new Set();
+    API.getAllTeam().then(dbData => {
+      dbData.data.forEach(oneTeam => {
+        setTeamId.add(oneTeam.teamId);
+      })
+    });
+
+    for (let i = 1; i <= 50; i++) {
+      API.getTeam(i).then(function (teamData) {
+        teamData.data.api.teams.forEach(oneTeam => 
+          {
+            if (!setTeamId.has(oneTeam.teamId)){
+              API.saveTeam(oneTeam);
+              setTeamId.add(oneTeam.teamId);              
+              console.log(oneTeam);
+            }
+          });
+      });
+    }
+  }
+
+  handleOneTimeClick = event => {
+    this.initializeData();
+  }
+
+  handleTestEvent = event => {
+    //test get all team api
+    switch (event.target.value) {
+      case "getallteam":
+        API.getAllTeam().then(data => {
+          console.log(data);
+        });
+        break;
+      case "saveteamtofav":
+        API.updateTeamFavorite(36, true).then(data => {
+          console.log(data);
+        });
+        break;
+      case "getallgame":
+        API.getAllGames(40).then(data => {
+          console.log(data);
+        })
+        break;
+      case "getfavgame":
+        API.getAllFavoriteGames().then(data => {
+          console.log(data);
+        })
+        break;
+      case "favoritegame":
+        API.addGameToFavorite({gameId: 1001}).then(data => {
+          console.log(data);
+        })
+        break;
+      case "unfavoritegame":
+        break;
+    }
+
+  }
+
   render() {
     return (
       <Container fluid>
+        <div>
+          <button onClick={this.handleOneTimeClick}>Click Once</button>
+          <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
+          <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
+          <button onClick={this.handleTestEvent} value="getallgame">Get All Games</button>
+          <button onClick={this.handleTestEvent} value="getfavgame">Get All Favorite Games</button>
+          <button onClick={this.handleTestEvent} value="favoritegame">Save Game To Favorite</button>
+          <button onClick={this.handleTestEvent} value="unfavoritegame">Remove Game From Favorite</button>
+        </div>
+
         <br />
-        
-        <Nav logo={logo} links={navLinks} />
+        <Nav logo={logo} links={navLinks}/>
 
         <br />
 
