@@ -3,9 +3,12 @@ import logo from "./Logo/Air_Ball_Logo.jpg";
 import Events from "./pages/Events/Events";
 import Nav from "./components/Nav";
 import "./App.css";
-import { Login } from "./components/Login/login";
-import { Register } from "./components/Login/register";
+// import { Login } from "./components/Login/login";
+// import { Register } from "./components/Login/register";
+import SignInBTN from "./components/SignInBTN";
+import RegisterBTN from "./components/RegisterBTN";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
@@ -21,13 +24,18 @@ function App() {
       </div>
 
       <div className="Login">
+
         <div className="container">
-          <Login /> <Register containerRef={(ref) => this.current = ref} />
+          <SignInBTN />
+          <RegisterBTN />
+
         </div>
-        {/* <rightLogin current={current} containerRef={ref => this.rightLogin = ref} onCLick={this.changeState.bind(this)} /> */}
+
       </div>
     </div>
   );
 }
 
 export default App;
+
+
