@@ -69,35 +69,7 @@ const settings = {
 
 class App extends Component {
   componentDidMount() {
-
-  }
-
-
-  initializeData = () => {
-    /** use set to ensure unique team is inserted to database, as sportAPI might return duplicate team */
-    let setTeamId = new Set();
-    API.getAllTeam().then(dbData => {
-      dbData.data.forEach(oneTeam => {
-        setTeamId.add(oneTeam.teamId);
-      })
-    });
-
-    for (let i = 1; i <= 50; i++) {
-      API.getTeam(i).then(function (teamData) {
-        teamData.data.api.teams.forEach(oneTeam => 
-          {
-            if (!setTeamId.has(oneTeam.teamId)){
-              API.saveTeam(oneTeam);
-              setTeamId.add(oneTeam.teamId);              
-              console.log(oneTeam);
-            }
-          });
-      });
-    }
-  }
-
-  handleOneTimeClick = event => {
-    this.initializeData();
+    API.intializeTeamData();
   }
 
   handleTestEvent = event => {
@@ -116,19 +88,21 @@ class App extends Component {
       case "getallgame":
         API.getAllGames(40).then(data => {
           console.log(data);
-        })
+        });
         break;
       case "getfavgame":
-        API.getAllFavoriteGames().then(data => {
-          console.log(data);
-        })
+        API.getAllFavoriteGames(console.log);
         break;
       case "favoritegame":
-        API.addGameToFavorite({gameId: 1001}).then(data => {
+        API.addGameToFavorite({gameId: 1005}).then(data => {
           console.log(data);
-        })
+        });
         break;
       case "unfavoritegame":
+        API.removeGameFromFavorite(1001).then(data => {
+          console.log("APPJS - removegamefromfavorite")
+          console.log(data);
+        });
         break;
     }
 
@@ -138,7 +112,6 @@ class App extends Component {
     return (
       <Container fluid>
         <div>
-          <button onClick={this.handleOneTimeClick}>Click Once</button>
           <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
           <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
           <button onClick={this.handleTestEvent} value="getallgame">Get All Games</button>

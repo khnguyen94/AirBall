@@ -19,15 +19,17 @@ export default {
     },
 
     getStats: function (gameId) {
-        axios({
-            "method": "GET",
-            "url": `https://api-nba-v1.p.rapidapi.com/statistics/games/gameId/${gameId}`,
-            "headers": {
-                "content-type": "application/octet-stream",
-                "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-                "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
-            }
-        })
+        return (
+            axios({
+                "method": "GET",
+                "url": `https://api-nba-v1.p.rapidapi.com/statistics/games/gameId/${gameId}`,
+                "headers": {
+                    "content-type": "application/octet-stream",
+                    "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+                    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+                }
+            })
+        )
     },
 
     getTeamFromId: function (teamId) {
@@ -44,12 +46,26 @@ export default {
         )
     },
 
-    getSchedule: function (id) {
+    getGameFromId: function (gameId) {
+        return (
+            axios({
+                "method": "GET",
+                "url": `https://api-nba-v1.p.rapidapi.com/games/gameId/${gameId}`,
+                "headers": {
+                    "content-type": "application/octet-stream",
+                    "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+                    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+                }
+            })
+        )
+    },
+
+    getSchedule: function (teamId) {
         console.log("sportAPI - getSchedule");
         return (
             axios({
                 "method": "GET",
-                "url": `https://api-nba-v1.p.rapidapi.com/games/teamId/${id}`,
+                "url": `https://api-nba-v1.p.rapidapi.com/games/teamId/${teamId}`,
                 "headers": {
                     "content-type": "application/octet-stream",
                     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",

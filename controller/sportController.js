@@ -35,8 +35,7 @@ module.exports = {
   },
   removeGame: function(req, res){
     db.Game
-      .findById({gameId:req.params.id})
-      .then(dbGame => dbGame.remove())
+      .findOneAndDelete({gameId:req.params.id})
       .then(dbGame => res.json(dbGame))
       .catch(err => res.status(422).json(err));
   }

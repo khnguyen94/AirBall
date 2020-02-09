@@ -28,6 +28,7 @@ export default{
 
   // remove game from favorite
   removeGameFromFavorite: function(id){
-    return axios.delete("/api/game" + id);
+    console.log("DBAPI - removegamefrom favorites");
+    return axios.delete("/api/game/" + id);
   }
 }
