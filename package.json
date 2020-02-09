@@ -28,9 +28,6 @@
     "moment": "^2.24.0",
     "mongoose": "^5.8.11",
     "passport": "^0.4.1",
-<<<<<<< HEAD
-    "react-simple-image-slider": "^1.0.2",
-=======
     "passport-local": "^1.0.0",
     "popper.js": "^1.16.1",
     "react": "^16.12.0",
@@ -39,7 +36,6 @@
     "react-router-dom": "^5.1.2",
     "react-slick": "^0.25.2",
     "slick-carousel": "^1.8.1",
->>>>>>> 4c0e590baaf3620cae8132ccd59c2575660a68e6
     "unirest": "^0.6.0"
   }
 }

@@ -25,7 +25,7 @@ const RegisterBTN = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
           </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="warning" onClick={handleClose}>
                         Create Account
           </Button>
                 </Modal.Footer>

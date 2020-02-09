@@ -27,7 +27,7 @@ const SignInBTN = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
           </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="warning" onClick={handleClose}>
                         Login
           </Button>
                 </Modal.Footer>
