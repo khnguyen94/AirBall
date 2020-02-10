@@ -12,6 +12,10 @@ import { PageItem } from "react-bootstrap";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SignInBTN from "./components/SignInBTN";
+import RegisterBTN from "./components/RegisterBTN";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Create an array to hold all slider Images
 const sliderImages = [
@@ -25,7 +29,6 @@ const sliderImages = [
       "https://images.wallpaperscraft.com/image/paul_pierce_washington_wizards_basketball_nba_103099_1280x720.jpg"
   }
 ];
-
 
 // Create an array of NavLinks
 const navLinks = [
@@ -104,6 +107,8 @@ class App extends Component {
       <Router>
         <Container fluid>
           <div>
+            <RegisterBTN />
+            <SignInBTN />
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
             <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
             <button onClick={this.handleTestEvent} value="getallgame">Get All Games</button>
@@ -127,3 +132,5 @@ class App extends Component {
   }
 }
 export default App;
+
+
