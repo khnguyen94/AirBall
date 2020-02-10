@@ -1,4 +1,5 @@
 import React from "react";
+import FavoriteButtonNew from "../FavoriteButtonNew";
 //import FavoriteBtn from "../FavoriteGameBtn";
 //import { FormBtn } from "../Form";
 
@@ -15,6 +16,7 @@ function EventCard(props) {
           {props.gameTime}
         </p>
       </div>
+      <FavoriteButtonNew></FavoriteButtonNew>
       {/*<FormBtn onClick={props.onClickFunc} buttonStyle={props.buttonStyle}>{props.buttonTitle}</FormBtn> */}
     </div>
   );

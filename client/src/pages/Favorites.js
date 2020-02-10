@@ -30,14 +30,14 @@ class Events extends Component {
                 console.log(res.body.api.games);
                 let lastGameIndex = this.findLastGame(res.body.api.games);
                 console.log(`Last Game Index: ${lastGameIndex}`)
-                let tempArray = res.body.api.games.slice(lastGameIndex, lastGameIndex + 4)
+                let tempArray = res.body.api.games.slice(lastGameIndex, lastGameIndex + 5)
                 console.log(`temp array: ${tempArray}`);
-                    this.setState({
-                        eventArray: [...this.state.eventArray, ...tempArray],
-                        awayTeam: "",
-                        homeTeam: "",
-                        gameDateTime: ""
-                    })
+                this.setState({
+                    eventArray: [...this.state.eventArray, ...tempArray],
+                    awayTeam: "",
+                    homeTeam: "",
+                    gameDateTime: ""
+                })
                 console.log(JSON.stringify(this.state.eventArray));
             })
             .catch(err => console.log(err));
@@ -51,10 +51,10 @@ class Events extends Component {
     };
 
     findLastGame(gameArray) {
-        for(let i=0; i < gameArray.length; i++) {
-          if(gameArray[i].statusGame === "Scheduled") {
-            return i;
-          }
+        for (let i = 0; i < gameArray.length; i++) {
+            if (gameArray[i].statusGame === "Scheduled") {
+                return i;
+            }
         }
     }
 
@@ -64,31 +64,33 @@ class Events extends Component {
         return (
             <Container fluid>
                 <Row>
-                    <Col size="md-6">
+                    <Col size="md-12">
                         <Jumbotron>
                             <h1>Air Ball</h1>
                         </Jumbotron>
+                    </Col>
+                    {this.state.eventArray.length ? (
 
-                        {this.state.eventArray.length ? (
-                            <div>
-                                {this.state.eventArray.map(event => {
+            
+                            this.state.eventArray.map(event => {
 
-                                    return (
-                                        <EventCard 
+                                return (
+                                    <Col size="md-6">
+                                        <EventCard
                                             key={event.gameId}
                                             homeTeam={event.vTeam.nickName}
                                             awayTeam={event.hTeam.nickName}
                                             gameTime={moment.utc(event.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
                                         >
                                         </EventCard>
-                                    );
-                                })}
-                            </div>
-                        ) : (
-                                <h3>No Event Results to Display</h3>
-                            )}
+                                        </Col>
+                                        );
+                                    })
 
-                    </Col>
+                            ) : (
+                            <h3>No Event Results to Display</h3>
+                        )}
+
                 </Row>
             </Container>
         );
