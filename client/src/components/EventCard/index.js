@@ -16,8 +16,7 @@ function EventCard(props) {
           {props.gameTime}
         </p>
       </div>
-      <FavoriteButtonNew></FavoriteButtonNew>
-      {/*<FormBtn onClick={props.onClickFunc} buttonStyle={props.buttonStyle}>{props.buttonTitle}</FormBtn> */}
+      <FavoriteButtonNew onClick={props.onClick} favorited={props.favorited}></FavoriteButtonNew>
     </div>
   );
 }

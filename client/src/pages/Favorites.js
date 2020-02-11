@@ -6,15 +6,12 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import EventCard from "../components/EventCard";
 import Moment from "moment";
-import moment from "moment";
 
 class Events extends Component {
     // Setting our component's initial state
     state = {
         eventArray: [],
-        awayTeam: "",
-        homeTeam: "",
-        gameDateTime: ""
+        favGames: []
     };
 
     // When the component mounts, load all Events and save them to this.state.events
@@ -25,20 +22,15 @@ class Events extends Component {
     // Loads all events and sets them to this.state.events
     loadEvents = () => {
         console.log("in loadEvents");
-        API.getAllGames(6)
+        API.getFavGamesNoAPI()
             .then((res) => {
-                console.log(res.body.api.games);
-                let lastGameIndex = this.findLastGame(res.body.api.games);
-                console.log(`Last Game Index: ${lastGameIndex}`)
-                let tempArray = res.body.api.games.slice(lastGameIndex, lastGameIndex + 5)
-                console.log(`temp array: ${tempArray}`);
-                this.setState({
-                    eventArray: [...this.state.eventArray, ...tempArray],
-                    awayTeam: "",
-                    homeTeam: "",
-                    gameDateTime: ""
-                })
-                console.log(JSON.stringify(this.state.eventArray));
+                console.log(res.data);
+                let gamesArray = [];
+                res.data.map((game => {
+                    gamesArray.push(game.gameId);
+                    return true;
+                }))
+                this.setState({ favGames: gamesArray });
             })
             .catch(err => console.log(err));
     };
@@ -50,15 +42,55 @@ class Events extends Component {
             .catch(err => console.log(err));
     };
 
+    getTeamsNextGames(teamName) {
+        Api.getTeamFromName("bulls")
+            .then((resposne) => {
+                API.getAllGames(response.data.api.teams)
+                    .then((res) => {
+                        console.log(res.data.api);
+                        let lastGameIndex = this.findLastGame(res.data.api.games);
+                        console.log(`Last Game Index: ${lastGameIndex}`)
+                        let tempArray = res.data.api.games.slice(lastGameIndex, lastGameIndex + 5)
+                        console.log(`temp array: ${tempArray}`);
+                        this.setState({
+                            eventArray: [...this.state.eventArray, ...tempArray]
+                        })
+                        console.log(JSON.stringify(this.state.eventArray));
+                    })
+                    .catch(err => console.log(err));
+            })
+            .catch(err => console.log(err));
+    }
+
     findLastGame(gameArray) {
         for (let i = 0; i < gameArray.length; i++) {
             if (gameArray[i].statusGame === "Scheduled") {
                 return i;
             }
         }
-    }
+    };
 
-
+    handleSubmit(gameId, favorited) {
+        if (favorited) {
+            let gameData = {
+                gameId: gameId
+            }
+            API.addGameToFavorite(gameData)
+                .then(res => {
+                    console.log("Game added to favorites!");
+                    this.loadEvents();
+                })
+                .catch(err => console.log(err));
+        }
+        else {
+            API.removeGameFromFavorite(gameId)
+                .then(res => {
+                    console.log("Game deleted from favorites!")
+                    this.loadEvents();
+                })
+                .catch(err => console.log(err));
+        }
+    };
 
     render() {
         return (
@@ -71,23 +103,25 @@ class Events extends Component {
                     </Col>
                     {this.state.eventArray.length ? (
 
-            
-                            this.state.eventArray.map(event => {
 
-                                return (
-                                    <Col size="md-6">
-                                        <EventCard
-                                            key={event.gameId}
-                                            homeTeam={event.vTeam.nickName}
-                                            awayTeam={event.hTeam.nickName}
-                                            gameTime={moment.utc(event.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
-                                        >
-                                        </EventCard>
-                                        </Col>
-                                        );
-                                    })
+                        this.state.eventArray.map(event => {
 
-                            ) : (
+                            return (
+                                <Col size="md-6">
+                                    <EventCard
+                                        key={event.gameId}
+                                        homeTeam={event.vTeam.nickName}
+                                        awayTeam={event.hTeam.nickName}
+                                        gameTime={Moment.utc(event.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
+                                        onClick={() => this.handleSubmit(event.gameId, this.favGames.includes(event.gameId))}
+                                        favorited={this.favGames.includes(event.gameId)}
+                                    >
+                                    </EventCard>
+                                </Col>
+                            );
+                        })
+
+                    ) : (
                             <h3>No Event Results to Display</h3>
                         )}
 

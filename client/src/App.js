@@ -34,7 +34,7 @@ const sliderImages = [
 const navLinks = [
   {
     label: "Home",
-    link: "#",
+    link: "/",
     hasList: false,
     active: true
   },
@@ -63,7 +63,7 @@ const navLinks = [
 
 class App extends Component {
   componentDidMount() {
-    API.intializeTeamData();
+    //API.intializeTeamData();
   }
 
   handleTestEvent = event => {
