@@ -35,20 +35,6 @@ class Nav extends Component {
   //     .catch(err => console.log(err));
   // };
 
-  // Function to change state of showAllTeams property
-  showAllTeams() {
-    this.setState({
-      showAllTeams: !this.state.showAllTeams
-    });
-  }
-
-  // Function to change state of showFaveTeams property
-  showFaveTeams() {
-    this.setState({
-      showFavoriteTeams: !this.state.showFavoriteTeams
-    });
-  }
-
   // Render function
   render() {
     // Define function that will render the list of NBA teams only if state.showAllTeams is true
@@ -67,7 +53,7 @@ class Nav extends Component {
 
     // Define function that will create html markups of each link
     let navLinksMarkup = this.props.links.map((link, index) => {
-      let navLinkMarkupActive = link.hasList ? (
+      let navLinkMarkupActive = link.active ? (
         <a className="navLink navLink-Active" href={link.link}>
           {link.label}
         </a>
@@ -97,7 +83,13 @@ class Nav extends Component {
         <h3> Air Ball</h3>
 
         <div className="navRight">
-          <ul className="navList">{navLinksMarkup}</ul>
+          <ul className="navList">
+            {navLinksMarkup}
+            </ul>
+        </div>
+
+        <div className="navUserDisp">
+
         </div>
       </nav>
     );

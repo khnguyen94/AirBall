@@ -8,7 +8,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import SideBar from "./components/SideBar/SideBar";
+import API from "../src/utils";
 
 // Create an array to hold all slider Images
 const sliderImages = [
@@ -29,6 +30,7 @@ const navLinks = [
     label: "Home",
     link: "#",
     hasList: false,
+    teamList: [],
     active: true
   },
   {
@@ -49,6 +51,7 @@ const navLinks = [
     label: "Calendar",
     link: "#",
     hasList: false,
+    teamList: [],
     active: false
   }
 ];
@@ -66,18 +69,38 @@ const settings = {
 };
 
 class App extends Component {
+  // Set inital state for: teams
+  constructor() {
+    super();
+    state = {
+      teams: []
+    };
+  }
+
+  // Function for when the component mounts, load all the teams to this.state.teams
+  componentDidMount() {
+    this.loadAllTeams();
+  }
+
+  // Function to load all teams from db
+  loadAllTeams() {
+    API.getAllTeam()
+    .then(res => this.setState({ teams: res.data }))
+    .catch(err => console.log(err))
+  }
+
   render() {
     return (
       <Container fluid>
         <br />
-        
+
         <Nav logo={logo} links={navLinks} />
 
         <br />
 
         <Row>
           <Col size="md-4 sm-12">
-            <Jumbotron>FILLER</Jumbotron>
+            <Jumbotron></Jumbotron>
           </Col>
 
           <Col size="md-8 sm-12">
