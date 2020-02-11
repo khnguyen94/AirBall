@@ -3,13 +3,19 @@ import logo from "./Logo/Air_Ball_Logo.jpg";
 import { Col, Row, Container } from "../src/components/Grid";
 import "./App.css";
 import Nav from "./components/Nav";
-import Jumbotron from "./components/Jumbotron";
-import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import SideBar from "./components/SideBar/SideBar";
-import API from "../src/utils";
+import API from "./utils/API";
+import { set } from "mongoose";
+import { PageItem } from "react-bootstrap";
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import SignInBTN from "./components/SignInBTN";
+import RegisterBTN from "./components/RegisterBTN";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Create an array to hold all slider Images
 const sliderImages = [
@@ -42,7 +48,7 @@ const navLinks = [
   },
   {
     label: "Favorite Teams",
-    link: "#",
+    link: "favorites",
     hasList: true,
     list: [],
     active: false
@@ -56,95 +62,86 @@ const navLinks = [
   }
 ];
 
-// Create a settings object for the imageSlider
-const settings = {
-  dots: true,
-  fade: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  arrows: true,
-  slidesToScroll: 1,
-  className: "slides"
-};
 
 class App extends Component {
-  // Set inital state for: teams
-  constructor() {
-    super();
-    state = {
-      teams: []
-    };
+  state = {
+    teams: []
   }
-
-  // Function for when the component mounts, load all the teams to this.state.teams
   componentDidMount() {
-    this.loadAllTeams();
+    // API.intializeTeamData();
+    API.getAllTeam().then(data => {
+      this.setState({
+        teams:data.data
+      });
+      console.log(this.state.teams);
+    })
   }
 
-  // Function to load all teams from db
-  loadAllTeams() {
-    API.getAllTeam()
-    .then(res => this.setState({ teams: res.data }))
-    .catch(err => console.log(err))
+  handleTestEvent = event => {
+    //test get all team api
+    switch (event.target.value) {
+      case "getallteam":
+        API.getAllTeam().then(data => {
+          console.log(data);
+        });
+        break;
+      case "saveteamtofav":
+        API.updateTeamFavorite(36, true).then(data => {
+          console.log(data);
+        });
+        break;
+      case "getallgame":
+        API.getAllGames(40).then(data => {
+          console.log(data);
+        });
+        break;
+      case "getfavgame":
+        API.getAllFavoriteGames(console.log);
+        break;
+      case "favoritegame":
+        API.addGameToFavorite({ gameId: 1005 }).then(data => {
+          console.log(data);
+        });
+        break;
+      case "unfavoritegame":
+        API.removeGameFromFavorite(1001).then(data => {
+          console.log("APPJS - removegamefromfavorite")
+          console.log(data);
+        });
+        break;
+    }
+
   }
 
   render() {
     return (
-      <Container fluid>
-        <br />
+      <Router>
+        <Container fluid>
+          <div>
+            <RegisterBTN />
+            <SignInBTN />
+            <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
+            <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
+            <button onClick={this.handleTestEvent} value="getallgame">Get All Games</button>
+            <button onClick={this.handleTestEvent} value="getfavgame">Get All Favorite Games</button>
+            <button onClick={this.handleTestEvent} value="favoritegame">Save Game To Favorite</button>
+            <button onClick={this.handleTestEvent} value="unfavoritegame">Remove Game From Favorite</button>
+          </div>
 
-        <Nav logo={logo} links={navLinks} />
+          <br />
+          <Nav logo={logo} links={navLinks} />
 
-        <br />
-
-        <Row>
-          <Col size="md-4 sm-12">
-            <Jumbotron></Jumbotron>
-          </Col>
-
-          <Col size="md-8 sm-12">
-            <Jumbotron
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "50%",
-                transform: "translate(-50%, -50%)"
-              }}
-            >
-              <Slider {...settings}>
-                {sliderImages.map(image => {
-                  return (
-                    <div>
-                      <img className="sliderImage" src={image.url} />
-                    </div>
-                  );
-                })}
-              </Slider>
-
-              <div className="Summary-div">
-                <p>
-                  AirBall is the premiere sports notification system. Game
-                  summaries can be delivered straight to your email at a
-                  customized schedule. While the final score matters most, as
-                  sports fans, we all know there is a library of supporting
-                  numbers and statistics to understanding what goes on during
-                  those 48 minutes.
-                </p>
-
-                <p>
-                  We are pioneering sports analytics into being more more than a
-                  game of numbers. Stay up to date with AirBall's visual game
-                  summaries. Fans can see their favorite teams and players
-                  performance in a simple, graphic presentation.
-                </p>
-              </div>
-            </Jumbotron>
-          </Col>
-        </Row>
-      </Container>
+          <br />
+          <Home teams={this.state.teams}/>
+          <Switch>
+            <Route exact path="/"/>
+            <Route exact path="/favorites" component={Favorites} />
+          </Switch>
+        </Container>
+      </Router>
     );
   }
 }
-
 export default App;
+
+

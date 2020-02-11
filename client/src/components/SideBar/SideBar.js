@@ -1,35 +1,81 @@
-import React, { Component } from "react";
-import Nav from "react-bootstrap/Nav";
-import NavDropDown from "react-bootstrap/NavDropdown";
-import API from "../../utils/API";
-var nbaTeams = require("../../data/nbaTeams.json");
+import React from "react";
+import { Container } from "../Grid";
+import "../SideBar/SideBar.css";
 
-function Sidebar() {
-  // Function to filter res.data and renderFaveTeams
+function SideBar(props) {
+  // Function to render all of the teams from allTeamsFiltered
+  let renderAllTeams = props.teams
+    .filter(team => {
+      return team.favorite === false;
+    })
+    .map((team, index) => {
+      return (
+        <li>
+          <a eventKey={index} href="#">
+            {team.fullName}
+          </a>
+        </li>
+      );
+    });
 
-  // Function to filter res.data and renderAllTeams (what teams are leftover)
+  // Function to render all the favorite teams from faveTeamsFiltered
+  let renderFaveTeams = props.teams
+    .filter(team => {
+      return team.favorite === true;
+    })
+    .map((team, index) => {
+      return (
+        <li>
+          <a eventKey={index} href="#">
+            {team.fullName}
+          </a>
+        </li>
+      );
+    });
 
   return (
     <Container>
-      <Nav defaultActiveKey="/home" className="flex-column">
-        <Nav.Link href="/home">Home</Nav.Link>
+      <div className="wrapper">
+        <nav id="sidebar">
+          <ul class="list-unstyled components">
+            <li class="active">
+              <li>
+                <a href="#">Home</a>
+              </li>
 
-        <NavDropdown title="All Teams" id="nav-dropdown">
-          <NavDropdown.Item eventKey="4.1">Team 1</NavDropdown.Item>
-          <NavDropdown.Item eventKey="4.2">Team 2</NavDropdown.Item>
-          <NavDropdown.Item eventKey="4.3">Team 3</NavDropdown.Item>
-          <NavDropdown.Item eventKey="4.4">Team 4</NavDropdown.Item>
-        </NavDropdown>
+              <a
+                href="#homeSubmenu"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+              >
+                All Teams
+              </a>
+              <ul class="collapse list-unstyled" id="homeSubmenu">
+                {renderAllTeams}
+              </ul>
+            </li>
 
-        <NavDropdown title="All Teams" id="nav-dropdown">
-          <NavDropdown.Item eventKey="4.1">Team 1</NavDropdown.Item>
-          <NavDropdown.Item eventKey="4.2">Team 2</NavDropdown.Item>
-          <NavDropdown.Item eventKey="4.3">Team 3</NavDropdown.Item>
-          <NavDropdown.Item eventKey="4.4">Team 4</NavDropdown.Item>
-        </NavDropdown>
+            <li>
+              <a
+                href="#pageSubmenu"
+                data-toggle="collapse"
+                aria-expanded="false"
+                class="dropdown-toggle"
+              >
+                Favorite Teams
+              </a>
+              <ul class="collapse list-unstyled" id="pageSubmenu">
+                {renderFaveTeams}
+              </ul>
+            </li>
 
-        <Nav.Link eventKey="link-3">Calendar</Nav.Link>
-      </Nav>
+            <li>
+              <a href="#">Calendar</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </Container>
   );
 }

@@ -35,6 +35,7 @@ class Nav extends Component {
   //     .catch(err => console.log(err));
   // };
 
+
   // Render function
   render() {
     // Define function that will render the list of NBA teams only if state.showAllTeams is true
