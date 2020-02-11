@@ -43,8 +43,8 @@ class Events extends Component {
     };
 
     getTeamsNextGames(teamName) {
-        Api.getTeamFromName("bulls")
-            .then((resposne) => {
+        API.getTeamFromName("bulls")
+            .then((response) => {
                 API.getAllGames(response.data.api.teams)
                     .then((res) => {
                         console.log(res.data.api);
