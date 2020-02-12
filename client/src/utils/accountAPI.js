@@ -6,9 +6,11 @@ export default {
     addAccount: function (accountData) {
         return axios.post("/api/account/signup", accountData);
     },
-    signInAccount: function(accountData){
-        console.log("accountAPI - signin");
-        // return axios.post("/api/account/login", accountData);
+    logInAccount: function(accountData){
         axios.post("/api/account/login", accountData);
+    },
+    logOutAccount: function(){
+        console.log("accountAPI - LOGOUT");
+        axios.delete("/api/account/logout");
     }
 }

@@ -39,10 +39,13 @@ export default {
   },
 
   // Add/remove team to/from favorite - done OPEN TO USRE
-  updateTeamFavorite: function (teamId, isFavorite) {
-    return dbAPI.updateTeamFavorite(teamId, isFavorite);
+  addTeamToFavorite: function (teamId) {
+    return dbAPI.addTeamToFavorite(teamId);
   },
 
+  removeTeamFromFavorite: function(teamId){
+    return dbAPI.removeTeamFromFavorite(teamId);
+  },
   // get all games of one team from api - done OPEN TO USER
   getAllGames: function (teamId) {
     return sportAPI.getSchedule(teamId);
@@ -75,10 +78,14 @@ export default {
     return accountAPI.addAccount(userData);
   },
 
-  signin: function(userData){
+  login: function(userData){
     console.log("API - signin");
-    accountAPI.signInAccount(userData);
+    accountAPI.logInAccount(userData);
     // axios.post("/api/account/login", userData);
+  },
+
+  logout: function(){
+    accountAPI.logOutAccount();
   }
 }
 

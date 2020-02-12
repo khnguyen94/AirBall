@@ -72,7 +72,12 @@ class App extends Component {
         });
         break;
       case "saveteamtofav":
-        API.updateTeamFavorite(36, true).then(data => {
+        API.addTeamToFavorite(36).then(data => {
+          console.log(data);
+        });
+        break;
+      case "unfavoriteteam":
+        API.removeTeamFromFavorite(36).then(data => {
           console.log(data);
         });
         break;
@@ -97,19 +102,20 @@ class App extends Component {
         break;
       case "register":
         API.register({
-          username: "jane789",
-          password: "12345",
-          email: "a@d",
-          firstName: "Jane",
+          username: "bob123",
+          password: "123456",
+          email: "aa@c",
+          firstName: "Bob",
           lastName: "Brown"
         }).then(user => {
           console.log(user);
         });
         break;
       case "signin":
-        API.signin({username: "jane789",password: "12345"}).then(user => {
-          console.log(user);
-        })
+        API.login({username: "bob123",password: "123456"});
+        break;
+      case "logout":
+        API.logout();
         break;
     }
   }
@@ -121,12 +127,14 @@ class App extends Component {
           <div>
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
             <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
+            <button onClick={this.handleTestEvent} value="unfavoriteteam">Remove Team From Favorite</button>
             <button onClick={this.handleTestEvent} value="getallgame">Get All Games</button>
             <button onClick={this.handleTestEvent} value="getfavgame">Get All Favorite Games</button>
             <button onClick={this.handleTestEvent} value="favoritegame">Save Game To Favorite</button>
             <button onClick={this.handleTestEvent} value="unfavoritegame">Remove Game From Favorite</button>
             <button onClick={this.handleTestEvent} value="register">Register User</button>
             <button onClick={this.handleTestEvent} value="signin">SignIn User</button>
+            <button onClick={this.handleTestEvent} value="logout">LogOut User</button>
           </div>
 
           <br />

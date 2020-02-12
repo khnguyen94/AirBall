@@ -14,7 +14,7 @@ const accountSchema = new Schema({
   },
   email: {
     type:String,
-    unique: true
+    //unique: true
   },
   firstName:{
     type:String
