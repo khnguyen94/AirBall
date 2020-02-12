@@ -60,17 +60,17 @@
 
 .navLogo {
     display: inline-block;
-    height: 80px;
-    width: 80px;
+    height: 40px;
+    width: 40px;
     background-size: cover 100%;
     background-repeat: no-repeat;
     background-position: center;
-    margin-left: 0px;
+    margin: 5px;
 }
 
 h3 {
     text-align: center;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .navSearchBtn {
