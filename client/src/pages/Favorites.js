@@ -17,11 +17,11 @@ class Events extends Component {
     // When the component mounts, load all Events and save them to this.state.events
     componentDidMount() {
         this.loadEvents();
+        this.getTeamsNextGames("bulls");
     }
 
     // Loads all events and sets them to this.state.events
     loadEvents = () => {
-        console.log("in loadEvents");
         API.getFavGamesNoAPI()
             .then((res) => {
                 console.log(res.data);
@@ -31,6 +31,7 @@ class Events extends Component {
                     return true;
                 }))
                 this.setState({ favGames: gamesArray });
+                console.log(`Fave Games: ${this.state.favGames}`);
             })
             .catch(err => console.log(err));
     };
@@ -43,19 +44,16 @@ class Events extends Component {
     };
 
     getTeamsNextGames(teamName) {
-        API.getTeamFromName("bulls")
+        API.getTeamFromName(teamName)
             .then((response) => {
-                API.getAllGames(response.data.api.teams)
+                API.getAllGames(response.data.api.teams[0].teamId)
                     .then((res) => {
-                        console.log(res.data.api);
                         let lastGameIndex = this.findLastGame(res.data.api.games);
-                        console.log(`Last Game Index: ${lastGameIndex}`)
                         let tempArray = res.data.api.games.slice(lastGameIndex, lastGameIndex + 5)
-                        console.log(`temp array: ${tempArray}`);
+                        console.log(tempArray);
                         this.setState({
                             eventArray: [...this.state.eventArray, ...tempArray]
                         })
-                        console.log(JSON.stringify(this.state.eventArray));
                     })
                     .catch(err => console.log(err));
             })
@@ -71,7 +69,7 @@ class Events extends Component {
     };
 
     handleSubmit(gameId, favorited) {
-        if (favorited) {
+        if (!favorited) {
             let gameData = {
                 gameId: gameId
             }
@@ -79,6 +77,7 @@ class Events extends Component {
                 .then(res => {
                     console.log("Game added to favorites!");
                     this.loadEvents();
+                    this.setState({eventArray : this.state.eventArray});
                 })
                 .catch(err => console.log(err));
         }
@@ -87,6 +86,7 @@ class Events extends Component {
                 .then(res => {
                     console.log("Game deleted from favorites!")
                     this.loadEvents();
+                    this.setState({eventArray : this.state.eventArray});
                 })
                 .catch(err => console.log(err));
         }
@@ -113,8 +113,8 @@ class Events extends Component {
                                         homeTeam={event.vTeam.nickName}
                                         awayTeam={event.hTeam.nickName}
                                         gameTime={Moment.utc(event.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
-                                        onClick={() => this.handleSubmit(event.gameId, this.favGames.includes(event.gameId))}
-                                        favorited={this.favGames.includes(event.gameId)}
+                                        onClick={() => this.handleSubmit(event.gameId, this.state.favGames.includes(event.gameId))}
+                                        favorited={this.state.favGames.includes(event.gameId)}
                                     >
                                     </EventCard>
                                 </Col>

@@ -73,7 +73,7 @@ class App extends Component {
       this.setState({
         teams:data.data
       });
-      console.log(this.state.teams);
+      //console.log(this.state.teams);
     })
 
   }

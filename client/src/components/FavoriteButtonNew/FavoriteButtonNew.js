@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 // That way we don't have to define them all individually
 function FavoriteButtonNew(props) {
   // Set initial state for this component
-  if (!this.favorited) {
+  if (!props.favorited) {
     return (
       <Button variant="primary" onClick={props.onClick}>Add To Favorites</Button>
     )
