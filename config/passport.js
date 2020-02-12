@@ -6,7 +6,7 @@ function initialize(passport) {
     const authenticateUser = (username, password, done) => {
         db.Account.findOne({ username: username }, function (err, user) {
             if (err) { return done(err); }
-            if (!user.username) {
+            if (!user) {
                 return done(null, false, { message: "Incorrect username." });
             }
             if (!bcrypt.compare(password, user.password)) {

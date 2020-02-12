@@ -1,4 +1,5 @@
 import axios from "axios";
+import passport from "passport";
 
 export default {
     // create account
@@ -6,7 +7,8 @@ export default {
         return axios.post("/api/account/signup", accountData);
     },
     signInAccount: function(accountData){
-        console.log("accountAPI - singin");
-        return axios.post("/api/account/login", accountData);
+        console.log("accountAPI - signin");
+        // return axios.post("/api/account/login", accountData);
+        axios.post("/api/account/login", accountData);
     }
 }

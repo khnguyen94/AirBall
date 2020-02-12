@@ -8,6 +8,7 @@ const passport = require("passport");
 const bcrypt = require("bcrypt");
 const flash  = require("express-flash");
 const session = require("express-session");
+const bodyParser = require("body-parser");
 
 const initializePassport = require("./config/passport");
 
@@ -15,6 +16,7 @@ initializePassport(passport);
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended:false}));
 app.use(express.json());
 app.use(flash());
 app.use(session({

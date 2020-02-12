@@ -2,6 +2,7 @@ import axios from "axios";
 import sportAPI from "./sportAPI";
 import dbAPI from "./dbAPI";
 import accountAPI from "./accountAPI";
+import passport from "passport";
 
 export default {
   // use set to ensure unique team is inserted to database, as sportAPI might return duplicate team - done OPEN TO USER
@@ -76,7 +77,8 @@ export default {
 
   signin: function(userData){
     console.log("API - signin");
-    return accountAPI.signInAccount(userData);
+    accountAPI.signInAccount(userData);
+    // axios.post("/api/account/login", userData);
   }
 }
 

@@ -107,9 +107,9 @@ class App extends Component {
         });
         break;
       case "signin":
-        API.signin({username: "jane123",password: "123456"}).then(user => {
+        API.signin({username: "jane789",password: "12345"}).then(user => {
           console.log(user);
-        });
+        })
         break;
     }
   }
