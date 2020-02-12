@@ -13,11 +13,11 @@ export default{
 
   // Add team to favorite - done OPEN TO USER
   addTeamToFavorite: function(teamId){
-    return axios.put("/api/team/" + teamId, {"isfavorite": true});
+    return axios.put("/api/team/" + teamId);
   },
 
   removeTeamFromFavorite: function(teamId){
-    return axios.put("/api/team/" + teamId, {"isfavorite": false});
+    return axios.put("/api/team/" + teamId);
   },
 
   // get favorite game ids from database

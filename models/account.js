@@ -21,7 +21,19 @@ const accountSchema = new Schema({
   },
   lastName:{
     type:String
-  }
+  },
+  team:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Team"
+    }
+  ],
+  game:[
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Game"
+    }
+  ]
 });
 
 // // validate duplicate email

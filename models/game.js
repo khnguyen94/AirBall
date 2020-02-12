@@ -16,11 +16,11 @@ const gameSchema = new Schema({
   //   required: true,
   //   ref: 'Team'
   // },
-  user:{
-    type:Schema.Types.ObjectId,
-    required: true,
-    ref: 'Account'
-  }
+  // user:{
+  //   type:Schema.Types.ObjectId,
+  //   required: true,
+  //   ref: 'Account'
+  // }
 });
 
 const Game = mongoose.model("Game", gameSchema);

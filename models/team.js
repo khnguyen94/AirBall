@@ -13,12 +13,12 @@ const teamSchema = new Schema({
     type: Boolean,
     default: false
   },
-  user: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Account'
-    }
-  ]
+  // user: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'Account'
+  //   }
+  // ]
 });
 
 const Team = mongoose.model("Team", teamSchema);

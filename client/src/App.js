@@ -72,12 +72,12 @@ class App extends Component {
         });
         break;
       case "saveteamtofav":
-        API.addTeamToFavorite(36).then(data => {
+        API.addTeamToFavorite("5e43bf13271d045e55c796e2").then(data => {
           console.log(data);
         });
         break;
       case "unfavoriteteam":
-        API.removeTeamFromFavorite(36).then(data => {
+        API.removeTeamFromFavorite("5e43bf13271d045e55c796e2").then(data => {
           console.log(data);
         });
         break;
