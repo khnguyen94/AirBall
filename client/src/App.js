@@ -75,11 +75,15 @@ class App extends Component {
       });
       console.log(this.state.teams);
     })
+
   }
 
   handleTestEvent = event => {
     //test get all team api
     switch (event.target.value) {
+      case "intialize":
+        API.intializeTeamData();
+        break;
       case "getallteam":
         API.getAllTeam().then(data => {
           console.log(data);
@@ -120,6 +124,7 @@ class App extends Component {
           <div>
             <RegisterBTN />
             <SignInBTN />
+            <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
             <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
             <button onClick={this.handleTestEvent} value="getallgame">Get All Games</button>
