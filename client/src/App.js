@@ -36,6 +36,7 @@ const navLinks = [
     label: "Home",
     link: "#",
     hasList: false,
+    teamList: [],
     active: true
   },
   {
@@ -56,14 +57,25 @@ const navLinks = [
     label: "Calendar",
     link: "#",
     hasList: false,
+    teamList: [],
     active: false
   }
 ];
 
 
 class App extends Component {
+  state = {
+    teams: []
+  }
   componentDidMount() {
     // API.intializeTeamData();
+    API.getAllTeam().then(data => {
+      this.setState({
+        teams:data.data
+      });
+      console.log(this.state.teams);
+    })
+
   }
 
   handleTestEvent = event => {
@@ -125,9 +137,9 @@ class App extends Component {
           <Nav logo={logo} links={navLinks} />
 
           <br />
-
+          <Home teams={this.state.teams}/>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/"/>
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
         </Container>
