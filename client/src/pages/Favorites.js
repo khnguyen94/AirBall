@@ -6,6 +6,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import EventCard from "../components/EventCard";
 import Moment from "moment";
+import Alert from "react-bootstrap/Alert";
 
 class Events extends Component {
     // Setting our component's initial state
@@ -80,6 +81,7 @@ class Events extends Component {
                     this.setState({eventArray : this.state.eventArray});
                 })
                 .catch(err => console.log(err));
+            alert("Game Added to Favorites!")
         }
         else {
             API.removeGameFromFavorite(gameId)
@@ -89,6 +91,7 @@ class Events extends Component {
                     this.setState({eventArray : this.state.eventArray});
                 })
                 .catch(err => console.log(err));
+            alert("Game Removed from Favorites!")
         }
     };
 
