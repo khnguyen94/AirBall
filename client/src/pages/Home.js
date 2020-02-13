@@ -53,7 +53,7 @@ const sliderImages = [
 function Home(props) {
   return (
     <Row>
-      <Col size="md-3 sm-12">
+      <Col size="md-4 sm-12">
         <Jumbotron>
           <SideBar teams={props.teams}/>
         </Jumbotron>
