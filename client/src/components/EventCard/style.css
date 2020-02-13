@@ -1,0 +1,10 @@
+.card {
+    background-color: rgb(78, 76, 76);
+    color: rgb(197, 197, 197);
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+}
+
+p {
+    text-align: center;
+}

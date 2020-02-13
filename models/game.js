@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
   gameId: {type:String},
-  // seasonYear: {type:String},
+  //seasonYear: {type:String},
   // startTimeUTC:{type:Date},
   // vTeamId:{
   //   type:Schema.Types.ObjectId,

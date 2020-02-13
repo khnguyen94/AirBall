@@ -51,6 +51,10 @@ export default {
     return sportAPI.getSchedule(teamId);
   },
 
+  getTeamFromName: function (teamName) {
+    return sportAPI.getTeam(teamName);
+  },
+
   // get all favorite games from database - done OPEN TO USER
   getAllFavoriteGames: function (done) {
     const gamearr = [];
@@ -63,6 +67,10 @@ export default {
         });
         done(gamearr);
     });
+  },
+
+  getFavGamesNoAPI: function (done) {
+    return dbAPI.getAllGames();
   },
 
   // add game to favorite - done OPEN TO USER
