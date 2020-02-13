@@ -9,6 +9,7 @@ const teamSchema = new Schema({
   logo: { type: String },
   shortName: { type: String },
   nickName: { type: String },
+  nbaFranchise:{type: String},
   favorite: {
     type: Boolean,
     default: false

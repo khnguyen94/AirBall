@@ -130,13 +130,21 @@ class App extends Component {
     }
   }
 
+  handleSubmitAccount = event => {
+
+  }
+
+  handleSignIn = event => {
+    
+  }
+
   render() {
     return (
       <Router>
         <Container fluid>
           <div>
-            <RegisterBTN />
-            <SignInBTN />
+            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount}/>
+            <SignInBTN handleSignIn={this.handleSignIn}/>
             <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
             <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
