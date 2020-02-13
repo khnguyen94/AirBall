@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "../Grid";
 import "../SideBar/SideBar.css";
+import FavoriteTeamBtn from "../FavoriteTeamBtn";
 
 function SideBar(props) {
   // Function to render all of the teams from allTeamsFiltered
@@ -10,9 +11,10 @@ function SideBar(props) {
     })
     .map((team, index) => {
       return (
-        <li>
-          <a eventKey={index} href="#">
-            {team.fullName}
+        <li className="sideBarTeamItem">
+          <a className="sideBarTeamLink" eventKey={index} href="#">
+            <span>{team.fullName}</span>
+            <FavoriteTeamBtn />
           </a>
         </li>
       );
@@ -28,6 +30,7 @@ function SideBar(props) {
         <li>
           <a eventKey={index} href="#">
             {team.fullName}
+            <FavoriteTeamBtn />
           </a>
         </li>
       );
@@ -38,40 +41,44 @@ function SideBar(props) {
       <div className="wrapper">
         <nav id="sidebar">
           <ul class="list-unstyled components">
-            <li class="active">
-              <li>
-                <a href="#">Home</a>
-              </li>
+            <li className="sideBarMainItem">
+              <a href="#">
+                <span className="sideBarMainItemText">Home</span>
+              </a>
+            </li>
 
+            <li className="sideBarMainItem">
               <a
                 href="#homeSubmenu"
                 data-toggle="collapse"
                 aria-expanded="false"
                 class="dropdown-toggle"
               >
-                All Teams
+                <span className="sideBarMainItemText">All Teams</span>
               </a>
               <ul class="collapse list-unstyled" id="homeSubmenu">
                 {renderAllTeams}
               </ul>
             </li>
 
-            <li>
+            <li className="sideBarMainItem">
               <a
                 href="#pageSubmenu"
                 data-toggle="collapse"
                 aria-expanded="false"
                 class="dropdown-toggle"
               >
-                Favorite Teams
+                <span className="sideBarMainItemText">Favorite Teams</span>
               </a>
               <ul class="collapse list-unstyled" id="pageSubmenu">
                 {renderFaveTeams}
               </ul>
             </li>
 
-            <li>
-              <a href="#">Calendar</a>
+            <li className="sideBarMainItem">
+              <a href="#">
+                <span className="sideBarMainItemText">Calendar</span>
+              </a>
             </li>
           </ul>
         </nav>

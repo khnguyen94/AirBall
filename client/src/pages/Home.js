@@ -51,10 +51,7 @@ const sliderImages = [
   }
 ];
 
-
-
 class Home extends Component {
-
   state = {
     teams: []
   }

@@ -64,13 +64,23 @@ const navLinks = [
 
 
 class App extends Component {
+  state = {
+    teams: []
+  }
+  componentDidMount() {
+    // API.intializeTeamData();
+    API.getAllTeam().then(data => {
+      this.setState({
+        teams:data.data
+      });
+      console.log(this.state.teams);
+    })
+  }
+
 
   handleTestEvent = event => {
     //test get all team api
     switch (event.target.value) {
-      case "intialize":
-        API.intializeTeamData();
-        break;
       case "getallteam":
         API.getAllTeam().then(data => {
           console.log(data);
@@ -160,7 +170,7 @@ class App extends Component {
           </div>
 
           <br />
-          <Nav logo={logo} links={navLinks} />
+          <Nav logo={logo} />
 
           <br />
           {/* <Home teams={this.state.teams}/> */}
