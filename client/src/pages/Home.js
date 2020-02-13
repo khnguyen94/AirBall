@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import "../App.css";
 import Jumbotron from "../components/Jumbotron";
@@ -8,6 +8,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PromiseProvider } from "mongoose";
+import API from "../utils/API";
 
 // Create an array of NavLinks
 const teamsFromAPI = [
@@ -50,54 +51,71 @@ const sliderImages = [
   }
 ];
 
-function Home(props) {
-  return (
-    <Row>
-      <Col size="md-4 sm-12">
-        <Jumbotron>
-          <SideBar teams={props.teams}/>
-        </Jumbotron>
-      </Col>
+class Home extends Component {
+  state = {
+    teams: []
+  }
 
-      <Col size="md-8 sm-12">
-        <Jumbotron
-          style={{
-            position: "absolute",
-            left: "50%",
-            top: "50%",
-            transform: "translate(-50%, -50%)"
-          }}
-        >
-          <Slider {...settings}>
-            {sliderImages.map(image => {
-              return (
-                <div>
-                  <img className="sliderImage" src={image.url} />
-                </div>
-              );
-            })}
-          </Slider>
+  componentDidMount() {
+    // API.intializeTeamData();
+    API.getAllTeam().then(data => {
+      this.setState({
+        teams:data.data
+      });
+      //console.log(this.state.teams);
+    })
+  
+  }
 
-          <div className="Summary-div">
-            <p>
-              AirBall is the premiere sports notification system. Game summaries
-              can be delivered straight to your email at a customized schedule.
-              While the final score matters most, as sports fans, we all know
-              there is a library of supporting numbers and statistics to
-              understanding what goes on during those 48 minutes.
-            </p>
+  render() {
+    return (
+      <Row>
+        <Col size="md-3 sm-12">
+          <Jumbotron>
+            <SideBar teams={this.state.teams}/>
+          </Jumbotron>
+        </Col>
 
-            <p>
-              We are pioneering sports analytics into being more more than a
-              game of numbers. Stay up to date with AirBall's visual game
-              summaries. Fans can see their favorite teams and players
-              performance in a simple, graphic presentation.
-            </p>
-          </div>
-        </Jumbotron>
-      </Col>
-    </Row>
-  );
+        <Col size="md-8 sm-12">
+          <Jumbotron
+            style={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)"
+            }}
+          >
+            <Slider {...settings}>
+              {sliderImages.map(image => {
+                return (
+                  <div>
+                    <img className="sliderImage" src={image.url} />
+                  </div>
+                );
+              })}
+            </Slider>
+
+            <div className="Summary-div">
+              <p>
+                AirBall is the premiere sports notification system. Game summaries
+                can be delivered straight to your email at a customized schedule.
+                While the final score matters most, as sports fans, we all know
+                there is a library of supporting numbers and statistics to
+                understanding what goes on during those 48 minutes.
+              </p>
+
+              <p>
+                We are pioneering sports analytics into being more more than a
+                game of numbers. Stay up to date with AirBall's visual game
+                summaries. Fans can see their favorite teams and players
+                performance in a simple, graphic presentation.
+              </p>
+            </div>
+          </Jumbotron>
+        </Col>
+      </Row>
+    );
+  }
 }
 
 export default Home;

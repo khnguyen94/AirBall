@@ -1,4 +1,8 @@
 import React from "react";
+import FavoriteButtonNew from "../FavoriteButtonNew";
+import "./style.css"
+import Image from "react-bootstrap/image"
+import { Col, Row, Container } from "../Grid";
 //import FavoriteBtn from "../FavoriteGameBtn";
 //import { FormBtn } from "../Form";
 
@@ -6,17 +10,29 @@ import React from "react";
 
 function EventCard(props) {
   return (
+
     <div className="card" key={props.key}>
       <div className="card-body">
-        <h5 className="card-title">
-          {props.homeTeam} VS. {props.awayTeam}
-        </h5>
+        <Row>
+          <Col size="md-3">
+            <Image src={props.homeTeamLogo} fluid />
+          </Col>
+          <Col size="md-6">
+          <h5>
+            {props.homeTeam} VS. {props.awayTeam} 
+          </h5>
+          </Col>
+          <Col size="md-3">
+            <Image src={props.awayTeamLogo} fluid />
+          </Col>
+        </Row>
         <p className="card-text">
           {props.gameTime}
         </p>
       </div>
-      {/*<FormBtn onClick={props.onClickFunc} buttonStyle={props.buttonStyle}>{props.buttonTitle}</FormBtn> */}
+      <FavoriteButtonNew onClick={props.onClick} favorited={props.favorited}></FavoriteButtonNew>
     </div>
+
   );
 }
 
