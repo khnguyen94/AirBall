@@ -6,19 +6,26 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import EventCard from "../components/EventCard";
 import Moment from "moment";
-import Alert from "react-bootstrap/Alert";
+import SideBar from "../components/SideBar/SideBar";
 
 class Events extends Component {
     // Setting our component's initial state
     state = {
         eventArray: [],
-        favGames: []
+        favGames: [],
+        teams: []
     };
 
     // When the component mounts, load all Events and save them to this.state.events
     componentDidMount() {
         this.loadEvents();
         this.getTeamsNextGames("bulls");
+        API.getAllTeam().then(data => {
+            this.setState({
+                teams: data.data
+            });
+            //console.log(this.state.teams);
+        })
     }
 
     // Loads all events and sets them to this.state.events
@@ -78,7 +85,7 @@ class Events extends Component {
                 .then(res => {
                     console.log("Game added to favorites!");
                     this.loadEvents();
-                    this.setState({eventArray : this.state.eventArray});
+                    this.setState({ eventArray: this.state.eventArray });
                 })
                 .catch(err => console.log(err));
             alert("Game Added to Favorites!")
@@ -88,7 +95,7 @@ class Events extends Component {
                 .then(res => {
                     console.log("Game deleted from favorites!")
                     this.loadEvents();
-                    this.setState({eventArray : this.state.eventArray});
+                    this.setState({ eventArray: this.state.eventArray });
                 })
                 .catch(err => console.log(err));
             alert("Game Removed from Favorites!")
@@ -99,18 +106,23 @@ class Events extends Component {
         return (
             <Container fluid>
                 <Row>
-                    <Col size="md-12">
+                    <Col size="md-3 sm-12">
+                        <Jumbotron>
+                            <SideBar teams={this.state.teams} />
+                        </Jumbotron>
+                    </Col>
+                    <Col size="md-9 sm-12">
                         <Jumbotron>
                             <h1>Air Ball</h1>
                         </Jumbotron>
-                    </Col>
+                    <Row>
                     {this.state.eventArray.length ? (
 
 
                         this.state.eventArray.map(event => {
 
                             return (
-                                <Col size="md-6">
+                                <Col size="md-4 sm-6">
                                     <EventCard
                                         key={event.gameId}
                                         homeTeam={event.vTeam.nickName}
@@ -127,7 +139,8 @@ class Events extends Component {
                     ) : (
                             <h3>No Event Results to Display</h3>
                         )}
-
+                    </Row>
+                    </Col>
                 </Row>
             </Container>
         );
