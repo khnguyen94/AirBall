@@ -4,7 +4,7 @@ import Switch from "react-switch";
 class FavoriteTeamBtn extends Component {
   constructor() {
     super();
-    this.state = { favorite: false };
+    this.state = { checked: false };
     this.handleChange = this.handleChange.bind(this);
   }
 
@@ -19,7 +19,7 @@ class FavoriteTeamBtn extends Component {
           <Switch
           height={15}
             onChange={this.handleChange}
-            favorite={this.state.favorite}
+            checked={this.state.checked}
             className="react-switch"
           />
         </label>
