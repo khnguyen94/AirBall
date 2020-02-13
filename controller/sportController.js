@@ -47,7 +47,7 @@ module.exports = {
       if (err) return res.json(err);
       if (!dbGame) {
         console.log("CONSOLE - NO GAME");
-        dbGame.save().then(newdb => {
+        db.Game.create(req.body).then(newdb => {
           db.Account.findByIdAndUpdate(req.user._id, { $push: { game: newdb._id} }, { new: true })
             .then(dbAccount => res.json(dbAccount))
             .catch(err => res.status(422).json(err));
