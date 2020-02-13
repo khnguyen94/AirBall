@@ -6,6 +6,7 @@ router.route("/")
 .post(sportController.addTeam);
 
 router.route("/:id")
-.put(sportController.updateTeam);
+.post(sportController.addTeamToFavorite)
+.delete(sportController.removeTeamFromFavorite);
 
 module.exports = router;

@@ -11,9 +11,18 @@ export default{
     return axios.get("/api/team");
   },
 
+  // get User's favorite team
+  getFavTeam: function(){
+    return axios.get("/api/account/favorites");
+  },
+
   // Add team to favorite - done OPEN TO USER
-  updateTeamFavorite: function(teamId, isFavorite){
-    return axios.put("/api/team/" + teamId, {"favorite": isFavorite});
+  addTeamToFavorite: function(id){
+    return axios.post("/api/team/" + id);
+  },
+
+  removeTeamFromFavorite: function(id){
+    return axios.delete("/api/team/" + id);
   },
 
   // get favorite game ids from database

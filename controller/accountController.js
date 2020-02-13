@@ -1,14 +1,35 @@
 const db = require("../models");
-const passport = require("passport");
-const localStrategy = require("passport-local").Strategy;
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 module.exports = {
-  createUser: function(req, res){
-    db.Account
-      .create(req.body)
-      .then(dbAccount => res.json(dbAccount))
-      .catch(err => res.status(422).json(err));
+  createUser: function (req, res) {
+    bcrypt.hash(req.body.password, saltRounds, function (err, hash) {
+      if (err) {
+        return res.status(422).json(err)
+      } else {
+        db.Account
+          .create({
+            username: req.body.username,
+            email: req.body.email,
+            password: hash,
+            firstName: req.body.firstName,
+            lastName: req.body.lastName
+          })
+          .then(dbAccount => {
+            console.log(dbAccount);
+            // res.redirect("/login");
+            res.json(dbAccount);
+          })
+          .catch(err => res.status(422).json(err));
+      }
+    });
   },
 
-  
+  getUserFavorites: function (req, res) {
+    // should be replaced by checkAuthenticate
+      db.Account.findById(req.user._id)
+        .populate('team')
+        .then(dbAccount => res.json(dbAccount.team));
+  }
 }

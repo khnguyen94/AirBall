@@ -1,6 +1,8 @@
 import axios from "axios";
 import sportAPI from "./sportAPI";
 import dbAPI from "./dbAPI";
+import accountAPI from "./accountAPI";
+import passport from "passport";
 
 export default {
   // use set to ensure unique team is inserted to database, as sportAPI might return duplicate team - done OPEN TO USER
@@ -31,32 +33,44 @@ export default {
     return dbAPI.getAllTeam();
   },
 
-  // get favorite team from database - Deprecated
+  // get favorite team from database 
   getFavoriteTeam: function () {
-    return axios.get("/api/team");
+    return axios.get("/api/account/favorites");
   },
 
   // Add/remove team to/from favorite - done OPEN TO USRE
-  updateTeamFavorite: function (teamId, isFavorite) {
-    return dbAPI.updateTeamFavorite(teamId, isFavorite);
+  addTeamToFavorite: function (id) {
+    return dbAPI.addTeamToFavorite(id);
   },
 
+  removeTeamFromFavorite: function (id) {
+    return dbAPI.removeTeamFromFavorite(id);
+  },
   // get all games of one team from api - done OPEN TO USER
   getAllGames: function (teamId) {
     return sportAPI.getSchedule(teamId);
+  },
+
+  getTeamFromName: function (teamName) {
+    return sportAPI.getTeam(teamName);
   },
 
   // get all favorite games from database - done OPEN TO USER
   getAllFavoriteGames: function (done) {
     const gamearr = [];
     dbAPI.getAllGames().then(dbGame => {
-      dbGame.data.forEach(game => {
-        sportAPI.getGameFromId(game.gameId).then(oneGame => {
-          gamearr.push(oneGame.data.api.games[0]);
+        console.log("HERE");
+        dbGame.data.forEach(game => {
+          sportAPI.getGameFromId(game.gameId).then(oneGame => {
+            gamearr.push(oneGame.data.api.games[0]);
+          });
         });
-      });
-      done(gamearr);
+        done(gamearr);
     });
+  },
+
+  getFavGamesNoAPI: function (done) {
+    return dbAPI.getAllGames();
   },
 
   // add game to favorite - done OPEN TO USER
@@ -66,9 +80,21 @@ export default {
 
   // remove game from favorite - done OPEN TO USER
   removeGameFromFavorite: function (gameId) {
-    console.log("API - removegamefromfavorite");
     return dbAPI.removeGameFromFavorite(gameId);
   },
 
+  register: function (userData) {
+    return accountAPI.addAccount(userData);
+  },
+
+  login: function (userData) {
+    console.log("API - signin");
+    accountAPI.logInAccount(userData);
+    // axios.post("/api/account/login", userData);
+  },
+
+  logout: function () {
+    accountAPI.logOutAccount();
+  }
 }
 

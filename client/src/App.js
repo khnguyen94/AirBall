@@ -34,8 +34,9 @@ const sliderImages = [
 const navLinks = [
   {
     label: "Home",
-    link: "#",
+    link: "/",
     hasList: false,
+    teamList: [],
     active: true
   },
   {
@@ -56,29 +57,47 @@ const navLinks = [
     label: "Calendar",
     link: "#",
     hasList: false,
+    teamList: [],
     active: false
   }
 ];
 
 
 class App extends Component {
+  state = {
+    teams: []
+  }
   componentDidMount() {
     // API.intializeTeamData();
+    API.getAllTeam().then(data => {
+      this.setState({
+        teams:data.data
+      });
+      console.log(this.state.teams);
+    })
   }
+
 
   handleTestEvent = event => {
     //test get all team api
     switch (event.target.value) {
-      case "intialize":
-        API.intializeTeamData();
-        break;
       case "getallteam":
         API.getAllTeam().then(data => {
           console.log(data);
         });
         break;
+      case "findfavteam":
+        API.getFavoriteTeam().then(data => {
+          console.log(data);
+        });
+        break;
       case "saveteamtofav":
-        API.updateTeamFavorite(36, true).then(data => {
+        API.addTeamToFavorite("5e3f8f0a7316ba529974698b").then(data => {
+          console.log(data);
+        });
+        break;
+      case "unfavoriteteam":
+        API.removeTeamFromFavorite("5e3f8f0a7316ba529974698b").then(data => {
           console.log(data);
         });
         break;
@@ -96,13 +115,37 @@ class App extends Component {
         });
         break;
       case "unfavoritegame":
-        API.removeGameFromFavorite(1001).then(data => {
+        API.removeGameFromFavorite(1005).then(data => {
           console.log("APPJS - removegamefromfavorite")
           console.log(data);
         });
         break;
+      case "register":
+        API.register({
+          username: "bob123",
+          password: "123456",
+          email: "aa@c",
+          firstName: "Bob",
+          lastName: "Brown"
+        }).then(user => {
+          console.log(user);
+        });
+        break;
+      case "signin":
+        API.login({username: "bob123",password: "123456"});
+        break;
+      case "logout":
+        API.logout();
+        break;
     }
+  }
 
+  handleSubmitAccount = event => {
+
+  }
+
+  handleSignIn = event => {
+    
   }
 
   render() {
@@ -110,24 +153,29 @@ class App extends Component {
       <Router>
         <Container fluid>
           <div>
-            <RegisterBTN />
-            <SignInBTN />
+            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount}/>
+            <SignInBTN handleSignIn={this.handleSignIn}/>
             <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
+            <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
             <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
+            <button onClick={this.handleTestEvent} value="unfavoriteteam">Remove Team From Favorite</button>
             <button onClick={this.handleTestEvent} value="getallgame">Get All Games</button>
             <button onClick={this.handleTestEvent} value="getfavgame">Get All Favorite Games</button>
             <button onClick={this.handleTestEvent} value="favoritegame">Save Game To Favorite</button>
             <button onClick={this.handleTestEvent} value="unfavoritegame">Remove Game From Favorite</button>
+            <button onClick={this.handleTestEvent} value="register">Register User</button>
+            <button onClick={this.handleTestEvent} value="signin">SignIn User</button>
+            <button onClick={this.handleTestEvent} value="logout">LogOut User</button>
           </div>
 
           <br />
-          <Nav logo={logo} links={navLinks} />
+          <Nav logo={logo} />
 
           <br />
-
+          {/* <Home teams={this.state.teams}/> */}
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={Home}/>
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
         </Container>
