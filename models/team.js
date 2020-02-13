@@ -10,6 +10,7 @@ const teamSchema = new Schema({
   favorites:{type:Boolean},
   shortName:{type:String},
   nickName:{type:String},
+  nbaFranchise:{type:String},
   favorite:{
     type:Boolean,
     default:false
