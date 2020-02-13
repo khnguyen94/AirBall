@@ -34,7 +34,7 @@ const sliderImages = [
 const navLinks = [
   {
     label: "Home",
-    link: "#",
+    link: "/",
     hasList: false,
     teamList: [],
     active: true
@@ -64,19 +64,6 @@ const navLinks = [
 
 
 class App extends Component {
-  state = {
-    teams: []
-  }
-  componentDidMount() {
-    // API.intializeTeamData();
-    API.getAllTeam().then(data => {
-      this.setState({
-        teams:data.data
-      });
-      console.log(this.state.teams);
-    })
-
-  }
 
   handleTestEvent = event => {
     //test get all team api
@@ -137,9 +124,9 @@ class App extends Component {
           <Nav logo={logo} links={navLinks} />
 
           <br />
-          <Home teams={this.state.teams}/>
+          {/* <Home teams={this.state.teams}/> */}
           <Switch>
-            <Route exact path="/"/>
+            <Route exact path="/" component={Home}/>
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
         </Container>
