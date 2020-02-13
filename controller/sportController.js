@@ -13,7 +13,7 @@ module.exports = {
       .then(dbTeam => res.json(dbTeam))
       .catch(err => res.status(422).json(err));
   },
-
+  
   // updateTeam: function (req, res) {
   //   console.log(req.body.isfavorite);
   //   if (req.body.isfavorite) {
@@ -36,7 +36,8 @@ module.exports = {
   },
 
   removeTeamFromFavorite: function (req, res) {
-    db.Account.findByIdAndUpdate(req.user._id, { $pullAll: { team: req.params.id } }, { new: true })
+    console.log("CONTROLLER - REMOVE TEAM FROM FAV");
+    db.Account.findByIdAndUpdate(req.user._id, { $pullAll: { team: [req.params.id] } }, { new: true })
       .then(dbAccount => res.json(dbAccount))
       .catch(err => res.status(422).json(err));
   },
@@ -45,13 +46,15 @@ module.exports = {
     db.Game.findOne({ gameId: req.body.gameId }, function (err, dbGame) {
       if (err) return res.json(err);
       if (!dbGame) {
-        dbGame.save().then(dbGame => {
-          db.Account.findByIdAndUpdate(req.user._id, { $push: { game: req.params.id } }, { new: true })
+        console.log("CONSOLE - NO GAME");
+        dbGame.save().then(newdb => {
+          db.Account.findByIdAndUpdate(req.user._id, { $push: { game: newdb._id} }, { new: true })
             .then(dbAccount => res.json(dbAccount))
             .catch(err => res.status(422).json(err));
         })
       } else {
-        db.Account.findByIdAndUpdate(req.user._id, { $push: { game: req.params.id } }, { new: true })
+        console.log("CONSOLE - GAME EXISTS")
+        db.Account.findByIdAndUpdate(req.user._id, { $push: { game: dbGame._id} }, { new: true })
           .then(dbAccount => res.json(dbAccount))
           .catch(err => res.status(422).json(err));
       }
@@ -59,15 +62,19 @@ module.exports = {
   },
 
   removeGameFromFavorite: function (req, res) {
-    db.Account.findByIdAndUpdate(req.user._id, { $pullAll: { game: req.params.id } }, { new: true })
+    db.Game.findOne({gameId: req.params.id}, function(err, dbGame){
+      if (err) return res.json(err);
+      db.Account.findByIdAndUpdate(req.user._id, { $pullAll: { game: [dbGame._id] } }, { new: true })
       .then(dbAccount => res.json(dbAccount))
       .catch(err => res.status(422).json(err));
+    })
   },
 
   findGame: function (req, res) {
-    db.Game
-      .find(req.query)
-      .then(dbGame => res.json(dbGame))
+    db.Account
+      .findById(req.user._id)
+      .populate('game')
+      .then(dbAccount => res.json(dbAccount.game))
       .catch(err => res.status(422).json(err));
   },
   // addGame: function (req, res) {

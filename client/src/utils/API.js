@@ -33,18 +33,18 @@ export default {
     return dbAPI.getAllTeam();
   },
 
-  // get favorite team from database - Deprecated
+  // get favorite team from database 
   getFavoriteTeam: function () {
-    return axios.get("/api/team");
+    return axios.get("/api/account/favorites");
   },
 
   // Add/remove team to/from favorite - done OPEN TO USRE
-  addTeamToFavorite: function (teamId) {
-    return dbAPI.addTeamToFavorite(teamId);
+  addTeamToFavorite: function (id) {
+    return dbAPI.addTeamToFavorite(id);
   },
 
-  removeTeamFromFavorite: function(teamId){
-    return dbAPI.removeTeamFromFavorite(teamId);
+  removeTeamFromFavorite: function (id) {
+    return dbAPI.removeTeamFromFavorite(id);
   },
   // get all games of one team from api - done OPEN TO USER
   getAllGames: function (teamId) {
@@ -55,12 +55,13 @@ export default {
   getAllFavoriteGames: function (done) {
     const gamearr = [];
     dbAPI.getAllGames().then(dbGame => {
-      dbGame.data.forEach(game => {
-        sportAPI.getGameFromId(game.gameId).then(oneGame => {
-          gamearr.push(oneGame.data.api.games[0]);
+        console.log("HERE");
+        dbGame.data.forEach(game => {
+          sportAPI.getGameFromId(game.gameId).then(oneGame => {
+            gamearr.push(oneGame.data.api.games[0]);
+          });
         });
-      });
-      done(gamearr);
+        done(gamearr);
     });
   },
 
@@ -74,17 +75,17 @@ export default {
     return dbAPI.removeGameFromFavorite(gameId);
   },
 
-  register: function(userData){
+  register: function (userData) {
     return accountAPI.addAccount(userData);
   },
 
-  login: function(userData){
+  login: function (userData) {
     console.log("API - signin");
     accountAPI.logInAccount(userData);
     // axios.post("/api/account/login", userData);
   },
 
-  logout: function(){
+  logout: function () {
     accountAPI.logOutAccount();
   }
 }

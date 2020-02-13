@@ -24,5 +24,12 @@ module.exports = {
           .catch(err => res.status(422).json(err));
       }
     });
+  },
+
+  getUserFavorites: function (req, res) {
+    // should be replaced by checkAuthenticate
+      db.Account.findById(req.user._id)
+        .populate('team')
+        .then(dbAccount => res.json(dbAccount.team));
   }
 }

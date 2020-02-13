@@ -71,13 +71,18 @@ class App extends Component {
           console.log(data);
         });
         break;
+      case "findfavteam":
+        API.getFavoriteTeam().then(data => {
+          console.log(data);
+        });
+        break;
       case "saveteamtofav":
-        API.addTeamToFavorite("5e43bf13271d045e55c796e2").then(data => {
+        API.addTeamToFavorite("5e3f8f0a7316ba529974698b").then(data => {
           console.log(data);
         });
         break;
       case "unfavoriteteam":
-        API.removeTeamFromFavorite("5e43bf13271d045e55c796e2").then(data => {
+        API.removeTeamFromFavorite("5e3f8f0a7316ba529974698b").then(data => {
           console.log(data);
         });
         break;
@@ -95,7 +100,7 @@ class App extends Component {
         });
         break;
       case "unfavoritegame":
-        API.removeGameFromFavorite(1001).then(data => {
+        API.removeGameFromFavorite(1005).then(data => {
           console.log("APPJS - removegamefromfavorite")
           console.log(data);
         });
@@ -125,6 +130,7 @@ class App extends Component {
       <Router>
         <Container fluid>
           <div>
+          <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
             <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
             <button onClick={this.handleTestEvent} value="unfavoriteteam">Remove Team From Favorite</button>

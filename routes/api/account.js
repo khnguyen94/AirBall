@@ -16,5 +16,7 @@ router.route("/logout")
         req.logOut();
         res.redirect("/");
     });
+router.route("/favorites")
+    .get(accountController.getUserFavorites);
 
 module.exports = router;
