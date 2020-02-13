@@ -122,14 +122,16 @@ class Events extends Component {
                         this.state.eventArray.map(event => {
 
                             return (
-                                <Col size="md-4 sm-6">
+                                <Col size="md-6 sm-6">
                                     <EventCard
                                         key={event.gameId}
-                                        homeTeam={event.vTeam.nickName}
-                                        awayTeam={event.hTeam.nickName}
+                                        homeTeam={event.hTeam.nickName}
+                                        awayTeam={event.vTeam.nickName}
                                         gameTime={Moment.utc(event.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
                                         onClick={() => this.handleSubmit(event.gameId, this.state.favGames.includes(event.gameId))}
                                         favorited={this.state.favGames.includes(event.gameId)}
+                                        awayTeamLogo={event.vTeam.logo}
+                                        homeTeamLogo={event.hTeam.logo}
                                     >
                                     </EventCard>
                                 </Col>

@@ -7,12 +7,12 @@ function FavoriteButtonNew(props) {
   // Set initial state for this component
   if (!props.favorited) {
     return (
-      <Button variant="primary" onClick={props.onClick}>Add To Favorites</Button>
+      <Button variant="primary" onClick={props.onClick}>Add Game To Favorites</Button>
     )
   }
   else {
     return (
-      <Button variant="danger" onClick={props.onClick}>Delete From Favorites</Button>
+      <Button variant="danger" onClick={props.onClick}>Delete Game From Favorites</Button>
     )
   }
 }
