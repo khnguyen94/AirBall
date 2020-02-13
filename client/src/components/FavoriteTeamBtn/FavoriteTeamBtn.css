@@ -1,8 +1,6 @@
 .react-switch {
-  vertical-align: middle;
+  vertical-align: right;
   margin-left: 4px;
 }
-      
-.favoriteTeamToggle {
-  float: left;
-}
+
+

@@ -1,12 +1,14 @@
 .wrapper {
     display: flex;
     width: 100%;
+    position: relative;
+	overflow-y: scroll;
 }
 
 #sidebar {
     width: 100%;
     top: 0;
-    left: 0;
+    bottom: 0;
     height: 80vh;
     z-index: 999;
     color: #fff;
@@ -19,20 +21,22 @@
     border-color: #3a3e47;
     padding: 5px;
     margin-bottom: 10px;
+    margin-right: 5px;
 }
 
 .sideBarMainItemText {
     color: #3a3e47;
     font-size: 20px;
-    display: inline-block;
 }
 
 .sideBarTeamItem {
     border-style: solid;
     border-width: 2px;
     border-color: #3a3e47; 
-    margin: 1px;
+    margin-right: 2px;
 }
 
 .sideBarTeamLink {
+    float: left;
+    margin-left: 5px;
 }

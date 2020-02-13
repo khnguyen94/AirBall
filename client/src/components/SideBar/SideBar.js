@@ -12,10 +12,10 @@ function SideBar(props) {
     .map((team, index) => {
       return (
         <li className="sideBarTeamItem">
-          <a className="sideBarTeamLink" eventKey={index} href="#">
-            <span>{team.fullName}</span>
-            <FavoriteTeamBtn />
+          <a eventKey={index} href="#">
+            <span className="sideBarTeamLink">{team.fullName}</span>
           </a>
+          <FavoriteTeamBtn />
         </li>
       );
     });
@@ -30,60 +30,60 @@ function SideBar(props) {
         <li>
           <a eventKey={index} href="#">
             {team.fullName}
-            <FavoriteTeamBtn />
           </a>
+          <div className="faveBtn">
+            <FavoriteTeamBtn />
+          </div>
         </li>
       );
     });
 
   return (
-    <Container>
-      <div className="wrapper">
-        <nav id="sidebar">
-          <ul class="list-unstyled components">
-            <li className="sideBarMainItem">
-              <a href="#">
-                <span className="sideBarMainItemText">Home</span>
-              </a>
-            </li>
+    <div className="wrapper">
+      <nav id="sidebar">
+        <ul class="list-unstyled components">
+          <li className="sideBarMainItem">
+            <a href="#">
+              <span className="sideBarMainItemText">Home</span>
+            </a>
+          </li>
 
-            <li className="sideBarMainItem">
-              <a
-                href="#homeSubmenu"
-                data-toggle="collapse"
-                aria-expanded="false"
-                class="dropdown-toggle"
-              >
-                <span className="sideBarMainItemText">All Teams</span>
-              </a>
-              <ul class="collapse list-unstyled" id="homeSubmenu">
-                {renderAllTeams}
-              </ul>
-            </li>
+          <li className="sideBarMainItem">
+            <a
+              href="#pageSubmenu"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle"
+            >
+              <span className="sideBarMainItemText">Favorite Teams</span>
+            </a>
+            <ul class="collapse list-unstyled" id="pageSubmenu">
+              {renderFaveTeams}
+            </ul>
+          </li>
 
-            <li className="sideBarMainItem">
-              <a
-                href="#pageSubmenu"
-                data-toggle="collapse"
-                aria-expanded="false"
-                class="dropdown-toggle"
-              >
-                <span className="sideBarMainItemText">Favorite Teams</span>
-              </a>
-              <ul class="collapse list-unstyled" id="pageSubmenu">
-                {renderFaveTeams}
-              </ul>
-            </li>
+          <li className="sideBarMainItem">
+            <a
+              href="#homeSubmenu"
+              data-toggle="collapse"
+              aria-expanded="false"
+              class="dropdown-toggle"
+            >
+              <span className="sideBarMainItemText">All Teams</span>
+            </a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+              {renderAllTeams}
+            </ul>
+          </li>
 
-            <li className="sideBarMainItem">
-              <a href="#">
-                <span className="sideBarMainItemText">Calendar</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </Container>
+          <li className="sideBarMainItem">
+            <a href="#">
+              <span className="sideBarMainItemText">Calendar</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 }
 

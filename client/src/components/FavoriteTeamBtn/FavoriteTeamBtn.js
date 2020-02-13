@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Switch from "react-switch";
+import "./FavoriteTeamBtn.css";
  
 class FavoriteTeamBtn extends Component {
   constructor() {
@@ -14,8 +15,8 @@ class FavoriteTeamBtn extends Component {
 
   render() {
     return (
-      <div className="favoriteTeamToggle">
-        <label>
+      <div>
+        <label className="favoriteTeamToggle">
           <Switch
           height={15}
             onChange={this.handleChange}

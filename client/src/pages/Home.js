@@ -69,7 +69,7 @@ class Home extends Component {
   render() {
     return (
       <Row>
-        <Col size="md-3 sm-12">
+        <Col size="md-4 sm-12">
           <Jumbotron>
             <SideBar teams={this.state.teams}/>
           </Jumbotron>
@@ -79,8 +79,8 @@ class Home extends Component {
           <Jumbotron
             style={{
               position: "absolute",
-              left: "50%",
-              top: "50%",
+              top: 0,
+              bottom: 0, 
               transform: "translate(-50%, -50%)"
             }}
           >
@@ -93,6 +93,8 @@ class Home extends Component {
                 );
               })}
             </Slider>
+
+            <br />
 
             <div className="Summary-div">
               <p>
