@@ -33,7 +33,7 @@ function SideBar(props) {
   renderAllTeams = () => {
     props.teams
       .filter(team => {
-        return team.favorite === false;
+        return (team.favorite === false && team.nbaFranchise === 1);
       })
       .map((team, index) => {
         return (
@@ -51,7 +51,7 @@ function SideBar(props) {
   renderFaveTeams = () => {
     props.teams
       .filter(team => {
-        return team.favorite === true;
+        return (team.favorite === true && team.nbaFranchise === 1);
       })
       .map((team, index) => {
         return (
