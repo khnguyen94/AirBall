@@ -2,41 +2,57 @@ import React from "react";
 import { Container } from "../Grid";
 import "../SideBar/SideBar.css";
 import FavoriteTeamBtn from "../FavoriteTeamBtn";
+import API from "../../utils/API";
 
 function SideBar(props) {
-  // Function to render all of the teams from allTeamsFiltered
-  let renderAllTeams = props.teams
-    .filter(team => {
-      return team.favorite === false;
+  // Function to handle when the new favorited team's favorite button is clicked
+  handleNewFavoriteSubmit = (event, id, checked) => {
+    event.preventDefault();
+    API.updateTeamFavorite({ 
+      id: id,
+      checked: checked
     })
-    .map((team, index) => {
-      return (
-        <li className="sideBarTeamItem">
-          <a eventKey={index} href="#">
-            <span className="sideBarTeamLink">{team.fullName}</span>
-          </a>
-          <FavoriteTeamBtn />
-        </li>
-      );
-    });
+      .then(res => this.renderAllTeams())
+      .catch(err => console.log(err));
+  };
+
+  // Function to render all of the teams from allTeamsFiltered
+  renderAllTeams = () => {
+    props.teams
+      .filter(team => {
+        return team.favorite === false;
+      })
+      .map((team, index) => {
+        return (
+          <li className="sideBarTeamItem">
+            <a eventKey={index} href="#">
+              <span className="sideBarTeamLink">{team.fullName}</span>
+            </a>
+            <FavoriteTeamBtn onClick={() => this.handleNewFavoriteSubmit(team.id)}/>
+          </li>
+        );
+      });
+  };
 
   // Function to render all the favorite teams from faveTeamsFiltered
-  let renderFaveTeams = props.teams
-    .filter(team => {
-      return team.favorite === true;
-    })
-    .map((team, index) => {
-      return (
-        <li>
-          <a eventKey={index} href="#">
-            {team.fullName}
-          </a>
-          <div className="faveBtn">
-            <FavoriteTeamBtn />
-          </div>
-        </li>
-      );
-    });
+  renderFaveTeams = () => {
+    props.teams
+      .filter(team => {
+        return team.favorite === true;
+      })
+      .map((team, index) => {
+        return (
+          <li>
+            <a eventKey={index} href="#">
+              {team.fullName}
+            </a>
+            <div className="faveBtn">
+              <FavoriteTeamBtn />
+            </div>
+          </li>
+        );
+      });
+  };
 
   return (
     <div className="wrapper">
