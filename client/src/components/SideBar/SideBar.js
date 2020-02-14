@@ -6,7 +6,20 @@ import API from "../../utils/API";
 
 function SideBar(props) {
   // Function to handle when the new favorited team's favorite button is clicked
+  // allTeams ==> faveTeams
   handleNewFavoriteSubmit = (event, id, checked) => {
+    event.preventDefault();
+    API.updateTeamFavorite({ 
+      id: id,
+      checked: checked
+    })
+      .then(res => this.renderAllTeams())
+      .catch(err => console.log(err));
+  };
+
+  // Function to handle when a favorite button for an already favorited team is clicked
+  // faveTeams ==> allTeams
+  handleUnfavoriteSubmit = (event, id, checked) => {
     event.preventDefault();
     API.updateTeamFavorite({ 
       id: id,
@@ -47,7 +60,7 @@ function SideBar(props) {
               {team.fullName}
             </a>
             <div className="faveBtn">
-              <FavoriteTeamBtn />
+              <FavoriteTeamBtn onClick={() => this.handleUnfavoriteSubmit(team.id)} />
             </div>
           </li>
         );
