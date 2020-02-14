@@ -25,7 +25,7 @@ function SideBar(props) {
       id: id,
       checked: checked
     })
-      .then(res => this.renderAllTeams())
+      .then(res => this.renderFaveTeams())
       .catch(err => console.log(err));
   };
 
