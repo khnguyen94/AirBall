@@ -77,7 +77,6 @@ class App extends Component {
     })
   }
 
-
   handleTestEvent = event => {
     //test get all team api
     switch (event.target.value) {
