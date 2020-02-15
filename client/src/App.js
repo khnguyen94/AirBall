@@ -69,14 +69,13 @@ class App extends Component {
   }
   componentDidMount() {
     // API.intializeTeamData();
-    API.getAllTeam().then(data => {
-      this.setState({
-        teams:data.data
-      });
-      console.log(this.state.teams);
-    })
+    // API.getAllTeam().then(data => {
+    //   this.setState({
+    //     teams:data.data
+    //   });
+    //   console.log(this.state.teams);
+    // })
   }
-
 
   handleTestEvent = event => {
     //test get all team api
