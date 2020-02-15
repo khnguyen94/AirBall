@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row} from "../components/Grid";
 import "../App.css";
 import Jumbotron from "../components/Jumbotron";
 import SideBar from "../components/SideBar/SideBar";
@@ -9,22 +9,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PromiseProvider } from "mongoose";
 import API from "../utils/API";
-
-// Create an array of NavLinks
-const teamsFromAPI = [
-  {
-    teamName: "Lakers", 
-    isFavorite: true
-  },
-  {
-    teamName: "Clippers", 
-    isFavorite: false
-  },
-  {
-    teamName: "Bulls", 
-    isFavorite: true
-  }
-];
 
 // Create a settings object for the imageSlider
 const settings = {
@@ -53,16 +37,16 @@ const sliderImages = [
 
 class Home extends Component {
   state = {
-    teams: []
+    teams: null
   }
 
   componentDidMount() {
     // API.intializeTeamData();
     API.getAllTeam().then(data => {
       this.setState({
-        teams:data.data
+        teams: data.data
       });
-      //console.log(this.state.teams);
+      // console.log(this.state.teams)
     })
   }
 
@@ -71,7 +55,7 @@ class Home extends Component {
       <Row>
         <Col size="md-4 sm-12">
           <Jumbotron>
-            <SideBar teams={this.state.teams}/>
+            {(this.state.teams) ? <SideBar teams={this.state.teams}/> : <p> LOADING </p>}
           </Jumbotron>
         </Col>
 

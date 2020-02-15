@@ -1,18 +1,17 @@
 .wrapper {
     display: flex;
     width: 100%;
-    position: relative;
-	overflow-y: scroll;
 }
 
 #sidebar {
     width: 100%;
     top: 0;
-    bottom: 0;
+    left: 0;
     height: 80vh;
     z-index: 999;
     color: #fff;
     transition: all 0.3s;
+    overflow: scroll
 }
 
 .sideBarMainItem {
@@ -21,22 +20,37 @@
     border-color: #3a3e47;
     padding: 5px;
     margin-bottom: 10px;
-    margin-right: 5px;
+    margin-right: 10px;
+    clear: both;
 }
 
 .sideBarMainItemText {
     color: #3a3e47;
     font-size: 20px;
+    display: inline-block;
 }
 
-.sideBarTeamItem {
+#faveTeamsList{
+    overflow-y: auto;
+}
+
+.listItem {
     border-style: solid;
     border-width: 2px;
     border-color: #3a3e47; 
-    margin-right: 2px;
+    margin: 1px;
+    overflow: hidden; 
 }
 
-.sideBarTeamLink {
+.listItemText {
     float: left;
-    margin-left: 5px;
+}
+
+.sideBarTeamLinkText{
+    float: left;
+}
+
+.faveBtnContainer {
+    float: right;
+    margin-right: 2px;
 }
