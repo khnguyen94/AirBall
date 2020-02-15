@@ -1,7 +1,8 @@
 import React from "react";
 import "./style.scss";
 import { Button } from "react-bootstrap"
-
+import ApiHelper from "../../utils/accountAPI"
+import API from "../../utils/API";
 
 export class Register extends React.Component {
 
@@ -12,7 +13,7 @@ export class Register extends React.Component {
             lastName: '',
             email: '',
             userName: '',
-            createPassword: '',
+            password: '',
             confirmPassword: '',
         };
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -58,7 +59,7 @@ export class Register extends React.Component {
 
     handleCreatePassword(event) {
         this.setState({
-            createPassword: event.target.value
+            password: event.target.value
         });
         console.log(event.target.value)
     }
@@ -83,24 +84,41 @@ export class Register extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log(event)
-        const { firstName, lastName, email, confirmPassword, createPassword } = this.state;
-        console.log("value: ", createPassword)
+        const { firstName, lastName, email, confirmPassword, password } = this.state;
+        console.log("value: ", password)
         const re = new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})');
-        console.log(re.test(createPassword))
-        const isOk = re.test(createPassword);
+        console.log(re.test(password))
+        const isOk = re.test(password);
 
         console.log(isOk);
 
         if (!isOk) {
             return alert('Password is weak!');
         }
-        alert('A password was submitted that was ' + createPassword.length + ' characters long.');
 
-        if (this.state.createPassword !== this.state.confirmPassword) {
+        alert('A password was submitted that was ' + password.length + ' characters long.');
+        console.log(this.state)
+        if (this.state.password !== this.state.confirmPassword) {
             return alert("The passwords doesn't match")
             return false; //the form won't submit
         }
-        else return true; //the form will submit
+
+        API.register(
+            {
+                username: this.state.userName,
+                password: this.state.password,
+                email: this.state.email,
+                firstName: this.state.firstName,
+                lastName: this.state.lastName
+            }).then(
+                data => {
+                    console.log(data);
+                }
+            )
+
+        setTimeout(function () { alert("Account was succesfully created"); }, 10)
+
+
     }
 
 
@@ -131,25 +149,32 @@ export class Register extends React.Component {
                         </div>
                         <div className="form-group">
                             <label htmlFor="password">Create Password </label>
-                            <input type="text" value={this.state.createPassword} onChange={this.handleCreatePassword} name="password" placeholder="*******" />
+                            <input type="text" value={this.state.password} onChange={this.handleCreatePassword} name="password" placeholder="*******" />
                         </div>
                         <div className="form-group">
                             <label htmlFor="passwordc">Confirm Password </label>
                             <input type="password" value={this.state.confirmPassword} onChange={this.handleConfirmPassword} name="passwordc" placeholder="*******" />
                         </div>
-                        <div className="form-group">
-                            <Button variant="warning" type="submit">Create Account </Button>
 
+                        <div className="footer">
+                            <div className="form-group">
+                                <Button variant="warning" type="submit">Create Account </Button>
+
+                            </div>
+
+                            <div className="form-group">
+                                <Button variant="secondary">Close</Button>
+                            </div>
                         </div>
-                        <div className="form-group">
-                            <Button variant="secondary">Close</Button>
-                        </div>
+
                     </div >
 
                 </div >
 
             </form>
+
         )
 
     }
+
 }
