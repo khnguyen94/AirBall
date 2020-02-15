@@ -122,6 +122,8 @@ export class Register extends React.Component {
     }
 
 
+
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
@@ -158,12 +160,12 @@ export class Register extends React.Component {
 
                         <div className="footer">
                             <div className="form-group">
-                                <Button variant="warning" type="submit">Create Account </Button>
+                                <Button variant="warning" type="submit" >Create Account </Button>
 
                             </div>
 
                             <div className="form-group">
-                                <Button variant="secondary">Close</Button>
+                                <Button variant="secondary" href="/" >Close</Button>
                             </div>
                         </div>
 
