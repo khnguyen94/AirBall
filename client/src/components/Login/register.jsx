@@ -96,7 +96,13 @@ export class Register extends React.Component {
         }
         alert('A password was submitted that was ' + createPassword.length + ' characters long.');
 
+        if (this.state.createPassword !== this.state.confirmPassword) {
+            return alert("The passwords doesn't match")
+            return false; //the form won't submit
+        }
+        else return true; //the form will submit
     }
+
 
     render() {
         return (
