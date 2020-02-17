@@ -71,13 +71,14 @@ class App extends Component {
     // API.intializeTeamData();
     API.getAllTeam().then(data => {
       this.setState({
-        teams:data.data
+        teams: data.data
       });
       console.log(this.state.teams);
     })
   }
 
   handleTestEvent = event => {
+    
     //test get all team api
     switch (event.target.value) {
       case "getallteam":
@@ -131,10 +132,36 @@ class App extends Component {
         });
         break;
       case "signin":
-        API.login({username: "bob123",password: "123456"});
+        API.login({ username: "bob123", password: "123456" });
         break;
       case "logout":
         API.logout();
+        break;
+      case "addevent":
+        let calendarEvent = {
+          'summary': 'NBA 2019 DEN-UTA',
+          'location': '800 Howard St., San Francisco, CA 94103',
+          'description': 'Score:',
+          'id': "2222222",
+          'start': {
+            'dateTime': '2020-02-18T09:00:00Z', // start time
+          },
+          'end':{
+            'dateTime': '2020-02-18T11:00:00Z' // end time
+          },
+          'attendees': [
+            { 'email': 'accountEmail@example.com' }, //account Email
+            { 'email': 'sbrin@example.com' },
+          ],
+          'reminders': {
+            'useDefault': false,
+            'overrides': [
+              { 'method': 'email', 'minutes': 24 * 60 },
+              { 'method': 'popup', 'minutes': 10 },
+            ],
+          },
+        };
+        API.addCalendarEvent(calendarEvent);
         break;
     }
   }
@@ -144,7 +171,7 @@ class App extends Component {
   }
 
   handleSignIn = event => {
-    
+
   }
 
   render() {
@@ -152,8 +179,8 @@ class App extends Component {
       <Router>
         <Container fluid>
           <div>
-            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount}/>
-            <SignInBTN handleSignIn={this.handleSignIn}/>
+            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
+            <SignInBTN handleSignIn={this.handleSignIn} />
             <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
             <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
@@ -166,6 +193,7 @@ class App extends Component {
             <button onClick={this.handleTestEvent} value="register">Register User</button>
             <button onClick={this.handleTestEvent} value="signin">SignIn User</button>
             <button onClick={this.handleTestEvent} value="logout">LogOut User</button>
+            <button onClick={this.handleTestEvent} value="addevent">Add Event To Calendar</button>
           </div>
 
           <br />
@@ -174,7 +202,7 @@ class App extends Component {
           <br />
           {/* <Home teams={this.state.teams}/> */}
           <Switch>
-            <Route exact path="/" component={Home}/>
+            <Route exact path="/" component={Home} />
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
         </Container>

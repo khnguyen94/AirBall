@@ -1,126 +1,69 @@
-const fs = require('fs');
-const readline = require('readline');
 const { google } = require('googleapis');
-const openurl = require('openurl');
-const axios = require("axios");
-const queryString = require("query-string");
+const router = require("express").Router();
+const openurl = require("openurl");
 
-// If modifying these scopes, delete token.json.
-const SCOPES = ['https://www.googleapis.com/auth/calendar'];
-
-// The file token.json stores the user's access and refresh tokens, and is
-// created automatically when the authorization flow completes for the first
-// time.
-const TOKEN_PATH = 'token.json';
-
-var event = {
-    'summary': 'NBA 2019 DEN-UTA',
-    'location': '800 Howard St., San Francisco, CA 94103',
-    'description': 'Score:', //
-    'id': "",
-    'start': {
-        'dateTime': '2020-02-22T09:00:00Z', // start time
-    },
-    'attendees': [
-        { 'email': 'accountEmail@example.com' }, //account Email
-        { 'email': 'sbrin@example.com' },
-    ],
-    'reminders': {
-        'useDefault': false,
-        'overrides': [
-            { 'method': 'email', 'minutes': 24 * 60 },
-            { 'method': 'popup', 'minutes': 10 },
-        ],
-    },
-};
-
-async function AddSingleEvent() {
-    const oAuth2Client = new google.auth.OAuth2(
-        "<Client ID>",
-        "<Secret>",
-        "/"
-    );
-    const scopes = ['https://www.googleapis.com/auth/calendar'];
-    const url = oAuth2Client.generateAuthUrl({
-        access_type: "offline",
-        scope: scopes
+var event;
+var baseurl;
+router.route("/")
+    .post(function (req, res) {
+        baseurl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+        console.log("calendar router origin url = " + baseurl);
+        const oAuth2Client = getOauthClient(baseurl);
+        console.log("ROUTES - Calendar");
+        const scopes = ['https://www.googleapis.com/auth/calendar'];
+        const url = oAuth2Client.generateAuthUrl({
+            access_type: "offline",
+            scope: scopes
+        });
+        event = req.body;
+        console.log(req.body);
+        openurl.open(url);
+        // addEvent(oAuth2Client, event);
     });
-    axios.get(url);
-    const code = queryString.parseUrl(url);
-    const { tokens } = await oAuth2Client.getToken(code);
-    oAuth2Client.setCredentials(tokens);
-    addEvent(oAuth2Client);
 
-}
+router.route("/oauthcallback")
+    .get(function (req, res) {
+        // const baseurl = `${req.protocol}://${req.get("host")}${req.originalUrl}`;
+        // console.log("calendar router origin url = " + baseurl);
+        // console.log("call back");
+        // console.log(req.body);
+        // const event = req.body;
+        // var event = {
+        //     'summary': 'NBA 2019 DEN-UTA',
+        //     'location': '800 Howard St., San Francisco, CA 94103',
+        //     'description': 'Score:', 
+        //     'id': "111",
+        //     'start': {
+        //         'dateTime': '2020-02-26T09:00:00Z', // start time
+        //     },
+        //     'attendees': [
+        //         { 'email': 'accountEmail@example.com' }, //account Email
+        //         { 'email': 'sbrin@example.com' },
+        //     ],
+        //     'reminders': {
+        //         'useDefault': false,
+        //         'overrides': [
+        //             { 'method': 'email', 'minutes': 24 * 60 },
+        //             { 'method': 'popup', 'minutes': 10 },
+        //         ],
+        //     },
+        // };
+        console.log("REDIRECT TO HERE");
+        const oAuth2Client = getOauthClient(baseurl);
+        const code = req.query.code;
+        oAuth2Client.getToken(code, function (err, tokens) {
+            if (err) { res.status(422).json(err); }
+            oAuth2Client.setCredentials(tokens);
+            console.log("TOKEN " + tokens);
+            console.log(event);
+            addEvent(oAuth2Client, event);
+        })
+    })
 
-AddSingleEvent();
-// // Load client secrets from a local file.
-// function AddEventToCalendar(curEvent) {
-//     event = curEvent;
-//     fs.readFile('credentials.json', (err, content) => {
-//         if (err) return console.log('Error loading client secret file:', err);
-//         // Authorize a client with credentials, then call the Google Calendar API.
-//         // authorize(JSON.parse(content), listEvents);goo
-//         authorize(JSON.parse(content), addEvent);
-//     });
-// }
-
-// AddEventToCalendar(event);
-// /**
-//  * Create an OAuth2 client with the given credentials, and then execute the
-//  * given callback function.
-//  * @param {Object} credentials The authorization client credentials.
-//  * @param {function} callback The callback to call with the authorized client.
-//  */
-// function authorize(credentials, callback) {
-//     const { client_secret, client_id, redirect_uris } = credentials.installed;
-//     const oAuth2Client = new google.auth.OAuth2(
-//         client_id, client_secret, redirect_uris[0]);
-
-//     // Check if we have previously stored a token.
-//     fs.readFile(TOKEN_PATH, (err, token) => {
-//         if (err) return getAccessToken(oAuth2Client, callback);
-//         oAuth2Client.setCredentials(JSON.parse(token));
-//         callback(oAuth2Client);
-//     });
-// }
-
-// /**
-//  * Get and store new token after prompting for user authorization, and then
-//  * execute the given callback with the authorized OAuth2 client.
-//  * @param {google.auth.OAuth2} oAuth2Client The OAuth2 client to get token for.
-//  * @param {getEventsCallback} callback The callback for the authorized client.
-//  */
-// function getAccessToken(oAuth2Client, callback) {
-//     const authUrl = oAuth2Client.generateAuthUrl({
-//         access_type: 'offline',
-//         scope: SCOPES,
-//     });
-//     console.log('Authorize this app by visiting this url:', authUrl);
-//     openurl.open(authUrl);
-
-
-//     const rl = readline.createInterface({
-//         input: process.stdin,
-//         output: process.stdout,
-//     });
-//     rl.question('Enter the code from that page here: ', (code) => {
-//         rl.close();
-//         oAuth2Client.getToken(code, (err, token) => {
-//             if (err) return console.error('Error retrieving access token', err);
-//             oAuth2Client.setCredentials(token);
-//             // Store the token to disk for later program executions
-//             fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-//                 if (err) return console.error(err);
-//                 console.log('Token stored to', TOKEN_PATH);
-//             });
-//             callback(oAuth2Client);
-//         });
-//     });
-// }
-
-function addEvent(auth) {
+function addEvent(auth, event) {
     const calendar = google.calendar({ version: 'v3', auth });
+    console.log("add Event");
+    console.log(event);
     calendar.events.insert({
         auth: auth,
         calendarId: 'primary',
@@ -133,3 +76,14 @@ function addEvent(auth) {
         console.log('Event created: %s', event.htmlLink);
     });
 }
+
+function getOauthClient(baseurl) {
+    return new google.auth.OAuth2(
+        "401663726835-79gkgrqip3n4jdcuqkh3ckscvouthrl7.apps.googleusercontent.com",
+        "P-4PhH5HIBy1nvybB90KcBCK",
+        /*`${baseurl}/oauthcallback`*/
+        "http://localhost:3001/api/calendar/oauthcallback"
+    );
+}
+
+module.exports = router;

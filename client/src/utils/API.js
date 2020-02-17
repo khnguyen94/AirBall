@@ -3,6 +3,7 @@ import sportAPI from "./sportAPI";
 import dbAPI from "./dbAPI";
 import accountAPI from "./accountAPI";
 import passport from "passport";
+import calendarAPI from "./calendarAPI";
 
 export default {
   // use set to ensure unique team is inserted to database, as sportAPI might return duplicate team - done OPEN TO USER
@@ -35,7 +36,7 @@ export default {
 
   // get favorite team from database 
   getFavoriteTeam: function () {
-    return axios.get("/api/account/favorites");
+    return dbAPI.getFavoriteTeam();
   },
 
   // Add/remove team to/from favorite - done OPEN TO USRE
@@ -95,6 +96,12 @@ export default {
 
   logout: function () {
     accountAPI.logOutAccount();
+  },
+
+  addCalendarEvent: function(event){
+    console.log("API addcalendar event");
+    console.log(event);
+    calendarAPI.addCalendarEvent(event);
   }
 }
 
