@@ -7,7 +7,7 @@ function SideBar(props) {
   // Function to render all of the teams from allTeamsFiltered
   let renderAllTeams = props.teams
     .filter(team => {
-      return team.favorite == false && team.nbaFranchise == 1;
+      return team.nbaFranchise == 1;
     })
     .map((team, index) => {
       return (
@@ -24,10 +24,7 @@ function SideBar(props) {
     });
 
   // Function to render all the favorite teams from faveTeamsFiltered
-  let renderFaveTeams = props.teams
-    .filter(team => {
-      return team.favorite === true;
-    })
+  let renderFaveTeams = props.favteams
     .map((team, index) => {
       return (
         <li className="listItem">
