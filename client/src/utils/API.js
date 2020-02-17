@@ -35,7 +35,7 @@ export default {
 
   // get favorite team from database , all favorite teams
   getFavoriteTeam: function() {
-    return dbAPI.getFavoriteTeam();
+    return dbAPI.getFavTeam();
   },
 
   // Add/remove team to/from favorite - done OPEN TO USRE
