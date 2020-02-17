@@ -37,7 +37,8 @@ const sliderImages = [
 
 class Home extends Component {
   state = {
-    teams: null
+    teams: [],
+    favteams:[]
   }
 
   componentDidMount() {
@@ -46,8 +47,14 @@ class Home extends Component {
       this.setState({
         teams: data.data
       });
-      // console.log(this.state.teams)
-    })
+      console.log(this.state.teams)
+    });
+    API.getFavoriteTeam().then(data => {
+      console.log(data);
+      this.setState({
+        favteams: data.data
+      });
+    });
   }
 
   render() {
@@ -55,7 +62,7 @@ class Home extends Component {
       <Row>
         <Col size="md-4 sm-12">
           <Jumbotron>
-            {(this.state.teams) ? <SideBar teams={this.state.teams}/> : <p> LOADING </p>}
+            {(this.state.teams) ? <SideBar teams={this.state.teams} favteams={this.state.favteams}/> : <p> LOADING </p>}
           </Jumbotron>
         </Col>
 
