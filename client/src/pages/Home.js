@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row} from "../components/Grid";
 import "../App.css";
 import Jumbotron from "../components/Jumbotron";
 import SideBar from "../components/SideBar/SideBar";
@@ -11,22 +11,6 @@ import { PromiseProvider } from "mongoose";
 import API from "../utils/API";
 import EventCard from "../components/EventCard";
 import Moment from "moment";
-
-// Create an array of NavLinks
-const teamsFromAPI = [
-  {
-    teamName: "Lakers",
-    isFavorite: true
-  },
-  {
-    teamName: "Clippers",
-    isFavorite: false
-  },
-  {
-    teamName: "Bulls",
-    isFavorite: true
-  }
-];
 
 // Create a settings object for the imageSlider
 const settings = {
@@ -77,9 +61,14 @@ class Home extends Component {
       this.setState({
         teams: data.data
       });
-      console.log(this.state.teams);
-    })
-
+      console.log(this.state.teams)
+    });
+    API.getFavoriteTeam().then(data => {
+      console.log(data);
+      this.setState({
+        favteams: data.data
+      });
+    });
   }
 
   getTeamsGames(teamName) {
@@ -185,39 +174,40 @@ teamOnClick(e) {
   render() {
     return (
       <Row>
-        <Col size="md-3 sm-12">
+        <Col size="md-4 sm-12">
           <Jumbotron>
-            <SideBar teams={this.state.teams} clickFunc={this.teamOnClick}/>
+            {(this.state.teams) ? <SideBar teams={this.state.teams} favteams={this.state.favteams}/> : <p> LOADING </p>}
           </Jumbotron>
         </Col>
 
         <Col size="md-8 sm-12">
-          {!this.state.next5Games.length ? (
-            <Jumbotron
-              style={{
-                position: "absolute",
-                left: "50%",
-                top: "50%",
-                transform: "translate(-50%, -50%)"
-              }}
-            >
-              <Slider {...settings}>
-                {sliderImages.map(image => {
-                  return (
-                    <div>
-                      <img className="sliderImage" src={image.url} />
-                    </div>
-                  );
-                })}
-              </Slider>
+          <Jumbotron
+            style={{
+              position: "absolute",
+              top: 0,
+              bottom: 0, 
+              transform: "translate(-50%, -50%)"
+            }}
+          >
+            <Slider {...settings}>
+              {sliderImages.map(image => {
+                return (
+                  <div>
+                    <img className="sliderImage" src={image.url} />
+                  </div>
+                );
+              })}
+            </Slider>
 
-              <div className="Summary-div">
-                <p>
-                  AirBall is the premiere sports notification system. Game summaries
-                  can be delivered straight to your email at a customized schedule.
-                  While the final score matters most, as sports fans, we all know
-                  there is a library of supporting numbers and statistics to
-                  understanding what goes on during those 48 minutes.
+            <br />
+
+            <div className="Summary-div">
+              <p>
+                AirBall is the premiere sports notification system. Game summaries
+                can be delivered straight to your email at a customized schedule.
+                While the final score matters most, as sports fans, we all know
+                there is a library of supporting numbers and statistics to
+                understanding what goes on during those 48 minutes.
               </p>
 
                 <p>

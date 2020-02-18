@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 import "./Nav.css";
-import API from "../../utils/API";
-import NavList from "./NavList";
-var nbaTeams = require("../../data/nbaTeams.json");
 
 class Nav extends Component {
   // Render function
