@@ -5,7 +5,7 @@ const openurl = require("openurl");
 let event;
 const oAuth2Client = new google.auth.OAuth2(
     "401663726835-79gkgrqip3n4jdcuqkh3ckscvouthrl7.apps.googleusercontent.com",
-    "P-4PhH5HIBy1nvybB90KcBCK",
+    "<clientsecret>",
     "http://localhost:3001/api/calendar/oauthcallback"
 );
 
