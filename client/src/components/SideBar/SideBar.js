@@ -12,7 +12,7 @@ function SideBar(props) {
     .map((team, index) => {
       return (
         <li className="sideBarTeamItem">
-          <a className="sideBarTeamLink" eventKey={index} href="#">
+          <a className="sideBarTeamLink" eventKey={index} href="#" data-teamId={team.teamId} onClick={props.clickFunc}>
             <span>{team.fullName}</span>
             <FavoriteTeamBtn />
           </a>
