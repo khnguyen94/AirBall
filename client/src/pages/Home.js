@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row, Container } from "../components/Grid";
+import { Col, Row} from "../components/Grid";
 import "../App.css";
 import Jumbotron from "../components/Jumbotron";
 import SideBar from "../components/SideBar/SideBar";
@@ -9,22 +9,6 @@ import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PromiseProvider } from "mongoose";
 import API from "../utils/API";
-
-// Create an array of NavLinks
-const teamsFromAPI = [
-  {
-    teamName: "Lakers", 
-    isFavorite: true
-  },
-  {
-    teamName: "Clippers", 
-    isFavorite: false
-  },
-  {
-    teamName: "Bulls", 
-    isFavorite: true
-  }
-];
 
 // Create a settings object for the imageSlider
 const settings = {
@@ -53,26 +37,32 @@ const sliderImages = [
 
 class Home extends Component {
   state = {
-    teams: []
+    teams: [],
+    favteams:[]
   }
 
   componentDidMount() {
     // API.intializeTeamData();
     API.getAllTeam().then(data => {
       this.setState({
-        teams:data.data
+        teams: data.data
       });
-      //console.log(this.state.teams);
-    })
-  
+      console.log(this.state.teams)
+    });
+    API.getFavoriteTeam().then(data => {
+      console.log(data);
+      this.setState({
+        favteams: data.data
+      });
+    });
   }
 
   render() {
     return (
       <Row>
-        <Col size="md-3 sm-12">
+        <Col size="md-4 sm-12">
           <Jumbotron>
-            <SideBar teams={this.state.teams}/>
+            {(this.state.teams) ? <SideBar teams={this.state.teams} favteams={this.state.favteams}/> : <p> LOADING </p>}
           </Jumbotron>
         </Col>
 
@@ -80,8 +70,8 @@ class Home extends Component {
           <Jumbotron
             style={{
               position: "absolute",
-              left: "50%",
-              top: "50%",
+              top: 0,
+              bottom: 0, 
               transform: "translate(-50%, -50%)"
             }}
           >
@@ -94,6 +84,8 @@ class Home extends Component {
                 );
               })}
             </Slider>
+
+            <br />
 
             <div className="Summary-div">
               <p>

@@ -68,12 +68,12 @@ class App extends Component {
   }
   componentDidMount() {
     // API.intializeTeamData();
-    API.getAllTeam().then(data => {
-      this.setState({
-        teams: data.data
-      });
-      console.log(this.state.teams);
-    })
+    // API.getAllTeam().then(data => {
+    //   this.setState({
+    //     teams:data.data
+    //   });
+    //   console.log(this.state.teams);
+    // })
   }
 
   handleTestEvent = event => {
@@ -141,7 +141,7 @@ class App extends Component {
           'summary': 'NBA 2020 DEN-UTA',
           'location': '800 Howard St., San Francisco, CA 94103',
           'description': 'Score:',
-          'id': "9999999",
+          'id': "9999900099",
           'start': {
             'dateTime': '2020-02-22T10:00:00Z', // start time
           },
