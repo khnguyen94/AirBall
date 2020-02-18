@@ -14,7 +14,6 @@ import Favorites from "./pages/Favorites";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignInBTN from "./components/SignInBTN";
 import RegisterBTN from "./components/RegisterBTN";
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Create an array to hold all slider Images
@@ -139,15 +138,15 @@ class App extends Component {
         break;
       case "addevent":
         let calendarEvent = {
-          'summary': 'NBA 2019 DEN-UTA',
+          'summary': 'NBA 2020 DEN-UTA',
           'location': '800 Howard St., San Francisco, CA 94103',
           'description': 'Score:',
-          'id': "2222222",
+          'id': "9999999",
           'start': {
-            'dateTime': '2020-02-18T09:00:00Z', // start time
+            'dateTime': '2020-02-22T10:00:00Z', // start time
           },
           'end':{
-            'dateTime': '2020-02-18T11:00:00Z' // end time
+            'dateTime': '2020-02-22T14:00:00Z' // end time
           },
           'attendees': [
             { 'email': 'accountEmail@example.com' }, //account Email
