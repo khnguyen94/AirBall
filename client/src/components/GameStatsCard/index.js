@@ -3,21 +3,24 @@ import FavoriteButtonNew from "../FavoriteButtonNew";
 import "./style.css"
 import Image from "react-bootstrap/image"
 import { Col, Row, Container } from "../Grid";
-import Button from "react-bootstrap/Button";
+import { Chart } from "react-google-charts";
 //import FavoriteBtn from "../FavoriteGameBtn";
 //import { FormBtn } from "../Form";
 
 // This file exports both the List and ListItem components
 
-function EventCard(props) {
+
+function GameStatsCard(props) {
+  const data = [
+    ["Team", "Visitations", { role: "style" }],
+    [props.homeTeam, props.homeTeamRebounds, "color: blue"],
+    [props.awayTeam, props.awayTeamRebounds, "color: red"],
+  ];
   return (
 
-    <div className="card" key={props.key}>
+    <div className="card">
       <div className="card-body">
         <Row>
-          <Col size="md-3">
-            <Image src={props.homeTeamLogo} fluid />
-          </Col>
           <Col size="md-6">
           <h5>
             {props.homeTeam} VS. {props.awayTeam} 
@@ -31,17 +34,26 @@ function EventCard(props) {
           {props.gameTime}
         </p>
       </div>
-      <Row>
-        <Col size="md-6">
-      <FavoriteButtonNew onClick={props.onClick} favorited={props.favorited}></FavoriteButtonNew>
-      </Col>
-      <Col size="md-6">
-      <Button variant="info">Add Game to Calander</Button>
-      </Col>
-      </Row>
+      <Chart
+      chartType="BarChart"
+      width="100%"
+      height="200px"
+      data={data}
+      options={{
+        title: 'Total Rebounds',
+        chartArea: { width: '50%' },
+        hAxis: {
+          title: 'Total Rebounds',
+          minValue: 0,
+        },
+        vAxis: {
+          title: 'Team',
+        },
+      }}
+      />
     </div>
 
   );
 }
 
-export default EventCard;
+export default GameStatsCard;
