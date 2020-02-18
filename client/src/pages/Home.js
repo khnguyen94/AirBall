@@ -52,7 +52,8 @@ class Home extends Component {
     next5Games: [],
     past5Games: [],
     teamClickedId: NaN,
-    favGames: []
+    favGames: [],
+    favteams: []
   }
 
   componentDidMount() {
@@ -179,8 +180,8 @@ teamOnClick(e) {
             {(this.state.teams) ? <SideBar teams={this.state.teams} favteams={this.state.favteams}/> : <p> LOADING </p>}
           </Jumbotron>
         </Col>
-
         <Col size="md-8 sm-12">
+        {!this.state.next5Games.length ? (
           <Jumbotron
             style={{
               position: "absolute",
