@@ -37,7 +37,8 @@ const sliderImages = [
 
 class Home extends Component {
   state = {
-    teams: null
+    teams: null, 
+    faveTeams: [],
   }
 
   componentDidMount() {
@@ -49,6 +50,32 @@ class Home extends Component {
       // console.log(this.state.teams)
     })
   }
+
+  handleFavoriteUpdate(teamID, isFavorite) {
+    if (!isFavorite) {
+        let targetTeam = {
+            teamID: teamID
+        }
+        API.addTeamToFavorite(targetTeam)
+            .then(res => {
+                console.log("Team added to favorites!");
+                this.loadEvents();
+                this.setState({ eventArray: this.state.eventArray });
+            })
+            .catch(err => console.log(err));
+        alert("Game Added to Favorites!")
+    }
+    else {
+        API.removeGameFromFavorite(gameId)
+            .then(res => {
+                console.log("Game deleted from favorites!")
+                this.loadEvents();
+                this.setState({ eventArray: this.state.eventArray });
+            })
+            .catch(err => console.log(err));
+        alert("Game Removed from Favorites!")
+    }
+};
 
   render() {
     return (
