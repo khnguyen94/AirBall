@@ -55,6 +55,9 @@ export default {
   getTeamFromName: function(teamName) {
     return sportAPI.getTeam(teamName);
   },
+  getGameStats: function(gameId) {
+    return sportAPI.getGameStats(gameId);
+  },
 
   // get all favorite games from database - done OPEN TO USER
   getAllFavoriteGames: function(done) {

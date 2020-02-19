@@ -12,8 +12,9 @@ function SideBar(props) {
     .map((team, index) => {
       return (
         <li className="listItem">
-          <a className="listItemText" eventKey={index} href="#">
+          <a className="listItemText" eventKey={index} href="#" data-teamId={team.teamId} onClick={props.clickFunc}>
             {team.fullName}
+            <FavoriteTeamBtn />
           </a>
 
           <div className="faveBtnContainer">
