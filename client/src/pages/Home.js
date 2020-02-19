@@ -155,6 +155,8 @@ class Home extends Component {
                    let gameObj = {
                      homeTeam: tempArray[i].hTeam.nickName,
                      awayTeam: tempArray[i].vTeam.nickName,
+                     homeTeamLogo: tempArray[i].hTeam.logo,
+                     awayTeamLogo: tempArray[i].vTeam.logo,
                      gameTime: Moment.utc(tempArray[i].startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY"),
                      stats: res.data.api.statistics
                    }
@@ -243,9 +245,13 @@ class Home extends Component {
             </Jumbotron>
           ) : (
               <Row>
+                <Row>
+                  <Col size="md-12">
+                  <h2>Upcoming Games</h2>
+                  </Col>
                 {this.state.next5Games.map(event => {
                   return (
-                    <Col size="md-6 sm-6">
+                    <Col size="md-6 sm-12">
                       <EventCard
                         key={event.gameId}
                         homeTeam={event.hTeam.nickName}
@@ -260,20 +266,44 @@ class Home extends Component {
                     </Col>
                   )
                 })}
+                </Row>
+                <Row>
+                <Col size="md-12">
+                  <h2>Past 5 Games</h2>
+                </Col>
                 {this.state.past5Games.map(event => {
                       return (
-                        <Col size="md-6 sm-6">
+                        <Col size="md-12">
                           <GameStatsCard
                             homeTeam={event.homeTeam}
                             awayTeam={event.awayTeam}
                             gameTime={event.gameTime}
+                            awayTeamLogo={event.awayTeamLogo}
+                            homeTeamLogo={event.homeTeamLogo}
                             homeTeamRebounds={parseInt(event.stats[0].totReb)}
                             awayTeamRebounds={parseInt(event.stats[1].totReb)}
+                            homeTeamScore={parseInt(event.stats[0].points)}
+                            awayTeamScore={parseInt(event.stats[1].points)}
+                            homeTeamOffReb={parseInt(event.stats[0].offReb)}
+                            awayTeamOffReb={parseInt(event.stats[1].offReb)}
+                            homeTeamDefReb={parseInt(event.stats[0].defReb)}
+                            awayTeamDefReb={parseInt(event.stats[1].defReb)}
+                            homeAssists={parseInt(event.stats[0].assists)}
+                            awayAssists={parseInt(event.stats[1].assists)}
+                            homeTOs={parseInt(event.stats[0].turnovers)}
+                            awayTOs={parseInt(event.stats[1].turnovers)}
+                            homePaint={parseInt(event.stats[0].pointsInPaint)}
+                            awayPaint={parseInt(event.stats[1].pointsInPaint)}
+                            homeFast={parseInt(event.stats[0].fastBreakPoints)}
+                            awayFast={parseInt(event.stats[1].fastBreakPoints)}
+                            homeSC={parseInt(event.stats[0].secondChancePoints)}
+                            awaySC={parseInt(event.stats[1].secondChancePoints)}
                           >
                           </GameStatsCard>
                         </Col>
                       )
                 })}
+                </Row>
               </Row>
             )}
         </Col>
