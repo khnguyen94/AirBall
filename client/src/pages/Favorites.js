@@ -81,6 +81,7 @@ class Events extends Component {
             let gameData = {
                 gameId: gameId
             }
+
             API.addGameToFavorite(gameData)
                 .then(res => {
                     console.log("Game added to favorites!");

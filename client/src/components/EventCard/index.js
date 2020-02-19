@@ -3,6 +3,7 @@ import FavoriteButtonNew from "../FavoriteButtonNew";
 import "./style.css"
 import Image from "react-bootstrap/image"
 import { Col, Row, Container } from "../Grid";
+import Button from "react-bootstrap/Button";
 //import FavoriteBtn from "../FavoriteGameBtn";
 //import { FormBtn } from "../Form";
 
@@ -30,7 +31,14 @@ function EventCard(props) {
           {props.gameTime}
         </p>
       </div>
+      <Row>
+        <Col size="md-6">
       <FavoriteButtonNew onClick={props.onClick} favorited={props.favorited}></FavoriteButtonNew>
+      </Col>
+      <Col size="md-6">
+      <Button variant="info">Add Game to Calander</Button>
+      </Col>
+      </Row>
     </div>
 
   );

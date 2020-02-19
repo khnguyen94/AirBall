@@ -3,6 +3,7 @@ import sportAPI from "./sportAPI";
 import dbAPI from "./dbAPI";
 import accountAPI from "./accountAPI";
 import passport from "passport";
+import calendarAPI from "./calendarAPI";
 
 export default {
   // use set to ensure unique team is inserted to database, as sportAPI might return duplicate team - done OPEN TO USER
@@ -35,7 +36,11 @@ export default {
 
   // get favorite team from database , all favorite teams
   getFavoriteTeam: function() {
+<<<<<<< HEAD
     return dbAPI.getFavoriteTeam();
+=======
+    return dbAPI.getFavTeam();
+>>>>>>> 46f428a13ef06a57527776bce19b46a4207e88d5
   },
 
   // Add/remove team to/from favorite - done OPEN TO USRE
@@ -53,6 +58,9 @@ export default {
 
   getTeamFromName: function(teamName) {
     return sportAPI.getTeam(teamName);
+  },
+  getGameStats: function(gameId) {
+    return sportAPI.getGameStats(gameId);
   },
 
   // get all favorite games from database - done OPEN TO USER
@@ -95,5 +103,14 @@ export default {
 
   logout: function() {
     accountAPI.logOutAccount();
+<<<<<<< HEAD
+=======
+  },
+
+  addCalendarEvent: function(event){
+    console.log("API addcalendar event");
+    console.log(event);
+    calendarAPI.addCalendarEvent(event);
+>>>>>>> 46f428a13ef06a57527776bce19b46a4207e88d5
   }
 };
