@@ -19,6 +19,11 @@
     "nodemon": "^1.18.7"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free-regular": "^5.0.13",
+    "@fortawesome/fontawesome-free-solid": "^5.0.13",
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/react-fontawesome": "^0.1.8",
     "axios": "^0.19.2",
     "bcrypt": "^3.0.8",
     "body-parser": "^1.19.0",
@@ -38,10 +43,12 @@
     "popper.js": "^1.16.1",
     "query-string": "^6.11.0",
     "react": "^16.12.0",
+    "react-addons-update": "^15.6.2",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
     "react-router-dom": "^5.1.2",
     "react-slick": "^0.25.2",
+    "react-stars": "^2.2.5",
     "react-switch": "^5.0.1",
     "slick-carousel": "^1.8.1",
     "unirest": "^0.6.0"

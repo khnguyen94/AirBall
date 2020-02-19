@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Col, Row} from "../components/Grid";
+import { Col, Row } from "../components/Grid";
 import "../App.css";
 import Jumbotron from "../components/Jumbotron";
 import SideBar from "../components/SideBar/SideBar";
@@ -9,6 +9,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PromiseProvider } from "mongoose";
 import API from "../utils/API";
+import ReactStarts from "react-stars";
+import update from 'react-addons-update';
+import { isBuffer } from "util";
 
 // Create a settings object for the imageSlider
 const settings = {
@@ -38,23 +41,62 @@ const sliderImages = [
 class Home extends Component {
   state = {
     teams: [],
-    favteams:[]
+    favteams: []
   }
 
   componentDidMount() {
     // API.intializeTeamData();
+    // TO FIX
+    this.loadAllTeams();
+    this.loadFavTeams();
+  }
+
+  loadAllTeams = () => {
     API.getAllTeam().then(data => {
-      this.setState({
-        teams: data.data
+      console.log(data);
+      const filteredTeam = data.data
+        .filter(team => team.nbaFranchise === '1');
+      filteredTeam.forEach(team => {
+        const favNames = this.state.favteams.map(favteam => favteam.fullName);
+        if (favNames.includes(team.fullName)) {
+          team.favorite = true;
+        }
       });
-      console.log(this.state.teams)
+      console.log(filteredTeam);
+      this.setState({
+        teams: filteredTeam
+      });
+      console.log(this.state.teams);
     });
+  }
+
+  loadFavTeams = () => {
     API.getFavoriteTeam().then(data => {
       console.log(data);
+      const favTeamName = data.data;
       this.setState({
-        favteams: data.data
+        favteams: favTeamName
       });
+      console.log(this.state.favteams);
+      this.loadAllTeams();
     });
+  }
+
+  changeFavTeam = (event) => {
+    const index = event.target.id;
+    console.log(event.target.checked);
+    console.log(index);
+    this.state.teams[index].favorite = event.target.checked;
+    this.forceUpdate();
+    if (this.state.teams[index].favorite) {
+      API.addTeamToFavorite(this.state.teams[index]._id).then(data => {
+        this.loadFavTeams();
+      });
+    } else {
+      API.removeTeamFromFavorite(this.state.teams[index]._id).then(data => {
+        this.loadFavTeams();
+      });
+    }
   }
 
   render() {
@@ -62,7 +104,7 @@ class Home extends Component {
       <Row>
         <Col size="md-4 sm-12">
           <Jumbotron>
-            {(this.state.teams) ? <SideBar teams={this.state.teams} favteams={this.state.favteams}/> : <p> LOADING </p>}
+            {(this.state.teams) ? <SideBar teams={this.state.teams} favteams={this.state.favteams} changeFavTeam={this.changeFavTeam} /> : <p> LOADING </p>}
           </Jumbotron>
         </Col>
 
@@ -71,7 +113,7 @@ class Home extends Component {
             style={{
               position: "absolute",
               top: 0,
-              bottom: 0, 
+              bottom: 0,
               transform: "translate(-50%, -50%)"
             }}
           >
