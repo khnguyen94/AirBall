@@ -1,7 +1,7 @@
 import React from "react";
 import FavoriteButtonNew from "../FavoriteButtonNew";
 import "./style.css"
-import Image from "react-bootstrap/image"
+// import Image from "react-bootstrap/image"
 import { Col, Row, Container } from "../Grid";
 import { Chart } from "react-google-charts";
 //import FavoriteBtn from "../FavoriteGameBtn";
@@ -57,7 +57,7 @@ function GameStatsCard(props) {
       <div className="card-body">
         <Row>
           <Col size="md-3">
-            <Image src={props.homeTeamLogo} fluid />
+            <img src={props.homeTeamLogo} />
           </Col>
           <Col size="md-6">
             <h4>
@@ -65,7 +65,7 @@ function GameStatsCard(props) {
             </h4>
           </Col>
           <Col size="md-3">
-            <Image src={props.awayTeamLogo} fluid />
+            <img src={props.awayTeamLogo} />
           </Col>
         </Row>
         <p className="card-text">
