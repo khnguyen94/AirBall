@@ -16,6 +16,7 @@ router.route("/")
             access_type: "offline",
             scope: scopes
         });
+        console.log(url);
         event = req.body;
         openurl.open(url);
     });
