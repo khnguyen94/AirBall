@@ -190,23 +190,23 @@ class Home extends Component {
               past5Games: []
             })
             console.log(`last game: ${JSON.stringify(tempArray[0])}`);
-             for (let i = 0; i < tempArray.length; i++) {
-               console.log(tempArray[i].gameId);
-               API.getGameStats(tempArray[i].gameId)
-                 .then((res) => {
-                   let gameObj = {
-                     homeTeam: tempArray[i].hTeam.nickName,
-                     awayTeam: tempArray[i].vTeam.nickName,
-                     homeTeamLogo: tempArray[i].hTeam.logo,
-                     awayTeamLogo: tempArray[i].vTeam.logo,
-                     gameTime: Moment.utc(tempArray[i].startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY"),
-                     stats: res.data.api.statistics
-                   }
-                   this.setState({
-                     gameStats: this.state.past5Games.push(gameObj)
+            for (let i = 0; i < tempArray.length; i++) {
+              console.log(tempArray[i].gameId);
+              API.getGameStats(tempArray[i].gameId)
+                .then((res) => {
+                  let gameObj = {
+                    homeTeam: tempArray[i].hTeam.nickName,
+                    awayTeam: tempArray[i].vTeam.nickName,
+                    homeTeamLogo: tempArray[i].hTeam.logo,
+                    awayTeamLogo: tempArray[i].vTeam.logo,
+                    gameTime: Moment.utc(tempArray[i].startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY"),
+                    stats: res.data.api.statistics
+                  }
+                  this.setState({
+                    gameStats: this.state.past5Games.push(gameObj)
                   })
                 })
-                 .catch(err => console.log(err));
+                .catch(err => console.log(err));
             }
           })
           .catch(err => console.log(err));
@@ -243,7 +243,7 @@ class Home extends Component {
       <Row>
         <Col size="md-4 sm-12">
           <Jumbotron>
-            {(this.state.teams) ? <SideBar teams={this.state.teams} favteams={this.state.favteams} clickFunc={this.teamOnClick} changeFavTeam={this.changeFavTeam}/> : <p> LOADING </p>}
+            {(this.state.teams) ? <SideBar teams={this.state.teams} favteams={this.state.favteams} clickFunc={this.teamOnClick} changeFavTeam={this.changeFavTeam} /> : <p> LOADING </p>}
           </Jumbotron>
         </Col>
         <Col size="md-8 sm-12">
@@ -289,62 +289,62 @@ class Home extends Component {
               <Row>
                 <Row>
                   <Col size="md-12">
-                  <h2>Upcoming Games</h2>
+                    <h2>Upcoming Games</h2>
                   </Col>
-                {this.state.next5Games.map(event => {
-                  return (
-                    <Col size="md-6 sm-12">
-                      <EventCard
-                        key={event.gameId}
-                        homeTeam={event.hTeam.nickName}
-                        awayTeam={event.vTeam.nickName}
-                        gameTime={Moment.utc(event.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
-                        onClick={() => this.handleSubmit(event.gameId, this.state.favGames.includes(event.gameId))}
-                        favorited={this.state.favGames.includes(event.gameId)}
-                        awayTeamLogo={event.vTeam.logo}
-                        homeTeamLogo={event.hTeam.logo}
-                      >
-                      </EventCard>
-                    </Col>
-                  )
-                })}
+                  {this.state.next5Games.map(event => {
+                    return (
+                      <Col size="md-6 sm-12">
+                        <EventCard
+                          key={event.gameId}
+                          homeTeam={event.hTeam.nickName}
+                          awayTeam={event.vTeam.nickName}
+                          gameTime={Moment.utc(event.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
+                          onClick={() => this.handleSubmit(event.gameId, this.state.favGames.includes(event.gameId))}
+                          favorited={this.state.favGames.includes(event.gameId)}
+                          awayTeamLogo={event.vTeam.logo}
+                          homeTeamLogo={event.hTeam.logo}
+                        >
+                        </EventCard>
+                      </Col>
+                    )
+                  })}
                 </Row>
                 <Row>
-                <Col size="md-12">
-                  <h2>Past 5 Games</h2>
-                </Col>
-                {this.state.past5Games.map(event => {
-                      return (
-                        <Col size="md-12">
-                          <GameStatsCard
-                            homeTeam={event.homeTeam}
-                            awayTeam={event.awayTeam}
-                            gameTime={event.gameTime}
-                            awayTeamLogo={event.awayTeamLogo}
-                            homeTeamLogo={event.homeTeamLogo}
-                            homeTeamRebounds={parseInt(event.stats[0].totReb)}
-                            awayTeamRebounds={parseInt(event.stats[1].totReb)}
-                            homeTeamScore={parseInt(event.stats[0].points)}
-                            awayTeamScore={parseInt(event.stats[1].points)}
-                            homeTeamOffReb={parseInt(event.stats[0].offReb)}
-                            awayTeamOffReb={parseInt(event.stats[1].offReb)}
-                            homeTeamDefReb={parseInt(event.stats[0].defReb)}
-                            awayTeamDefReb={parseInt(event.stats[1].defReb)}
-                            homeAssists={parseInt(event.stats[0].assists)}
-                            awayAssists={parseInt(event.stats[1].assists)}
-                            homeTOs={parseInt(event.stats[0].turnovers)}
-                            awayTOs={parseInt(event.stats[1].turnovers)}
-                            homePaint={parseInt(event.stats[0].pointsInPaint)}
-                            awayPaint={parseInt(event.stats[1].pointsInPaint)}
-                            homeFast={parseInt(event.stats[0].fastBreakPoints)}
-                            awayFast={parseInt(event.stats[1].fastBreakPoints)}
-                            homeSC={parseInt(event.stats[0].secondChancePoints)}
-                            awaySC={parseInt(event.stats[1].secondChancePoints)}
-                          >
-                          </GameStatsCard>
-                        </Col>
-                      )
-                })}
+                  <Col size="md-12">
+                    <h2>Past 5 Games</h2>
+                  </Col>
+                  {this.state.past5Games.map(event => {
+                    return (
+                      <Col size="md-12">
+                        <GameStatsCard
+                          homeTeam={event.homeTeam}
+                          awayTeam={event.awayTeam}
+                          gameTime={event.gameTime}
+                          awayTeamLogo={event.awayTeamLogo}
+                          homeTeamLogo={event.homeTeamLogo}
+                          homeTeamRebounds={parseInt(event.stats[0].totReb)}
+                          awayTeamRebounds={parseInt(event.stats[1].totReb)}
+                          homeTeamScore={parseInt(event.stats[0].points)}
+                          awayTeamScore={parseInt(event.stats[1].points)}
+                          homeTeamOffReb={parseInt(event.stats[0].offReb)}
+                          awayTeamOffReb={parseInt(event.stats[1].offReb)}
+                          homeTeamDefReb={parseInt(event.stats[0].defReb)}
+                          awayTeamDefReb={parseInt(event.stats[1].defReb)}
+                          homeAssists={parseInt(event.stats[0].assists)}
+                          awayAssists={parseInt(event.stats[1].assists)}
+                          homeTOs={parseInt(event.stats[0].turnovers)}
+                          awayTOs={parseInt(event.stats[1].turnovers)}
+                          homePaint={parseInt(event.stats[0].pointsInPaint)}
+                          awayPaint={parseInt(event.stats[1].pointsInPaint)}
+                          homeFast={parseInt(event.stats[0].fastBreakPoints)}
+                          awayFast={parseInt(event.stats[1].fastBreakPoints)}
+                          homeSC={parseInt(event.stats[0].secondChancePoints)}
+                          awaySC={parseInt(event.stats[1].secondChancePoints)}
+                        >
+                        </GameStatsCard>
+                      </Col>
+                    )
+                  })}
                 </Row>
               </Row>
             )}

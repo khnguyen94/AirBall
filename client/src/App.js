@@ -68,16 +68,16 @@ class App extends Component {
   }
   componentDidMount() {
     // API.intializeTeamData();
-    // API.getAllTeam().then(data => {
-    //   this.setState({
-    //     teams:data.data
-    //   });
-    //   console.log(this.state.teams);
-    // })
+    //   API.getAllTeam().then(data => {
+    //     this.setState({
+    //       teams: data.data
+    //     });
+    //     console.log(this.state.teams);
+    //   })
   }
 
   handleTestEvent = event => {
-    
+
     //test get all team api
     switch (event.target.value) {
       case "getallteam":
@@ -145,7 +145,7 @@ class App extends Component {
           'start': {
             'dateTime': '2020-02-22T10:00:00Z', // start time
           },
-          'end':{
+          'end': {
             'dateTime': '2020-02-22T14:00:00Z' // end time
           },
           'attendees': [
