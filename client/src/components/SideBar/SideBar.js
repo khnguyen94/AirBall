@@ -4,37 +4,41 @@ import { Row } from "../Grid";
 import FavoriteTeamBtn from "../FavoriteTeamBtn";
 
 function SideBar(props) {
+  let allSortedTeams = props.teams.sort(function(teamA, teamB) {
+    return teamA.teamId - teamB.teamId;
+  });
+
   // Function to render all of the teams from allTeamsFiltered
-  let renderAllTeams = props.teams
+  let renderAllTeams = allSortedTeams
     .filter(team => {
-<<<<<<< HEAD
-      return team.favorite == false && team.nbaFranchise == 1;
-=======
-      return team.nbaFranchise == 1;
->>>>>>> 46f428a13ef06a57527776bce19b46a4207e88d5
+      return team.nbaFranchise == 1 && team.favorite == false;
     })
+    .sort()
     .map((team, index) => {
       return (
         <li className="listItem">
-<<<<<<< HEAD
-          <a className="listItemText" eventKey={index} href="#">
+          <a
+            className="listItemText"
+            eventKey={index}
+            href="#"
+            data-teamId={team.teamId}
+            // onClick={props.clickFunc}
+          >
             {team.fullName}
-=======
-          <a className="listItemText" eventKey={index} href="#" data-teamId={team.teamId} onClick={props.clickFunc}>
-            {team.fullName}
-            <FavoriteTeamBtn />
->>>>>>> 46f428a13ef06a57527776bce19b46a4207e88d5
           </a>
 
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn />
+            <FavoriteTeamBtn clickFunc={props.clickFunc} teamId={team.teamId} />
           </div>
         </li>
       );
     });
 
   // Function to render all the favorite teams from faveTeamsFiltered
-  let renderFaveTeams = props.favteams
+  let renderFaveTeams = props.teams
+    .filter(team => {
+      return team.nbaFranchise == 1 && team.favorite == true;
+    })
     .map((team, index) => {
       return (
         <li className="listItem">
@@ -43,7 +47,7 @@ function SideBar(props) {
           </a>
 
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn />
+            <FavoriteTeamBtn clickFunc={this.props.onClickSaveFavorite}/>
           </div>
         </li>
       );
@@ -53,12 +57,6 @@ function SideBar(props) {
     <div className="wrapper">
       <nav id="sidebar">
         <ul className="list-unstyled components">
-          <li className="sideBarMainItem">
-            <a href="#">
-              <span className="sideBarMainItemText">Home</span>
-            </a>
-          </li>
-
           <li className="sideBarMainItem">
             <a
               href="#pageSubmenu"
@@ -85,12 +83,6 @@ function SideBar(props) {
             <ul className="collapse list-unstyled" id="homeSubmenu">
               {renderAllTeams}
             </ul>
-          </li>
-
-          <li className="sideBarMainItem">
-            <a href="#">
-              <span className="sideBarMainItemText">Calendar</span>
-            </a>
           </li>
         </ul>
       </nav>

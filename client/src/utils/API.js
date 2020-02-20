@@ -36,11 +36,7 @@ export default {
 
   // get favorite team from database , all favorite teams
   getFavoriteTeam: function() {
-<<<<<<< HEAD
-    return dbAPI.getFavoriteTeam();
-=======
     return dbAPI.getFavTeam();
->>>>>>> 46f428a13ef06a57527776bce19b46a4207e88d5
   },
 
   // Add/remove team to/from favorite - done OPEN TO USRE
@@ -103,14 +99,11 @@ export default {
 
   logout: function() {
     accountAPI.logOutAccount();
-<<<<<<< HEAD
-=======
   },
 
   addCalendarEvent: function(event){
     console.log("API addcalendar event");
     console.log(event);
     calendarAPI.addCalendarEvent(event);
->>>>>>> 46f428a13ef06a57527776bce19b46a4207e88d5
   }
 };

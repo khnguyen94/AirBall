@@ -4,28 +4,27 @@ import "./FavoriteTeamBtn.css";
 import API from "../../utils/API";
 
 class FavoriteTeamBtn extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = { checked: false };
-    this.onClick = this.onClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  // When the favorite button is clicked, use the API.updateTeamFavorite method to save the newly favorited team's isFavorite property
-  // checked is now set to true
-  // Then reload favoriteTeams list in sideBar
-  onClick(event) {
-    event.preventDefault();
-    this.setState({ checked: true });
+  handleChange(checked) {
+    console.log(this.state.checked);
+    console.log(this.props.teamId)
+    this.setState({ checked });
   }
 
   render() {
     return (
-      <label className="favoriteTeamToggle">
+      <label>
         <Switch
           height={15}
           width={30}
-          onClick={this.onClick}
+          onChange={this.handleChange}
           checked={this.state.checked}
+          teamid={this.props.teamId}
           className="react-switch"
         />
       </label>
