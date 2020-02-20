@@ -9,6 +9,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { PromiseProvider } from "mongoose";
 import API from "../utils/API";
+import ReactStarts from "react-stars";
+import update from "react-addons-update";
+import { isBuffer } from "util";
 import EventCard from "../components/EventCard";
 import GameStatsCard from "../components/GameStatsCard";
 import Moment from "moment";
@@ -61,19 +64,57 @@ class Home extends Component {
 
   componentDidMount() {
     // API.intializeTeamData();
+    // TO FIX
+    this.loadAllTeams();
+    this.loadFavTeams();
+  }
+
+  loadAllTeams = () => {
     API.getAllTeam().then(data => {
+      console.log(data);
+      const filteredTeam = data.data.filter(team => team.nbaFranchise === "1");
+      filteredTeam.forEach(team => {
+        const favNames = this.state.favteams.map(favteam => favteam.fullName);
+        if (favNames.includes(team.fullName)) {
+          team.favorite = true;
+        }
+      });
+      console.log(filteredTeam);
       this.setState({
-        teams: data.data
+        teams: filteredTeam
       });
       console.log(this.state.teams);
     });
+  };
+
+  loadFavTeams = () => {
     API.getFavoriteTeam().then(data => {
       console.log(data);
+      const favTeamName = data.data;
       this.setState({
-        favteams: data.data
+        favteams: favTeamName
       });
+      console.log(this.state.favteams);
+      this.loadAllTeams();
     });
-  }
+  };
+
+  changeFavTeam = event => {
+    const index = event.target.id;
+    console.log(event.target.checked);
+    console.log(index);
+    this.state.teams[index].favorite = event.target.checked;
+    this.forceUpdate();
+    if (this.state.teams[index].favorite) {
+      API.addTeamToFavorite(this.state.teams[index]._id).then(data => {
+        this.loadFavTeams();
+      });
+    } else {
+      API.removeTeamFromFavorite(this.state.teams[index]._id).then(data => {
+        this.loadFavTeams();
+      });
+    }
+  };
 
   getTeamsGames(teamName) {
     API.getTeamFromName(teamName)
@@ -216,7 +257,7 @@ class Home extends Component {
     this.setState({ checked }, () => {
       console.log("favorite: " + this.state.checked);
     });
-  };
+  }
 
   render() {
     return (
@@ -227,7 +268,8 @@ class Home extends Component {
               <SideBar
                 teams={this.state.teams}
                 favteams={this.state.favteams}
-                // onChangeFunc={() => {this.handleFavoriteChange}}
+                clickFunc={this.teamOnClick}
+                changeFavTeam={this.changeFavTeam}
               />
             ) : (
               <p> LOADING </p>

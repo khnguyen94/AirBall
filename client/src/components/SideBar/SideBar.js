@@ -27,9 +27,8 @@ function SideBar(props) {
           >
             {team.fullName}
           </a>
-
-          <div className="faveBtnContainer">
-            <FavoriteTeamBtn clickFaveFunc={handleFavoriteChange} teamId={team.teamId} />
+          <div className="faveBtnContainer" >
+            <input className="star" type="checkbox" id={index} onChange={props.changeFavTeam} checked={team.favorite}/>
           </div>
         </li>
       );
@@ -46,9 +45,8 @@ function SideBar(props) {
           <a className="listItemText" eventKey={index} href="#">
             {team.fullName}
           </a>
-
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn clickFaveFunc={this.props.handleFaveChange} teamId={team.teamId}/>
+            {/* <FavoriteTeamBtn clickFaveFunc={this.props.handleFaveChange} teamId={team.teamId}/> */}
           </div>
         </li>
       );
@@ -60,7 +58,7 @@ function SideBar(props) {
         <ul className="list-unstyled components">
           <li className="sideBarMainItem">
             <a
-              href="#pageSubmenu"
+              href="#faveTeamsList"
               data-toggle="collapse"
               aria-expanded="false"
               className="dropdown-toggle"
