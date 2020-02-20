@@ -46,10 +46,12 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.teamOnClick = this.teamOnClick.bind(this);
+    this.teamFaveBtnOnClick = this.handleFavoriteChange.bind(this);
   }
 
   state = {
-    teams: [],
+    allTeams: [],
+    faveTeams: [],
     next5Games: [],
     past5Games: [],
     teamClickedId: NaN,
@@ -207,6 +209,15 @@ class Home extends Component {
       .catch(err => console.log(err));
   };
 
+  // Handles onClick of Favorite btn
+  handleFavoriteChange(checked) {
+    console.log("clicked");
+    console.log("teamID: " + this.props.teamId);
+    this.setState({ checked }, () => {
+      console.log("favorite: " + this.state.checked);
+    });
+  };
+
   render() {
     return (
       <Row>
@@ -216,7 +227,7 @@ class Home extends Component {
               <SideBar
                 teams={this.state.teams}
                 favteams={this.state.favteams}
-                clickFunc={this.onClickSaveFavorite}
+                // onChangeFunc={() => {this.handleFavoriteChange}}
               />
             ) : (
               <p> LOADING </p>

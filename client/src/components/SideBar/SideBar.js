@@ -4,6 +4,7 @@ import { Row } from "../Grid";
 import FavoriteTeamBtn from "../FavoriteTeamBtn";
 
 function SideBar(props) {
+  
   let allSortedTeams = props.teams.sort(function(teamA, teamB) {
     return teamA.teamId - teamB.teamId;
   });
@@ -28,7 +29,7 @@ function SideBar(props) {
           </a>
 
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn clickFunc={props.clickFunc} teamId={team.teamId} />
+            <FavoriteTeamBtn clickFaveFunc={handleFavoriteChange} teamId={team.teamId} />
           </div>
         </li>
       );
@@ -47,7 +48,7 @@ function SideBar(props) {
           </a>
 
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn clickFunc={this.props.onClickSaveFavorite}/>
+            <FavoriteTeamBtn clickFaveFunc={this.props.handleFaveChange} teamId={team.teamId}/>
           </div>
         </li>
       );

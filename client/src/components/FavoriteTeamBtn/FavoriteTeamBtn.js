@@ -7,13 +7,6 @@ class FavoriteTeamBtn extends Component {
   constructor() {
     super();
     this.state = { checked: false };
-    this.handleChange = this.handleChange.bind(this);
-  }
-
-  handleChange(checked) {
-    console.log(this.state.checked);
-    console.log(this.props.teamId)
-    this.setState({ checked });
   }
 
   render() {
@@ -22,7 +15,7 @@ class FavoriteTeamBtn extends Component {
         <Switch
           height={15}
           width={30}
-          onChange={this.handleChange}
+          onChange={() => {handleFaveChange}}
           checked={this.state.checked}
           teamid={this.props.teamId}
           className="react-switch"
