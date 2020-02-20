@@ -10,11 +10,13 @@ function SideBar(props) {
   });
 
   // Function to render all of the teams from allTeamsFiltered
+
   let renderAllTeams = allSortedTeams
     .filter(team => {
       return team.nbaFranchise == 1 && team.favorite == false;
     })
     .sort()
+
     .map((team, index) => {
       return (
         <li className="listItem">
@@ -28,8 +30,10 @@ function SideBar(props) {
             {team.fullName}
           </a>
 
+
           <div className="faveBtnContainer">
             <FavoriteTeamBtn clickFaveFunc={handleFavoriteChange} teamId={team.teamId} />
+
           </div>
         </li>
       );
@@ -46,9 +50,9 @@ function SideBar(props) {
           <a className="listItemText" eventKey={index} href="#">
             {team.fullName}
           </a>
-
           <div className="faveBtnContainer">
             <FavoriteTeamBtn clickFaveFunc={this.props.handleFaveChange} teamId={team.teamId}/>
+
           </div>
         </li>
       );
@@ -59,8 +63,10 @@ function SideBar(props) {
       <nav id="sidebar">
         <ul className="list-unstyled components">
           <li className="sideBarMainItem">
+
+
             <a
-              href="#pageSubmenu"
+              href="#faveTeamsList"
               data-toggle="collapse"
               aria-expanded="false"
               className="dropdown-toggle"
