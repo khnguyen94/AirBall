@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignInBTN from "./components/SignInBTN";
 import RegisterBTN from "./components/RegisterBTN";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Logout from "./components/Login/logout"
 
 // Create an array to hold all slider Images
 const sliderImages = [
@@ -173,6 +174,10 @@ class App extends Component {
 
   }
 
+  handleSignOut = event => {
+
+  }
+
   render() {
     return (
       <Router>
@@ -180,6 +185,7 @@ class App extends Component {
           <div>
             <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
             <SignInBTN handleSignIn={this.handleSignIn} />
+            <Logout handleSignOut={this.handleSignOut} />
             <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
             <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
@@ -205,7 +211,7 @@ class App extends Component {
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
         </Container>
-      </Router>
+      </Router >
     );
   }
 }
