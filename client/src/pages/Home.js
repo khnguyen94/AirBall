@@ -283,7 +283,7 @@ class Home extends Component {
               <SideBar
                 teams={this.state.teams}
                 favteams={this.state.favteams}
-                // onChangeFunc={() => {this.handleFavoriteChange}}
+                onChangeFunc={() => this.handleFavoriteChange}
                 clickFunc={this.teamOnClick}
               />
             ) : (
