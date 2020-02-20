@@ -11,10 +11,6 @@ function SideBar(props) {
 
   // Function to render all of the teams from allTeamsFiltered
   let renderAllTeams = allSortedTeams
-    .filter(team => {
-      return team.nbaFranchise == 1 && team.favorite == false;
-    })
-    .sort()
     .map((team, index) => {
       return (
         <li className="listItem">
@@ -23,7 +19,7 @@ function SideBar(props) {
             eventKey={index}
             href="#"
             data-teamId={team.teamId}
-            // onClick={props.clickFunc}
+            onClick={() => props.clickFunc(team.teamId)}
           >
             {team.fullName}
           </a>
@@ -36,9 +32,6 @@ function SideBar(props) {
 
   // Function to render all the favorite teams from faveTeamsFiltered
   let renderFaveTeams = props.teams
-    .filter(team => {
-      return team.nbaFranchise == 1 && team.favorite == true;
-    })
     .map((team, index) => {
       return (
         <li className="listItem">
@@ -46,7 +39,7 @@ function SideBar(props) {
             {team.fullName}
           </a>
           <div className="faveBtnContainer">
-            {/* <FavoriteTeamBtn clickFaveFunc={this.props.handleFaveChange} teamId={team.teamId}/> */}
+            {/* <FavoriteTeamBtn clickFaveFunc={props.onChangeFunc} teamId={team.teamId}/> */}
           </div>
         </li>
       );
