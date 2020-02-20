@@ -15,17 +15,14 @@ export class Logout extends React.Component {
     handleSubmit(event) {
         console.log(event);
 
-        API.logout(
-            console.log("logged out")
-
-        )
+        API.logout();
 
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <Button variant="light">Logout</Button>
+            <form>
+                <Button variant="light" onClick={this.handleSubmit}>Logout</Button>
             </form>
         )
     }
