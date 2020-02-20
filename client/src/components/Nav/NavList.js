@@ -1,25 +1,48 @@
 import React, { Component } from "react";
+import "./NavList.css";
 
 class NavList extends Component {
-  // Set initial states for: showAllTeams and showFavoriteTeams
   constructor(props) {
     super(props);
-    this.state = {
-      showList: false
-    };
   }
 
   render() {
-    // Define a variable that will make html markups of each team in the appropriate list
-    let subListMarkup = this.props.teams.map((team, index) => {
+    let navLinksMarkup = this.props.links.map((link, index) => {
+      let navLinkMarkup = link.active ? (
+        <a className="menu__link menu__link--active" href={link.link}>
+          {link.label}
+        </a>
+      ) : (
+        <a className="menu__link" href={link.link}>
+          {link.label}
+        </a>
+      );
+
       return (
-        <li className="nav__submenu-item">
-          <a>{team.teamName}</a>
+        <li key={index} className="menu__list-item">
+          {navLinkMarkup}
         </li>
       );
     });
 
-    return <ul className="navSubList">{subListMarkup}</ul>;
+    return (
+      <nav className="menu">
+        <div 
+          style={{
+            backgroundImage: "url(" + this.props.logo + ")"
+          }}
+          className="menu__logo"
+        ></div>
+
+        <div>
+          <h1>Air Ball</h1>
+        </div>
+
+        <div className="menu__right">
+          <ul className="menu__list">{navLinksMarkup}</ul>
+        </div>
+      </nav>
+    );
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./Logo/Air_Ball_Logo.jpg";
+import logo from "./Logo/logo.jpg";
 import { Col, Row, Container } from "../src/components/Grid";
 import "./App.css";
 import Nav from "./components/Nav";
@@ -15,6 +15,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignInBTN from "./components/SignInBTN";
 import RegisterBTN from "./components/RegisterBTN";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Logout from "./components/Login/logout"
 
 // Create an array to hold all slider Images
 const sliderImages = [
@@ -47,7 +48,7 @@ const navLinks = [
   },
   {
     label: "Favorite Teams",
-    link: "favorites",
+    link: "/favorites",
     hasList: true,
     list: [],
     active: false
@@ -68,16 +69,16 @@ class App extends Component {
   }
   componentDidMount() {
     // API.intializeTeamData();
-    // API.getAllTeam().then(data => {
-    //   this.setState({
-    //     teams:data.data
-    //   });
-    //   console.log(this.state.teams);
-    // })
+    //   API.getAllTeam().then(data => {
+    //     this.setState({
+    //       teams: data.data
+    //     });
+    //     console.log(this.state.teams);
+    //   })
   }
 
   handleTestEvent = event => {
-    
+
     //test get all team api
     switch (event.target.value) {
       case "getallteam":
@@ -145,7 +146,7 @@ class App extends Component {
           'start': {
             'dateTime': '2020-02-22T10:00:00Z', // start time
           },
-          'end':{
+          'end': {
             'dateTime': '2020-02-22T14:00:00Z' // end time
           },
           'attendees': [
@@ -173,6 +174,10 @@ class App extends Component {
 
   }
 
+  handleSignOut = event => {
+
+  }
+
   render() {
     return (
       <Router>
@@ -180,6 +185,7 @@ class App extends Component {
           <div>
             <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
             <SignInBTN handleSignIn={this.handleSignIn} />
+            <Logout handleSignOut={this.handleSignOut} />
             <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
             <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
@@ -196,7 +202,7 @@ class App extends Component {
           </div>
 
           <br />
-          <Nav logo={logo} />
+          <Nav logo={logo} links={navLinks}/>
 
           <br />
           {/* <Home teams={this.state.teams}/> */}
@@ -205,7 +211,7 @@ class App extends Component {
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
         </Container>
-      </Router>
+      </Router >
     );
   }
 }

@@ -1,26 +1,22 @@
 import React, { Component } from "react";
+import logo from "../../Logo/logo.jpg";
+import NavList from "./NavList";
 import "./Nav.css";
 
 class Nav extends Component {
   // Render function
   render() {
+    let links = [
+      { label: 'Home', link: '/', active: true },
+      { label: 'Favorites', link: 'favorites' },
+      { label: 'Link 3', link: '#link3' },
+      { label: 'Link 4', link: '#link4' },
+    ];
 
     return (
-      <nav className="nav">
-        <h1
-          style={{
-            backgroundImage: "url(" + this.props.logo + ")"
-          }}
-          className="navLogo"
-        >
-        </h1>
-
-        <h3> Air Ball</h3>
-
-        <div className="navUserDisp">
-
-        </div>
-      </nav>
+      <div>
+        <NavList links={links} logo={logo}/>
+      </div>
     );
   }
 }
