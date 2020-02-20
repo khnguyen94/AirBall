@@ -6,9 +6,6 @@ import FavoriteTeamBtn from "../FavoriteTeamBtn";
 function SideBar(props) {
   // Function to render all of the teams from allTeamsFiltered
   let renderAllTeams = props.teams
-    .filter(team => {
-      return team.nbaFranchise == 1;
-    })
     .map((team, index) => {
       return (
         <li className="listItem">
@@ -16,9 +13,8 @@ function SideBar(props) {
             {team.fullName}
             <FavoriteTeamBtn />
           </a>
-
-          <div className="faveBtnContainer">
-            <FavoriteTeamBtn />
+          <div className="faveBtnContainer" >
+            <input className="star" type="checkbox" id={index} onChange={props.changeFavTeam} checked={team.favorite}/>
           </div>
         </li>
       );
@@ -32,9 +28,7 @@ function SideBar(props) {
           <a className="listItemText" eventKey={index} href="#">
             {team.fullName}
           </a>
-
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn />
           </div>
         </li>
       );
@@ -49,10 +43,9 @@ function SideBar(props) {
               <span className="sideBarMainItemText">Home</span>
             </a>
           </li>
-
           <li className="sideBarMainItem">
             <a
-              href="#pageSubmenu"
+              href="#faveTeamsList"
               data-toggle="collapse"
               aria-expanded="false"
               className="dropdown-toggle"
