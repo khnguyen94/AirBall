@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./Logo/Air_Ball_Logo.jpg";
+import logo from "./Logo/logo.jpg";
 import { Col, Row, Container } from "../src/components/Grid";
 import "./App.css";
 import Nav from "./components/Nav";
@@ -48,7 +48,7 @@ const navLinks = [
   },
   {
     label: "Favorite Teams",
-    link: "favorites",
+    link: "/favorites",
     hasList: true,
     list: [],
     active: false
@@ -202,7 +202,7 @@ class App extends Component {
           </div>
 
           <br />
-          <Nav logo={logo} />
+          <Nav logo={logo} links={navLinks}/>
 
           <br />
           {/* <Home teams={this.state.teams}/> */}
