@@ -47,7 +47,7 @@ const navLinks = [
   },
   {
     label: "Favorite Teams",
-    link: "/favorites",
+    link: "favorites",
     hasList: true,
     list: [],
     active: false
@@ -66,6 +66,7 @@ class App extends Component {
   state = {
     teams: []
   }
+  
   componentDidMount() {
     // API.intializeTeamData();
     // API.getAllTeam().then(data => {
@@ -196,7 +197,7 @@ class App extends Component {
           </div>
 
           <br />
-          <Nav logo={logo} links={navLinks}/>
+          <Nav logo={logo} />
 
           <br />
           {/* <Home teams={this.state.teams}/> */}

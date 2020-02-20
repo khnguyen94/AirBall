@@ -65,7 +65,16 @@
    position: relative;
    visibility:visible;
 }
+
 .star:checked:before {
     content: "\2605";
    position: relative;
+}
+
+.star:hover {
+	opacity: 0.8;
+}
+
+.star:active {
+	transform: scale(0.93,0.93) translateY(2px)
 }
