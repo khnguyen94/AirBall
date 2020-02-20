@@ -73,6 +73,37 @@ class Home extends Component {
     });
   }
 
+  addGametoCalender(event) {
+    let locale = event.hTeam.fullName.split(" ")[0];
+    let startTime = Moment.utc(event.startTimeUTC).utcOffset(-8).format();
+    let endTime = Moment.utc(event.startTimeUTC).utcOffset(-8).add(3, 'h').format();
+    let calendarEvent = {
+      'summary': `${event.vTeam.fullName} @ ${event.hTeam.fullName}`,
+      'location': `${locale}`,
+      'description': 'Score:',
+      'id': `${event.gameId}`,
+      'start': {
+        'dateTime': `${startTime}`, // start time
+      },
+      'end':{
+        'dateTime':  `${endTime}`// end time
+      },
+      'attendees': [
+        { 'email': 'accountEmail@example.com' }, //account Email
+        { 'email': 'sbrin@example.com' },
+      ],
+      'reminders': {
+        'useDefault': false,
+        'overrides': [
+          { 'method': 'email', 'minutes': 24 * 60 },
+          { 'method': 'popup', 'minutes': 10 },
+        ],
+      },
+    };
+    API.addCalendarEvent(calendarEvent)
+    alert("Game added to calender");
+  }
+
   getTeamsGames(teamName) {
     API.getTeamFromName(teamName)
       .then((response) => {
@@ -127,10 +158,6 @@ class Home extends Component {
       alert("Game Removed from Favorites!")
     }
   };
-
-  printTeamId(teamId) {
-
-  }
 
   teamOnClick(e) {
     e.preventDefault();
@@ -261,6 +288,7 @@ class Home extends Component {
                         favorited={this.state.favGames.includes(event.gameId)}
                         awayTeamLogo={event.vTeam.logo}
                         homeTeamLogo={event.hTeam.logo}
+                        calanderClick={() => this.addGametoCalender(event)}
                       >
                       </EventCard>
                     </Col>
