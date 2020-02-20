@@ -25,15 +25,14 @@ function SideBar(props) {
             eventKey={index}
             href="#"
             data-teamId={team.teamId}
-            // onClick={props.clickFunc}
+            onClick={() => props.clickFunc(team.teamId)}
           >
             {team.fullName}
           </a>
 
 
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn clickFaveFunc={handleFavoriteChange} teamId={team.teamId} />
-
+            <FavoriteTeamBtn clickFaveFunc={props.onChangeFunc} teamId={team.teamId} />
           </div>
         </li>
       );
@@ -51,7 +50,7 @@ function SideBar(props) {
             {team.fullName}
           </a>
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn clickFaveFunc={this.props.handleFaveChange} teamId={team.teamId}/>
+            <FavoriteTeamBtn clickFaveFunc={props.onChangeFunc} teamId={team.teamId}/>
 
           </div>
         </li>
