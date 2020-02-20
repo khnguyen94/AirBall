@@ -12,21 +12,21 @@ export default {
                 "headers": {
                     "content-type": "application/octet-stream",
                     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-                    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+                    "x-rapidapi-key": process.env.API_KEY||"10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
                 }
             })
         )
     },
 
     getStats: function (gameId) {
-        return (
+        return(
             axios({
                 "method": "GET",
                 "url": `https://api-nba-v1.p.rapidapi.com/statistics/games/gameId/${gameId}`,
                 "headers": {
                     "content-type": "application/octet-stream",
                     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-                    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+                    "x-rapidapi-key": process.env.API_KEY||"10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
                 }
             })
         )
