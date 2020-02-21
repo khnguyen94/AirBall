@@ -6,7 +6,7 @@
     opacity: .92;
 }
 .navbar-brand img {
-    height: 2rem;
+    height: 3rem;
 }
 
 .navbar-nav li {
@@ -16,11 +16,16 @@
 .nav-link {
     color: white;
     padding-top: .8rem;
+    margin-top: .5rem;
 }
 
 .nav-link.active, 
 .nav-link:hover {
     color: #e66722;
+}
+
+.btn-container {
+
 }
 
 .btn {
@@ -31,9 +36,24 @@
     border-radius: 1rem;
     border-width: .15rem;
     border-color: #e66722;
+    text-transform: uppercase; 
 }
 
 .btn-outline-light:hover {
+    border-radius: 1.2rem;
+    border-width: .15rem;
+    border-color: #e66722;
+    opacity: .7;
+}
+
+.btn-light {
+    border-radius: 1rem;
+    border-width: .15rem;
+    border-color: #e66722;
+    text-transform: uppercase; 
+}
+
+.btn-light:hover {
     border-radius: 1.2rem;
     border-width: .15rem;
     border-color: #e66722;

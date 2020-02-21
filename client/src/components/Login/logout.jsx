@@ -23,7 +23,7 @@ export class Logout extends React.Component {
     render() {
         return (
             <form>
-                <Button variant="light" onClick={this.handleSubmit}>Logout</Button>
+                <Button variant="outline-light" onClick={this.handleSubmit}>Logout</Button>
             </form>
         )
     }

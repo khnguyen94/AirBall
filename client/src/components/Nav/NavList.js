@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import logo from "../../Logo/logo.png";
 import "./NavList.css";
+import SignInBTN from "../SignInBTN";
+import RegisterBTN from "../RegisterBTN";
+import "bootstrap/dist/css/bootstrap.min.css";
+import Logout from "../Login/logout";
 
 class NavList extends Component {
   constructor(props) {
@@ -35,14 +39,15 @@ class NavList extends Component {
 
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav ml-auto">
-            {renderLinkMarkup}
-            </ul>
+            {renderLinkMarkup} 
+            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
+            <SignInBTN handleSignIn={this.handleSignIn} />
+            <Logout handleSignOut={this.handleSignOut} />
+          </ul>
 
-          <div className="">
-            <button className="btn btn-outline-light" type="button">Register</button>
-            <button className="btn btn-outline-light" type="button">Login</button>
+          <div className="btn-container">
+            
           </div>
-
         </div>
       </nav>
     );
