@@ -12,7 +12,7 @@ const RegisterBTN = () => {
 
     return (
         <div>
-            <Button variant="outline-dark" onClick={handleShow}>Register</Button>
+            <Button variant="outline-light" onClick={handleShow}>Register</Button>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>

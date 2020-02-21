@@ -20,7 +20,7 @@ class NavList extends Component {
 
     return (
       <nav className="navbar navbar-expand-md bg-dark fixed-top">
-        <a className="navbar-brand" href="#">
+        <a className="navbar-brand" href="/">
           <img src={logo} />
         </a>
 

@@ -192,7 +192,7 @@ class App extends Component {
           <br />
           {/* <Home teams={this.state.teams}/> */}
           <Switch>
-          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/" component={LandingPage}/>
             <Route exact path="/home" component={Home} />
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
