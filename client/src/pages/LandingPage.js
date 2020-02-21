@@ -62,7 +62,7 @@ class LandingPage extends Component {
 
   render() {
       return (
-          <Landing images={carouselImages} registerBtn={this.props.RegisterBTN}/>
+          <Landing images={carouselImages}/>
       )
   }
 }
