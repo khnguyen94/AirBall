@@ -235,6 +235,7 @@ class Home extends Component {
               this.setState({
                 gameStats: this.state.past5Games.push(gameObj)
               })
+              console.log(gameObj);
             })
             .catch(err => console.log(err));
         }
@@ -392,6 +393,7 @@ class Home extends Component {
                           awayFast={parseInt(event.stats[1].fastBreakPoints)}
                           homeSC={parseInt(event.stats[0].secondChancePoints)}
                           awaySC={parseInt(event.stats[1].secondChancePoints)}
+                          deleteButton={false}
                         ></GameStatsCard>
                       </Col>
                     );

@@ -244,6 +244,8 @@ class Events extends Component {
                                                         awayFast={parseInt(event.stats[1].fastBreakPoints)}
                                                         homeSC={parseInt(event.stats[0].secondChancePoints)}
                                                         awaySC={parseInt(event.stats[1].secondChancePoints)}
+                                                        deleteButton={true}
+                                                        onClick={() => this.handleSubmit(event.stats[0].gameId, true)}
                                                     ></GameStatsCard>
                                                 </Col>
                                             ))
