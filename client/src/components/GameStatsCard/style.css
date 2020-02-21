@@ -2,9 +2,12 @@
     background-color: rgb(78, 76, 76);
     color: rgb(197, 197, 197);
     margin-bottom: 1rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     padding: 0.5rem;
 }
 
-p {
+p,h2 {
     text-align: center;
 }
+
