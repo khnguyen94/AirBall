@@ -17,6 +17,7 @@ import SignInBTN from "./components/SignInBTN";
 import RegisterBTN from "./components/RegisterBTN";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logout from "./components/Login/logout"
+import Footer from "./components/Footer/Footer";
 
 // Create an array to hold all slider Images
 const sliderImages = [
@@ -208,6 +209,8 @@ class App extends Component {
             <Route exact path="/home" component={Home} />
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
+
+          <Footer />
         </Container>
       </Router >
     );
