@@ -96,12 +96,12 @@ export default {
 
   login: function(userData) {
     console.log("API - signin");
-    accountAPI.logInAccount(userData);
+    return accountAPI.logInAccount(userData);
     // axios.post("/api/account/login", userData);
   },
 
   logout: function() {
-    accountAPI.logOutAccount();
+    return accountAPI.logOutAccount();
   },
 
   addCalendarEvent: function(event){

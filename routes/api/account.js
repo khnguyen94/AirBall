@@ -10,11 +10,12 @@ router.route("/login").post(passport.authenticate("local"), function(req, res){
 
 router.route("/signup")
     .post(accountController.createUser);
+
 router.route("/logout")
     .delete((req, res) => {
         console.log("Logout user " + req.user);
         req.logOut();
-        res.redirect("/");
+        res.json({"message": "You're logged out"});
     });
 router.route("/favorites")
     .get(accountController.getUserFavorites);
