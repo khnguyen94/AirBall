@@ -57,7 +57,7 @@ function GameStatsCard(props) {
       <div className="card-body">
         <Row>
           <Col size="md-3">
-            <Image src={props.homeTeamLogo} fluid />
+            <Image src={props.homeTeamLogo} fluid/>
           </Col>
           <Col size="md-6">
             <h4>
@@ -65,7 +65,7 @@ function GameStatsCard(props) {
             </h4>
           </Col>
           <Col size="md-3">
-            <Image src={props.awayTeamLogo} fluid />
+            <Image src={props.awayTeamLogo} fluid/>
           </Col>
         </Row>
         <p className="card-text">
