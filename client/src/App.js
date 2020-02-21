@@ -17,19 +17,7 @@ import SignInBTN from "./components/SignInBTN";
 import RegisterBTN from "./components/RegisterBTN";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logout from "./components/Login/logout"
-
-// Create an array to hold all slider Images
-const sliderImages = [
-  {
-    name: "Image 1",
-    url: "https://wallpaperfm.com/img/original/3/6/a/49159.jpg"
-  },
-  {
-    name: "Image 2",
-    url:
-      "https://images.wallpaperscraft.com/image/paul_pierce_washington_wizards_basketball_nba_103099_1280x720.jpg"
-  }
-];
+import Footer from "./components/Footer/Footer";
 
 // Create an array of NavLinks
 const navLinks = [
@@ -208,6 +196,8 @@ class App extends Component {
             <Route exact path="/home" component={Home} />
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
+
+          <Footer />
         </Container>
       </Router >
     );
