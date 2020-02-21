@@ -58,6 +58,9 @@ export default {
   getGameStats: function(gameId) {
     return sportAPI.getGameStats(gameId);
   },
+  getGameFromGameId: function(gameId) {
+    return sportAPI.getGameFromId(gameId);
+  },
 
   // get all favorite games from database - done OPEN TO USER
   getAllFavoriteGames: function(done) {
@@ -93,12 +96,12 @@ export default {
 
   login: function(userData) {
     console.log("API - signin");
-    accountAPI.logInAccount(userData);
+    return accountAPI.logInAccount(userData);
     // axios.post("/api/account/login", userData);
   },
 
   logout: function() {
-    accountAPI.logOutAccount();
+    return accountAPI.logOutAccount();
   },
 
   addCalendarEvent: function(event){

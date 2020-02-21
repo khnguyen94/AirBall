@@ -1,11 +1,9 @@
 import React from "react";
-import FavoriteButtonNew from "../FavoriteButtonNew";
 import "./style.css"
-import Image from "react-bootstrap/image"
+import Image from "react-bootstrap/Image"
 import { Col, Row, Container } from "../Grid";
 import { Chart } from "react-google-charts";
-//import FavoriteBtn from "../FavoriteGameBtn";
-//import { FormBtn } from "../Form";
+import Button from "react-bootstrap/Button";
 
 // This file exports both the List and ListItem components
 
@@ -75,145 +73,156 @@ function GameStatsCard(props) {
       </div>
       <Row>
         <Col size="md-4">
-      <Chart
-        chartType="BarChart"
-        width="100%"
-        height="200px"
-        data={rebounds}
-        options={{
-          title: 'Total Rebounds',
-          chartArea: { width: '50%' },
-          hAxis: {
-            title: 'Total Rebounds',
-            minValue: 0,
-          },
-          vAxis: {
-            title: 'Team',
-          },
-        }}
-      />
-      </Col>
-      <Col size="md-4">
-      <Chart
-        chartType="BarChart"
-        width="100%"
-        height="200px"
-        data={offRebounds}
-        options={{
-          title: 'Offensive Rebounds',
-          chartArea: { width: '50%' },
-          hAxis: {
-            title: 'Offensive Rebounds',
-            minValue: 0,
-          },
-          vAxis: {
-            title: 'Team',
-          },
-        }}
-      />
-      </Col>
-      <Col size="md-4">
-      <Chart
-        chartType="BarChart"
-        width="100%"
-        height="200px"
-        data={defRebounds}
-        options={{
-          title: 'Defensive Rebounds',
-          chartArea: { width: '50%' },
-          hAxis: {
-            title: 'Defensive Rebounds',
-            minValue: 0,
-          },
-          vAxis: {
-            title: 'Team',
-          },
-        }}
-      />
-      </Col>
+          <Chart
+            chartType="BarChart"
+            width="100%"
+            height="200px"
+            data={rebounds}
+            options={{
+              title: 'Total Rebounds',
+              chartArea: { width: '50%' },
+              hAxis: {
+                title: 'Total Rebounds',
+                minValue: 0,
+              },
+              vAxis: {
+                title: 'Team',
+              },
+            }}
+          />
+        </Col>
+        <Col size="md-4">
+          <Chart
+            chartType="BarChart"
+            width="100%"
+            height="200px"
+            data={offRebounds}
+            options={{
+              title: 'Offensive Rebounds',
+              chartArea: { width: '50%' },
+              hAxis: {
+                title: 'Offensive Rebounds',
+                minValue: 0,
+              },
+              vAxis: {
+                title: 'Team',
+              },
+            }}
+          />
+        </Col>
+        <Col size="md-4">
+          <Chart
+            chartType="BarChart"
+            width="100%"
+            height="200px"
+            data={defRebounds}
+            options={{
+              title: 'Defensive Rebounds',
+              chartArea: { width: '50%' },
+              hAxis: {
+                title: 'Defensive Rebounds',
+                minValue: 0,
+              },
+              vAxis: {
+                title: 'Team',
+              },
+            }}
+          />
+        </Col>
       </Row>
       <br></br>
       <br></br>
       <Row>
         <Col size="md-6">
-        <Chart
-        chartType="ColumnChart"
-        width="100%"
-        height="200px"
-        data={assists}
-        options={{
-          title: 'Assists',
-          chartArea: { width: '50%' },
-          hAxis: {
-            title: 'Team',
-            minValue: 0,
-          },
-          vAxis: {
-            title: 'Assists',
-          },
-        }}
-      />
+          <Chart
+            chartType="ColumnChart"
+            width="100%"
+            height="200px"
+            data={assists}
+            options={{
+              title: 'Assists',
+              chartArea: { width: '50%' },
+              hAxis: {
+                title: 'Team',
+                minValue: 0,
+              },
+              vAxis: {
+                title: 'Assists',
+              },
+            }}
+          />
         </Col>
         <Col size="md-6">
-        <Chart
-        chartType="ColumnChart"
-        width="100%"
-        height="200px"
-        data={turnOvers}
-        options={{
-          title: 'Turn Overs',
-          chartArea: { width: '50%' },
-          hAxis: {
-            title: 'Team',
-            minValue: 0,
-          },
-          vAxis: {
-            title: 'Turn Overs',
-          },
-        }}
-      />
+          <Chart
+            chartType="ColumnChart"
+            width="100%"
+            height="200px"
+            data={turnOvers}
+            options={{
+              title: 'Turn Overs',
+              chartArea: { width: '50%' },
+              hAxis: {
+                title: 'Team',
+                minValue: 0,
+              },
+              vAxis: {
+                title: 'Turn Overs',
+              },
+            }}
+          />
         </Col>
       </Row>
       <br></br>
       <br></br>
       <Row>
         <Col size="md-4">
-        <Chart
-        chartType="PieChart"
-        width="100%"
-        height="250px"
-        data={paintPoints}
-        options={{
-          title: 'Paint Points',
-          pieSliceText: 'value',
-        }}
-      />
+          <Chart
+            chartType="PieChart"
+            width="100%"
+            height="250px"
+            data={paintPoints}
+            options={{
+              title: 'Paint Points',
+              pieSliceText: 'value',
+            }}
+          />
         </Col>
         <Col size="md-4">
-        <Chart
-        chartType="PieChart"
-        width="100%"
-        height="250px"
-        data={fastBreak}
-        options={{
-          title: 'Fast Break Points',
-          pieSliceText: 'value',
-        }}
-      />
+          <Chart
+            chartType="PieChart"
+            width="100%"
+            height="250px"
+            data={fastBreak}
+            options={{
+              title: 'Fast Break Points',
+              pieSliceText: 'value',
+            }}
+          />
         </Col>
         <Col size="md-4">
-        <Chart
-        chartType="PieChart"
-        width="100%"
-        height="250px"
-        data={secondChance}
-        options={{
-          title: 'Second Chance Points',
-          pieSliceText: 'value',
-        }}
-      />
+          <Chart
+            chartType="PieChart"
+            width="100%"
+            height="250px"
+            data={secondChance}
+            options={{
+              title: 'Second Chance Points',
+              pieSliceText: 'value',
+            }}
+          />
         </Col>
       </Row>
+      <br></br>
+      <br></br>
+      {props.deleteButton ? (
+        <Row>
+          <br></br>
+          <Col size="md-4">
+            <Button variant="danger" onClick={props.onClick}>Delete Game From Favorites</Button>
+          </Col>
+        </Row>
+      ) : (<span></span>)
+      }
     </div>
 
   );

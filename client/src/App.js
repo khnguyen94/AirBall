@@ -16,6 +16,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignInBTN from "./components/SignInBTN";
 import RegisterBTN from "./components/RegisterBTN";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Logout from "./components/Login/logout"
 
 // Create an array to hold all slider Images
 const sliderImages = [
@@ -65,23 +66,24 @@ const navLinks = [
 
 class App extends Component {
   state = {
-    teams: []
+    firstName:"",
+    lastName:""
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> 722674879e60d72dfe49b0900fe3d68b6c70ba56
   componentDidMount() {
-    // API.intializeTeamData();
-    // API.getAllTeam().then(data => {
-    //   this.setState({
-    //     teams:data.data
-    //   });
-    //   console.log(this.state.teams);
-    // })
   }
 
   handleTestEvent = event => {
-    
+
     //test get all team api
     switch (event.target.value) {
+      case "intialize":
+        API.intializeTeamData();
+        break;
       case "getallteam":
         API.getAllTeam().then(data => {
           console.log(data);
@@ -147,7 +149,7 @@ class App extends Component {
           'start': {
             'dateTime': '2020-02-22T10:00:00Z', // start time
           },
-          'end':{
+          'end': {
             'dateTime': '2020-02-22T14:00:00Z' // end time
           },
           'attendees': [
@@ -167,11 +169,11 @@ class App extends Component {
     }
   }
 
-  handleSubmitAccount = event => {
+  handleSignIn = () =>{
 
   }
 
-  handleSignIn = event => {
+  handleSignOut = () => {
 
   }
 
@@ -179,8 +181,35 @@ class App extends Component {
     return (
       <Router>
         <Container fluid>
+<<<<<<< HEAD
           <br />
           <Nav logo={logo} />
+=======
+          {/*
+          <div>
+            <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
+            <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
+            <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
+            <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
+            <button onClick={this.handleTestEvent} value="unfavoriteteam">Remove Team From Favorite</button>
+            <button onClick={this.handleTestEvent} value="getallgame">Get All Games</button>
+            <button onClick={this.handleTestEvent} value="getfavgame">Get All Favorite Games</button>
+            <button onClick={this.handleTestEvent} value="favoritegame">Save Game To Favorite</button>
+            <button onClick={this.handleTestEvent} value="unfavoritegame">Remove Game From Favorite</button>
+            <button onClick={this.handleTestEvent} value="register">Register User</button>
+            <button onClick={this.handleTestEvent} value="signin">SignIn User</button>
+            <button onClick={this.handleTestEvent} value="logout">LogOut User</button>
+            <button onClick={this.handleTestEvent} value="addevent">Add Event To Calendar</button>
+          </div>
+          */}
+          <br />
+          <div>
+            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
+            <SignInBTN handleSignIn={this.handleSignIn} />
+            <Logout handleSignOut={this.handleSignOut} />
+          </div>
+          <Nav logo={logo} links={navLinks} />
+>>>>>>> 722674879e60d72dfe49b0900fe3d68b6c70ba56
 
           <br />
           {/* <Home teams={this.state.teams}/> */}
@@ -190,7 +219,7 @@ class App extends Component {
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
         </Container>
-      </Router>
+      </Router >
     );
   }
 }

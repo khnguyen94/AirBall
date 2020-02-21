@@ -3,23 +3,25 @@ import Jumbotron from "../components/Jumbotron";
 import DeleteBtn from "../components/DeleteBtn";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+//import { List, ListItem } from "../components/List";
 import EventCard from "../components/EventCard";
 import Moment from "moment";
 import SideBar from "../components/SideBar/SideBar";
+import GameStatsCard from "../components/GameStatsCard";
 
 class Events extends Component {
     // Setting our component's initial state
     state = {
         eventArray: [],
         favGames: [],
+        statsArray: [],
         teams: []
     };
 
     // When the component mounts, load all Events and save them to this.state.events
     componentDidMount() {
         this.loadEvents();
-        this.getTeamsNextGames("bulls");
+        //this.getTeamsNextGames("bulls");
         API.getAllTeam().then(data => {
             this.setState({
                 teams: data.data
@@ -38,8 +40,54 @@ class Events extends Component {
                     gamesArray.push(game.gameId);
                     return true;
                 }))
-                this.setState({ favGames: gamesArray });
+                this.setState({
+                    favGames: gamesArray,
+                    statsArray: []
+                });
                 console.log(`Fave Games: ${this.state.favGames}`);
+                let tempStats = [];
+                for (let i = 0; i < this.state.favGames.length; i++) {
+                    API.getGameFromGameId(this.state.favGames[i])
+                        .then(gameRes => {
+                            if (gameRes.data.api.games[0].statusGame == "Scheduled") {
+                                let tempObj = {
+                                    finished: false,
+                                    game: gameRes.data.api
+                                }
+
+                                tempStats.push(tempObj);
+                                this.setState({
+                                    statsArray: tempStats
+                                })
+                            }
+                            else {
+                                API.getGameStats(this.state.favGames[i])
+                                    .then(statsRes => {
+                                        console.log(`gameRes: ${JSON.stringify(gameRes)}`);
+                                        let gameObj = {
+                                            finished: true,
+                                            homeTeam: gameRes.data.api.games[0].hTeam.nickName,
+                                            awayTeam: gameRes.data.api.games[0].vTeam.nickName,
+                                            homeTeamLogo: gameRes.data.api.games[0].hTeam.logo,
+                                            awayTeamLogo: gameRes.data.api.games[0].vTeam.logo,
+                                            gameTime: Moment.utc(gameRes.data.api.games[0].startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY"),
+                                            stats: statsRes.data.api.statistics
+                                        }
+                                        tempStats.push(gameObj);
+                                        this.setState({
+                                            statsArray: tempStats
+                                        })
+                                    })
+                                    .catch(err => console.log(err));
+                            }
+                        })
+                        .catch(err => console.log(err));
+                }
+                // console.log(tempStats);
+                // this.setState({
+                //     statsArray: [...this.state.statsArray, ...tempStats]
+                // })
+                console.log(`stats array ${this.state.statsArray}`)
             })
             .catch(err => console.log(err));
     };
@@ -103,46 +151,110 @@ class Events extends Component {
         }
     };
 
+    addGametoCalender(event) {
+        let locale = event.hTeam.fullName.split(" ")[0];
+        let startTime = Moment.utc(event.startTimeUTC).utcOffset(-8).format();
+        let endTime = Moment.utc(event.startTimeUTC).utcOffset(-8).add(3, 'h').format();
+        let calendarEvent = {
+          'summary': `${event.vTeam.fullName} @ ${event.hTeam.fullName}`,
+          'location': `${locale}`,
+          'description': 'Score:',
+          'id': `00000${event.gameId}`,
+          'start': {
+            'dateTime': `${startTime}`, // start time
+          },
+          'end': {
+            'dateTime': `${endTime}`// end time
+          },
+          'attendees': [
+            { 'email': 'accountEmail@example.com' }, //account Email
+            { 'email': 'sbrin@example.com' },
+          ],
+          'reminders': {
+            'useDefault': false,
+            'overrides': [
+              { 'method': 'email', 'minutes': 24 * 60 },
+              { 'method': 'popup', 'minutes': 10 },
+            ],
+          },
+        };
+        API.addCalendarEvent(calendarEvent)
+        alert("Game added to calender");
+      }
+
     render() {
         return (
             <Container fluid>
                 <Row>
-                    <Col size="md-3 sm-12">
+                    {/* <Col size="md-3 sm-12">
                         <Jumbotron>
                             <SideBar teams={this.state.teams} />
                         </Jumbotron>
-                    </Col>
+                    </Col> */}
                     <Col size="md-9 sm-12">
                         <Jumbotron>
                             <h1>Air Ball</h1>
                         </Jumbotron>
-                    <Row>
-                    {this.state.eventArray.length ? (
+                        <Row>
+                            {this.state.statsArray.length ? (
+
+                                this.state.statsArray.map(event => {
+                                    console.log(`event: ${JSON.stringify(event)}`);
+                                    return (
+                                        !event.finished ? (
 
 
-                        this.state.eventArray.map(event => {
+                                            <Col size="md-6 sm-6">
+                                                <EventCard
+                                                    key={event.game.games[0].gameId}
+                                                    homeTeam={event.game.games[0].hTeam.nickName}
+                                                    awayTeam={event.game.games[0].vTeam.nickName}
+                                                    gameTime={Moment.utc(event.game.games[0].startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
+                                                    onClick={() => this.handleSubmit(event.game.games[0].gameId, this.state.favGames.includes(event.game.games[0].gameId))}
+                                                    favorited={this.state.favGames.includes(event.game.games[0].gameId)}
+                                                    awayTeamLogo={event.game.games[0].vTeam.logo}
+                                                    homeTeamLogo={event.game.games[0].hTeam.logo}
+                                                    calendarClick={() => this.addGametoCalender(event.game.games[0])}
+                                                >
+                                                </EventCard>
+                                            </Col>
+                                        ) : (
+                                                <Col size="md-12">
+                                                    <GameStatsCard
+                                                        homeTeam={event.homeTeam}
+                                                        awayTeam={event.awayTeam}
+                                                        gameTime={event.gameTime}
+                                                        awayTeamLogo={event.awayTeamLogo}
+                                                        homeTeamLogo={event.homeTeamLogo}
+                                                        homeTeamRebounds={parseInt(event.stats[0].totReb)}
+                                                        awayTeamRebounds={parseInt(event.stats[1].totReb)}
+                                                        homeTeamScore={parseInt(event.stats[0].points)}
+                                                        awayTeamScore={parseInt(event.stats[1].points)}
+                                                        homeTeamOffReb={parseInt(event.stats[0].offReb)}
+                                                        awayTeamOffReb={parseInt(event.stats[1].offReb)}
+                                                        homeTeamDefReb={parseInt(event.stats[0].defReb)}
+                                                        awayTeamDefReb={parseInt(event.stats[1].defReb)}
+                                                        homeAssists={parseInt(event.stats[0].assists)}
+                                                        awayAssists={parseInt(event.stats[1].assists)}
+                                                        homeTOs={parseInt(event.stats[0].turnovers)}
+                                                        awayTOs={parseInt(event.stats[1].turnovers)}
+                                                        homePaint={parseInt(event.stats[0].pointsInPaint)}
+                                                        awayPaint={parseInt(event.stats[1].pointsInPaint)}
+                                                        homeFast={parseInt(event.stats[0].fastBreakPoints)}
+                                                        awayFast={parseInt(event.stats[1].fastBreakPoints)}
+                                                        homeSC={parseInt(event.stats[0].secondChancePoints)}
+                                                        awaySC={parseInt(event.stats[1].secondChancePoints)}
+                                                        deleteButton={true}
+                                                        onClick={() => this.handleSubmit(event.stats[0].gameId, true)}
+                                                    ></GameStatsCard>
+                                                </Col>
+                                            ))
+                                })
 
-                            return (
-                                <Col size="md-6 sm-6">
-                                    <EventCard
-                                        key={event.gameId}
-                                        homeTeam={event.hTeam.nickName}
-                                        awayTeam={event.vTeam.nickName}
-                                        gameTime={Moment.utc(event.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
-                                        onClick={() => this.handleSubmit(event.gameId, this.state.favGames.includes(event.gameId))}
-                                        favorited={this.state.favGames.includes(event.gameId)}
-                                        awayTeamLogo={event.vTeam.logo}
-                                        homeTeamLogo={event.hTeam.logo}
-                                    >
-                                    </EventCard>
-                                </Col>
-                            );
-                        })
-
-                    ) : (
-                            <h3>No Event Results to Display</h3>
-                        )}
-                    </Row>
+                            ) : (
+                                    <h3>No Event Results to Display</h3>
+                                )}
+                        </Row>
                     </Col>
                 </Row>
             </Container>
