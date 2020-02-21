@@ -29,14 +29,12 @@ export class Register extends React.Component {
         this.setState({
             firstName: event.target.value
         });
-        console.log(event.target.value)
     }
 
     handleLastName(event) {
         this.setState({
             lastName: event.target.value
         });
-        console.log(event.target.value)
     }
 
 
@@ -44,7 +42,6 @@ export class Register extends React.Component {
         this.setState({
             email: event.target.value
         });
-        console.log(event.target.value)
     }
 
 
@@ -52,7 +49,6 @@ export class Register extends React.Component {
         this.setState({
             username: event.target.value
         });
-        console.log(event.target.value)
     }
 
 
@@ -60,7 +56,6 @@ export class Register extends React.Component {
         this.setState({
             password: event.target.value
         });
-        console.log(event.target.value)
     }
 
 
@@ -68,7 +63,6 @@ export class Register extends React.Component {
         this.setState({
             confirmPassword: event.target.value
         });
-        console.log(event.target.value)
     }
 
 
@@ -76,7 +70,6 @@ export class Register extends React.Component {
         this.setState({
             value: event.target.value
         });
-        console.log(event.target.value)
     }
 
 
@@ -112,11 +105,9 @@ export class Register extends React.Component {
             }).then(
                 data => {
                     console.log(data);
+                    alert("Account was succesfully created")
                 }
             )
-
-        setTimeout(function () { alert("Account was succesfully created"); }, 10)
-
 
     }
 

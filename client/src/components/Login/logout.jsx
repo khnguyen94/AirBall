@@ -14,9 +14,10 @@ export class Logout extends React.Component {
 
     handleSubmit(event) {
         console.log(event);
-
-        API.logout();
-
+        API.logout().then((resdata) => {
+            console.log(resdata);
+            alert(resdata.data.message);
+        });
     }
 
     render() {
