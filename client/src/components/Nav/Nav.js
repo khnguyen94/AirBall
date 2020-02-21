@@ -7,9 +7,7 @@ class Nav extends Component {
   render() {
     let links = [
       { label: 'Home', link: '/home'},
-      { label: 'Favorites', link: 'favorites' },
-      { label: 'Calendar', link: 'calendar' },
-      { label: 'Link 4', link: '#link4' },
+      { label: 'Favorites', link: 'favorites' }
     ];
 
     return (

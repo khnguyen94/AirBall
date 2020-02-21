@@ -7,5 +7,7 @@ body {
 }
 
 .jumbotron {
-    padding: 1.5rem;
+    padding: 1rem;
+    height: 80vh;
+    margin: 2rem;
 }
