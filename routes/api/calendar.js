@@ -1,6 +1,6 @@
 const { google } = require('googleapis');
 const router = require("express").Router();
-const openurl = require("openurl");
+const open = require("open");
 
 let event;
 const oAuth2Client = new google.auth.OAuth2(
@@ -18,7 +18,7 @@ router.route("/")
         });
         console.log(url);
         event = req.body;
-        openurl.open(url);
+        open(url);
     });
 
 router.route("/oauthcallback")
