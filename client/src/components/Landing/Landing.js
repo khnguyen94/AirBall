@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./Landing.css";
 import Carousel from "react-bootstrap/Carousel";
+import RegisterBTN from "../RegisterBTN";
 
 class Landing extends Component {
   constructor(props) {
@@ -36,7 +37,10 @@ class Landing extends Component {
           </Carousel>
 
           <h3>GAME NOTIFICATIONS FOR TRUE NBA FANS</h3>
-          <a className="btn btn-outline-light btn-lg">GET STARTED</a>
+
+          <div className="regist-btn">
+            <RegisterBTN />
+            </div>
         </div>
       </div>
     );

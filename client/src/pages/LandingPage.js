@@ -53,8 +53,8 @@ const carouselImages = [
 ];
 
 class LandingPage extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
   }
 
   state = {
@@ -62,7 +62,7 @@ class LandingPage extends Component {
 
   render() {
       return (
-          <Landing images={carouselImages}/>
+          <Landing images={carouselImages} registerBtn={this.props.RegisterBTN}/>
       )
   }
 }
