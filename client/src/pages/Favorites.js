@@ -3,7 +3,7 @@ import Jumbotron from "../components/Jumbotron";
 import DeleteBtn from "../components/DeleteBtn";
 import API from "../utils/API";
 import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
+//import { List, ListItem } from "../components/List";
 import EventCard from "../components/EventCard";
 import Moment from "moment";
 import SideBar from "../components/SideBar/SideBar";
@@ -63,7 +63,7 @@ class Events extends Component {
                         else {
                             API.getGameStats(this.state.favGames[i])
                             .then(statsRes => {
-                                console.log(`gameRes: ${JSON.stringify(gameRes)}`);
+                                //console.log(`gameRes: ${JSON.stringify(gameRes)}`);
                                 let gameObj = {
                                     finished: true,
                                     homeTeam: gameRes.data.api.games[0].hTeam.nickName,

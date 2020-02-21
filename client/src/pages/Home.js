@@ -335,7 +335,6 @@ class Home extends Component {
             </Jumbotron>
           ) : (
               <Row>
-<<<<<<< HEAD
                 <Col size="md-12">
                   <h2>Upcoming Games</h2>
                 </Col>
@@ -363,36 +362,6 @@ class Home extends Component {
                     </Col>
                   );
                 })}
-=======
-                <Row>
-                  <Col size="md-12">
-                    <h2>Upcoming Games</h2>
-                  </Col>
-                  {this.state.next5Games.map(event => {
-                    return (
-                      <Col size="md-6 sm-12">
-                        <EventCard
-                          key={event.gameId}
-                          homeTeam={event.hTeam.nickName}
-                          awayTeam={event.vTeam.nickName}
-                          gameTime={Moment.utc(event.startTimeUTC)
-                            .utcOffset(-8)
-                            .format("dddd, MMMM Do YYYY, h:mm a")}
-                          onClick={() =>
-                            this.handleSubmit(
-                              event.gameId,
-                              this.state.favGames.includes(event.gameId)
-                            )
-                          }
-                          favorited={this.state.favGames.includes(event.gameId)}
-                          awayTeamLogo={event.vTeam.logo}
-                          homeTeamLogo={event.hTeam.logo}
-                        ></EventCard>
-                      </Col>
-                    );
-                  })}
-                </Row>
-                <Row>
                   <Col size="md-12">
                     <h2>Past 5 Games</h2>
                   </Col>
@@ -428,10 +397,8 @@ class Home extends Component {
                     );
                   })}
                 </Row>
->>>>>>> master
-              </Row>
-            )}
-        </Col>
+          )}
+          </Col>
       </Row>
     );
   }
