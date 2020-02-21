@@ -8,7 +8,6 @@ import EventCard from "../components/EventCard";
 import Moment from "moment";
 import SideBar from "../components/SideBar/SideBar";
 import GameStatsCard from "../components/GameStatsCard";
-import { compareSync } from "bcrypt";
 
 class Events extends Component {
     // Setting our component's initial state
@@ -55,15 +54,16 @@ class Events extends Component {
                                 finished: false,
                                 game: gameRes.data.api
                             }
-                            // this.setState({
-                            //     statsArray: this.state.statsArray.push(tempObj)
-                            // })
+
                             tempStats.push(tempObj);
+                            this.setState({
+                                statsArray: tempStats
+                           })
                         }
                         else {
                             API.getGameStats(this.state.favGames[i])
                             .then(statsRes => {
-                                //console.log(`gameRes: ${JSON.stringify(gameRes)}`);
+                                console.log(`gameRes: ${JSON.stringify(gameRes)}`);
                                 let gameObj = {
                                     finished: true,
                                     homeTeam: gameRes.data.api.games[0].hTeam.nickName,
@@ -73,19 +73,21 @@ class Events extends Component {
                                     gameTime: Moment.utc(gameRes.data.api.games[0].startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY"),
                                     stats: statsRes.data.api.statistics
                                 }
-                                // this.setState({
-                                //     statsArray: this.state.statsArray.push(gameObj)
-                                // })
                                 tempStats.push(gameObj);
+                                this.setState({
+                                    statsArray: tempStats
+                               })
                             })
                             .catch(err => console.log(err));
                         }
                     })
                     .catch(err => console.log(err));
-                    this.setState({
-                        statsArray: tempStats
-                    })
                 }
+                // console.log(tempStats);
+                // this.setState({
+                //     statsArray: [...this.state.statsArray, ...tempStats]
+                // })
+                console.log(`stats array ${this.state.statsArray}`)
             })
             .catch(err => console.log(err));
     };
@@ -153,35 +155,34 @@ class Events extends Component {
         return (
             <Container fluid>
                 <Row>
-                    <Col size="md-3 sm-12">
+                    {/* <Col size="md-3 sm-12">
                         <Jumbotron>
                             <SideBar teams={this.state.teams} />
                         </Jumbotron>
-                    </Col>
+                    </Col> */}
                     <Col size="md-9 sm-12">
                         <Jumbotron>
                             <h1>Air Ball</h1>
                         </Jumbotron>
                     <Row>
                     {this.state.statsArray.length ? (
-                        
 
                         this.state.statsArray.map(event => {
-                            console.log(`stats array: ${this.state.statsArray}`);
+                            console.log(`event: ${JSON.stringify(event)}`);
                             return (
                             !event.finished ? (
 
 
                                     <Col size="md-6 sm-6">
                                         <EventCard
-                                            key={event.gameId}
-                                            homeTeam={event.game.hTeam.nickName}
-                                            awayTeam={event.game.vTeam.nickName}
-                                            gameTime={Moment.utc(event.game.startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
-                                            onClick={() => this.handleSubmit(event.game.gameId, this.state.favGames.includes(event.game.gameId))}
-                                            favorited={this.state.favGames.includes(event.game.gameId)}
-                                            awayTeamLogo={event.game.vTeam.logo}
-                                            homeTeamLogo={event.game.hTeam.logo}
+                                            key={event.game.games[0].gameId}
+                                            homeTeam={event.game.games[0].hTeam.nickName}
+                                            awayTeam={event.game.games[0].vTeam.nickName}
+                                            gameTime={Moment.utc(event.game.games[0].startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY, h:mm a")}
+                                            onClick={() => this.handleSubmit(event.game.games[0].gameId, this.state.favGames.includes(event.game.games[0].gameId))}
+                                            favorited={this.state.favGames.includes(event.game.games[0].gameId)}
+                                            awayTeamLogo={event.game.games[0].vTeam.logo}
+                                            homeTeamLogo={event.game.games[0].hTeam.logo}
                                         >
                                         </EventCard>
                                     </Col>
