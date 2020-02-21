@@ -1,5 +1,4 @@
 import React from "react";
-import FavoriteButtonNew from "../FavoriteButtonNew";
 import "./style.css"
 import Image from "react-bootstrap/Image"
 import { Col, Row, Container } from "../Grid";

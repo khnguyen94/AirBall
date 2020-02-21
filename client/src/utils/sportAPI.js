@@ -12,6 +12,7 @@ export default {
                 "headers": {
                     "content-type": "application/octet-stream",
                     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+                    //"x-rapidapi-key": "e858d08557msh539c4b3b4b0a87bp19a67ajsn418d4a3abfaf"
                     "x-rapidapi-key": process.env.API_KEY||"10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
                 }
             })
@@ -26,6 +27,7 @@ export default {
                 "headers": {
                     "content-type": "application/octet-stream",
                     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
+                    //"x-rapidapi-key": "e858d08557msh539c4b3b4b0a87bp19a67ajsn418d4a3abfaf"
                     "x-rapidapi-key": process.env.API_KEY||"10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
                 }
             })
@@ -40,7 +42,7 @@ export default {
                 "headers": {
                     "content-type": "application/octet-stream",
                     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-                    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+                    "x-rapidapi-key": "e858d08557msh539c4b3b4b0a87bp19a67ajsn418d4a3abfaf"
                 }
             })
         )
@@ -54,7 +56,7 @@ export default {
                 "headers": {
                     "content-type": "application/octet-stream",
                     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-                    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+                    "x-rapidapi-key": "e858d08557msh539c4b3b4b0a87bp19a67ajsn418d4a3abfaf"
                 }
             })
         )
@@ -68,7 +70,7 @@ export default {
                 "headers": {
                     "content-type": "application/octet-stream",
                     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-                    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+                    "x-rapidapi-key": "e858d08557msh539c4b3b4b0a87bp19a67ajsn418d4a3abfaf"
                 }
             })
         )
@@ -83,7 +85,7 @@ export default {
                 "headers": {
                     "content-type": "application/octet-stream",
                     "x-rapidapi-host": "api-nba-v1.p.rapidapi.com",
-                    "x-rapidapi-key": "10fe929c79msh5c73d4ac038c79ep15bd2cjsn28ec07e1adda"
+                    "x-rapidapi-key": "e858d08557msh539c4b3b4b0a87bp19a67ajsn418d4a3abfaf"
                 }
             })
         );

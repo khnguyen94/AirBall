@@ -58,6 +58,9 @@ export default {
   getGameStats: function(gameId) {
     return sportAPI.getGameStats(gameId);
   },
+  getGameFromGameId: function(gameId) {
+    return sportAPI.getGameFromId(gameId);
+  },
 
   // get all favorite games from database - done OPEN TO USER
   getAllFavoriteGames: function(done) {

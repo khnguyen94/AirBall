@@ -36,7 +36,7 @@ function EventCard(props) {
       <FavoriteButtonNew onClick={props.onClick} favorited={props.favorited}></FavoriteButtonNew>
       </Col>
       <Col size="md-6">
-      <Button onClick={props.calanderClick} variant="info">Add Game to Calander</Button>
+      <Button onClick={props.calendarClick} variant="info">Add Game to Calendar</Button>
       </Col>
       </Row>
     </div>
