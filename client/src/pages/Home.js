@@ -49,12 +49,10 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.teamOnClick = this.teamOnClick.bind(this);
-    this.teamFaveBtnOnClick = this.handleFavoriteChange.bind(this);
   }
 
   state = {
     allTeams: [],
-    faveTeams: [],
     next5Games: [],
     past5Games: [],
     teamClickedId: NaN,
@@ -64,8 +62,6 @@ class Home extends Component {
 
   componentDidMount() {
     // API.intializeTeamData();
-    // TO FIX
-    this.loadAllTeams();
     this.loadFavTeams();
   }
 
@@ -89,15 +85,20 @@ class Home extends Component {
   }
 
   loadFavTeams = () => {
-    API.getFavoriteTeam().then(data => {
-      console.log(data);
-      const favTeamName = data.data;
-      this.setState({
-        favteams: favTeamName
-      });
-      console.log(this.state.favteams);
-      this.loadAllTeams();
-    });
+    API.getFavoriteTeam()
+      .then(data => {
+        console.log(data);
+        const favTeamName = data.data;
+        this.setState({
+          favteams: favTeamName
+        });
+        console.log(this.state.favteams);
+        this.loadAllTeams();
+      })
+      .catch(err => {
+        console.log(err);
+        this.loadAllTeams();
+      })
   }
 
   addGametoCalender(event) {
@@ -283,12 +284,12 @@ class Home extends Component {
               <SideBar
                 teams={this.state.teams}
                 favteams={this.state.favteams}
-                onChangeFunc={() => this.handleFavoriteChange}
+                changeFavTeam={this.changeFavTeam}
                 clickFunc={this.teamOnClick}
               />
             ) : (
-              <p> LOADING </p>
-            )}
+                <p> LOADING </p>
+              )}
 
           </Jumbotron>
         </Col>
@@ -333,8 +334,8 @@ class Home extends Component {
               </div>
             </Jumbotron>
           ) : (
-            <Row>
               <Row>
+<<<<<<< HEAD
                 <Col size="md-12">
                   <h2>Upcoming Games</h2>
                 </Col>
@@ -362,45 +363,74 @@ class Home extends Component {
                     </Col>
                   );
                 })}
+=======
+                <Row>
+                  <Col size="md-12">
+                    <h2>Upcoming Games</h2>
+                  </Col>
+                  {this.state.next5Games.map(event => {
+                    return (
+                      <Col size="md-6 sm-12">
+                        <EventCard
+                          key={event.gameId}
+                          homeTeam={event.hTeam.nickName}
+                          awayTeam={event.vTeam.nickName}
+                          gameTime={Moment.utc(event.startTimeUTC)
+                            .utcOffset(-8)
+                            .format("dddd, MMMM Do YYYY, h:mm a")}
+                          onClick={() =>
+                            this.handleSubmit(
+                              event.gameId,
+                              this.state.favGames.includes(event.gameId)
+                            )
+                          }
+                          favorited={this.state.favGames.includes(event.gameId)}
+                          awayTeamLogo={event.vTeam.logo}
+                          homeTeamLogo={event.hTeam.logo}
+                        ></EventCard>
+                      </Col>
+                    );
+                  })}
+                </Row>
+                <Row>
+                  <Col size="md-12">
+                    <h2>Past 5 Games</h2>
+                  </Col>
+                  {this.state.past5Games.map(event => {
+                    return (
+                      <Col size="md-12">
+                        <GameStatsCard
+                          homeTeam={event.homeTeam}
+                          awayTeam={event.awayTeam}
+                          gameTime={event.gameTime}
+                          awayTeamLogo={event.awayTeamLogo}
+                          homeTeamLogo={event.homeTeamLogo}
+                          homeTeamRebounds={parseInt(event.stats[0].totReb)}
+                          awayTeamRebounds={parseInt(event.stats[1].totReb)}
+                          homeTeamScore={parseInt(event.stats[0].points)}
+                          awayTeamScore={parseInt(event.stats[1].points)}
+                          homeTeamOffReb={parseInt(event.stats[0].offReb)}
+                          awayTeamOffReb={parseInt(event.stats[1].offReb)}
+                          homeTeamDefReb={parseInt(event.stats[0].defReb)}
+                          awayTeamDefReb={parseInt(event.stats[1].defReb)}
+                          homeAssists={parseInt(event.stats[0].assists)}
+                          awayAssists={parseInt(event.stats[1].assists)}
+                          homeTOs={parseInt(event.stats[0].turnovers)}
+                          awayTOs={parseInt(event.stats[1].turnovers)}
+                          homePaint={parseInt(event.stats[0].pointsInPaint)}
+                          awayPaint={parseInt(event.stats[1].pointsInPaint)}
+                          homeFast={parseInt(event.stats[0].fastBreakPoints)}
+                          awayFast={parseInt(event.stats[1].fastBreakPoints)}
+                          homeSC={parseInt(event.stats[0].secondChancePoints)}
+                          awaySC={parseInt(event.stats[1].secondChancePoints)}
+                        ></GameStatsCard>
+                      </Col>
+                    );
+                  })}
+                </Row>
+>>>>>>> master
               </Row>
-              <Row>
-                <Col size="md-12">
-                  <h2>Past 5 Games</h2>
-                </Col>
-                {this.state.past5Games.map(event => {
-                  return (
-                    <Col size="md-12">
-                      <GameStatsCard
-                        homeTeam={event.homeTeam}
-                        awayTeam={event.awayTeam}
-                        gameTime={event.gameTime}
-                        awayTeamLogo={event.awayTeamLogo}
-                        homeTeamLogo={event.homeTeamLogo}
-                        homeTeamRebounds={parseInt(event.stats[0].totReb)}
-                        awayTeamRebounds={parseInt(event.stats[1].totReb)}
-                        homeTeamScore={parseInt(event.stats[0].points)}
-                        awayTeamScore={parseInt(event.stats[1].points)}
-                        homeTeamOffReb={parseInt(event.stats[0].offReb)}
-                        awayTeamOffReb={parseInt(event.stats[1].offReb)}
-                        homeTeamDefReb={parseInt(event.stats[0].defReb)}
-                        awayTeamDefReb={parseInt(event.stats[1].defReb)}
-                        homeAssists={parseInt(event.stats[0].assists)}
-                        awayAssists={parseInt(event.stats[1].assists)}
-                        homeTOs={parseInt(event.stats[0].turnovers)}
-                        awayTOs={parseInt(event.stats[1].turnovers)}
-                        homePaint={parseInt(event.stats[0].pointsInPaint)}
-                        awayPaint={parseInt(event.stats[1].pointsInPaint)}
-                        homeFast={parseInt(event.stats[0].fastBreakPoints)}
-                        awayFast={parseInt(event.stats[1].fastBreakPoints)}
-                        homeSC={parseInt(event.stats[0].secondChancePoints)}
-                        awaySC={parseInt(event.stats[1].secondChancePoints)}
-                      ></GameStatsCard>
-                    </Col>
-                  );
-                })}
-              </Row>
-            </Row>
-          )}
+            )}
         </Col>
       </Row>
     );

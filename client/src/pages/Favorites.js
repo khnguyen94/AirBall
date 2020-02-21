@@ -167,7 +167,7 @@ class Events extends Component {
                         
 
                         this.state.statsArray.map(event => {
-                            //console.log(`stats array: ${this.state.statsArray}`);
+                            console.log(`stats array: ${this.state.statsArray}`);
                             return (
                             !event.finished ? (
 
