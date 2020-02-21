@@ -19,19 +19,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Logout from "./components/Login/logout"
 import Footer from "./components/Footer/Footer";
 
-// Create an array to hold all slider Images
-const sliderImages = [
-  {
-    name: "Image 1",
-    url: "https://wallpaperfm.com/img/original/3/6/a/49159.jpg"
-  },
-  {
-    name: "Image 2",
-    url:
-      "https://images.wallpaperscraft.com/image/paul_pierce_washington_wizards_basketball_nba_103099_1280x720.jpg"
-  }
-];
-
 // Create an array of NavLinks
 const navLinks = [
   {

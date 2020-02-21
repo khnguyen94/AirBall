@@ -16,35 +16,6 @@ import EventCard from "../components/EventCard";
 import GameStatsCard from "../components/GameStatsCard";
 import Moment from "moment";
 
-// Create a settings object for the imageSlider
-const settings = {
-  dots: true,
-  fade: true,
-  infinite: true,
-  speed: 500,
-  slidesToShow: 1,
-  arrows: true,
-  slidesToScroll: 1,
-  className: "slides"
-};
-
-// Create an array to hold all slider Images
-const sliderImages = [
-  {
-    name: "Image 1",
-    url: "https://wallpaperfm.com/img/original/3/6/a/49159.jpg"
-  },
-  {
-    name: "Image 2",
-    url:
-      "https://images.wallpaperscraft.com/image/paul_pierce_washington_wizards_basketball_nba_103099_1280x720.jpg"
-  },
-  {
-    name: "Image 3",
-    url: ""
-  }
-];
-
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -304,15 +275,6 @@ class Home extends Component {
                 transform: "translate(-50%, -50%)"
               }}
             >
-              <Slider {...settings}>
-                {sliderImages.map(image => {
-                  return (
-                    <div>
-                      <img className="sliderImage" src={image.url} />
-                    </div>
-                  );
-                })}
-              </Slider>
 
               <br />
 

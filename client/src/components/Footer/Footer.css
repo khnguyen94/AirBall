@@ -1,6 +1,5 @@
 .footer {
     background-color: darkgrey;
-    box-shadow: 0 50vh 0 50vh rgba(48, 48, 48, 0.9);
     width: 100%;
     height: 40px;
     display: flex;
@@ -15,6 +14,12 @@
     opacity: .92;
     width: 100%;
     bottom: 0;
+    width:100%;
+    font-weight:bold;
+    text-align:center;
+    position:fixed;    /*Here's what sticks it*/
+    bottom:0;          /*to the bottom of the window*/
+    left:0;            /*and to the left of the window.*/
 }
 
 .footer-text {
