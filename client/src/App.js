@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./Logo/logo.jpg";
+import logo from "./Logo/logo.png";
 import { Col, Row, Container } from "../src/components/Grid";
 import "./App.css";
 import Nav from "./components/Nav";
@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import API from "./utils/API";
 import { set } from "mongoose";
 import { PageItem } from "react-bootstrap";
+import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -48,7 +49,7 @@ const navLinks = [
   },
   {
     label: "Favorite Teams",
-    link: "/favorites",
+    link: "favorites",
     hasList: true,
     list: [],
     active: false
@@ -68,7 +69,6 @@ class App extends Component {
     firstName:"",
     lastName:""
   }
-
   componentDidMount() {
   }
 
@@ -204,7 +204,8 @@ class App extends Component {
           <br />
           {/* <Home teams={this.state.teams}/> */}
           <Switch>
-            <Route exact path="/" component={Home} />
+          <Route exact path="/" component={LandingPage} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
         </Container>

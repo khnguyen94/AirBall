@@ -10,8 +10,9 @@
     height: 80vh;
     z-index: 999;
     color: #fff;
-    transition: all 0.3s;
-    overflow: scroll
+    transition: all 0.5s;
+    overflow: scroll;
+    border-radius: 5px;
 }
 
 .sideBarMainItem {
@@ -22,6 +23,7 @@
     margin-bottom: 10px;
     margin-right: 10px;
     clear: both;
+    border-radius: 5px;
 }
 
 .sideBarMainItemText {
@@ -40,32 +42,81 @@
     border-color: #3a3e47; 
     margin: 1px;
     overflow: hidden; 
+    border-radius: 5px;
 }
 
 .listItemText {
     float: left;
 }
 
+
 .sideBarTeamLinkText{
     float: left;
 }
 
-.faveBtnContainer {
+input {
     float: right;
-    margin-right: 2px;
+    margin-right: 3px;
 }
 
 .star {
     visibility:hidden;
     font-size:16px;
     cursor:pointer;
+    color:#ff8400;
 }
 .star:before {
    content: "\2606";
    position: relative;
    visibility:visible;
 }
+
 .star:checked:before {
     content: "\2605";
    position: relative;
+}
+
+.star:hover {
+	opacity: 0.8;
+}
+
+.star:active {
+	transform: scale(0.93,0.93) translateY(2px)
+}
+
+.star:after {
+    color:orange;
+}
+
+
+.active span, .active-2 span {
+	color: #F5CC27 !important;
+}
+
+.active-2 .ring {
+	width: 58px !important;
+	height: 58px !important;
+	top: -10px !important;
+	left: -10px !important;
+	position: absolute;
+	border-radius: 50%;
+	opacity: 1 !important;
+}
+
+.active-2 .ring {
+	background: #F5CC27 !important;
+}
+
+.active-2 .ring2 {
+	background: #fff !important;
+}
+
+.active-3 .ring2 {
+	width: 60px !important;
+	height: 60px !important;
+	top: -11px !important;
+	left: -11px !important;
+	position: absolute;
+	border-radius: 50%;
+	opacity: 1 !important;
 }
