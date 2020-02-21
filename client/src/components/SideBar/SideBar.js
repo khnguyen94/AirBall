@@ -5,18 +5,9 @@ import FavoriteTeamBtn from "../FavoriteTeamBtn";
 
 function SideBar(props) {
   
-  let allSortedTeams = props.teams.sort(function(teamA, teamB) {
-    return teamA.teamId - teamB.teamId;
-  });
-
   // Function to render all of the teams from allTeamsFiltered
 
-  let renderAllTeams = allSortedTeams
-    .filter(team => {
-      return team.nbaFranchise == 1 && team.favorite == false;
-    })
-    .sort()
-
+  let renderAllTeams = props.teams
     .map((team, index) => {
       return (
         <li className="listItem">
@@ -29,20 +20,15 @@ function SideBar(props) {
           >
             {team.fullName}
           </a>
-
-
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn clickFaveFunc={props.onChangeFunc} teamId={team.teamId} />
+          <input className="star" type="checkbox" id={index} onChange={props.changeFavTeam} checked={team.favorite}/>
           </div>
         </li>
       );
     });
 
   // Function to render all the favorite teams from faveTeamsFiltered
-  let renderFaveTeams = props.teams
-    .filter(team => {
-      return team.nbaFranchise == 1 && team.favorite == true;
-    })
+  let renderFaveTeams = props.favteams
     .map((team, index) => {
       return (
         <li className="listItem">
@@ -50,8 +36,6 @@ function SideBar(props) {
             {team.fullName}
           </a>
           <div className="faveBtnContainer">
-            <FavoriteTeamBtn clickFaveFunc={props.onChangeFunc} teamId={team.teamId}/>
-
           </div>
         </li>
       );

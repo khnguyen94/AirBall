@@ -49,12 +49,10 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.teamOnClick = this.teamOnClick.bind(this);
-    this.teamFaveBtnOnClick = this.handleFavoriteChange.bind(this);
   }
 
   state = {
     allTeams: [],
-    faveTeams: [],
     next5Games: [],
     past5Games: [],
     teamClickedId: NaN,
@@ -64,8 +62,6 @@ class Home extends Component {
 
   componentDidMount() {
     // API.intializeTeamData();
-    // TO FIX
-    this.loadAllTeams();
     this.loadFavTeams();
   }
 
@@ -89,15 +85,20 @@ class Home extends Component {
   }
 
   loadFavTeams = () => {
-    API.getFavoriteTeam().then(data => {
-      console.log(data);
-      const favTeamName = data.data;
-      this.setState({
-        favteams: favTeamName
-      });
-      console.log(this.state.favteams);
-      this.loadAllTeams();
-    });
+    API.getFavoriteTeam()
+      .then(data => {
+        console.log(data);
+        const favTeamName = data.data;
+        this.setState({
+          favteams: favTeamName
+        });
+        console.log(this.state.favteams);
+        this.loadAllTeams();
+      })
+      .catch(err => {
+        console.log(err);
+        this.loadAllTeams();
+      })
   }
 
   addGametoCalender(event) {
@@ -283,7 +284,7 @@ class Home extends Component {
               <SideBar
                 teams={this.state.teams}
                 favteams={this.state.favteams}
-                onChangeFunc={() => this.handleFavoriteChange}
+                changeFavTeam={this.changeFavTeam}
                 clickFunc={this.teamOnClick}
               />
             ) : (
