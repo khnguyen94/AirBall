@@ -61,6 +61,7 @@ export class Login extends React.Component {
 
 
 
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
@@ -84,9 +85,9 @@ export class Login extends React.Component {
                                     <Button variant="warning" type="submit">Login</Button>
                                 </div>
 
-                                <div className="form-group">
-                                    <Button variant="secondary" href="/">Close</Button>
-                                </div>
+                                {/* <div className="form-group">
+                                    <Button variant="secondary" >Close</Button>
+                                </div> */}
                             </div>
                         </div>
                     </div>

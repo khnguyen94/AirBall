@@ -163,9 +163,9 @@ export class Register extends React.Component {
 
                             </div>
 
-                            <div className="form-group">
+                            {/* <div className="form-group">
                                 <Button variant="secondary" href="/" >Close</Button>
-                            </div>
+                            </div> */}
                         </div>
 
                     </div >
