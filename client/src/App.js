@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./Logo/logo.jpg";
+import logo from "./Logo/logo.png";
 import { Col, Row, Container } from "../src/components/Grid";
 import "./App.css";
 import Nav from "./components/Nav";
@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import API from "./utils/API";
 import { set } from "mongoose";
 import { PageItem } from "react-bootstrap";
+import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -16,19 +17,7 @@ import SignInBTN from "./components/SignInBTN";
 import RegisterBTN from "./components/RegisterBTN";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Logout from "./components/Login/logout"
-
-// Create an array to hold all slider Images
-const sliderImages = [
-  {
-    name: "Image 1",
-    url: "https://wallpaperfm.com/img/original/3/6/a/49159.jpg"
-  },
-  {
-    name: "Image 2",
-    url:
-      "https://images.wallpaperscraft.com/image/paul_pierce_washington_wizards_basketball_nba_103099_1280x720.jpg"
-  }
-];
+import Footer from "./components/Footer/Footer";
 
 // Create an array of NavLinks
 const navLinks = [
@@ -48,7 +37,7 @@ const navLinks = [
   },
   {
     label: "Favorite Teams",
-    link: "/favorites",
+    link: "favorites",
     hasList: true,
     list: [],
     active: false
@@ -68,7 +57,6 @@ class App extends Component {
     firstName:"",
     lastName:""
   }
-
   componentDidMount() {
   }
 
@@ -204,9 +192,12 @@ class App extends Component {
           <br />
           {/* <Home teams={this.state.teams}/> */}
           <Switch>
-            <Route exact path="/" component={Home} />
+          <Route exact path="/" component={LandingPage} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
+
+          <Footer />
         </Container>
       </Router >
     );
