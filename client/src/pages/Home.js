@@ -10,7 +10,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { PromiseProvider } from "mongoose";
 import API from "../utils/API";
 import ReactStarts from "react-stars";
-import update from "react-addons-update";
+import update from 'react-addons-update';
 import { isBuffer } from "util";
 import EventCard from "../components/EventCard";
 import GameStatsCard from "../components/GameStatsCard";
@@ -68,7 +68,8 @@ class Home extends Component {
   loadAllTeams = () => {
     API.getAllTeam().then(data => {
       console.log(data);
-      const filteredTeam = data.data.filter(team => team.nbaFranchise === "1");
+      const filteredTeam = data.data
+        .filter(team => team.nbaFranchise === '1');
       filteredTeam.forEach(team => {
         const favNames = this.state.favteams.map(favteam => favteam.fullName);
         if (favNames.includes(team.fullName)) {
@@ -81,21 +82,9 @@ class Home extends Component {
       });
       console.log(this.state.teams);
     });
-  };
+  }
 
   loadFavTeams = () => {
-<<<<<<< HEAD
-    API.getFavoriteTeam().then(data => {
-      console.log(data);
-      const favTeamName = data.data;
-      this.setState({
-        favteams: favTeamName
-      });
-      console.log(this.state.favteams);
-      this.loadAllTeams();
-    });
-  };
-=======
     API.getFavoriteTeam()
       .then(data => {
         console.log(data);
@@ -111,54 +100,39 @@ class Home extends Component {
         this.loadAllTeams();
       })
   }
->>>>>>> 722674879e60d72dfe49b0900fe3d68b6c70ba56
 
   addGametoCalender(event) {
     let locale = event.hTeam.fullName.split(" ")[0];
-    let startTime = Moment.utc(event.startTimeUTC)
-      .utcOffset(-8)
-      .format();
-    let endTime = Moment.utc(event.startTimeUTC)
-      .utcOffset(-8)
-      .add(3, "h")
-      .format();
+    let startTime = Moment.utc(event.startTimeUTC).utcOffset(-8).format();
+    let endTime = Moment.utc(event.startTimeUTC).utcOffset(-8).add(3, 'h').format();
     let calendarEvent = {
-<<<<<<< HEAD
-      summary: `${event.vTeam.fullName} @ ${event.hTeam.fullName}`,
-      location: `${locale}`,
-      description: "Score:",
-      id: `${event.gameId}`,
-      start: {
-        dateTime: `${startTime}` // start time
-=======
       'summary': `${event.vTeam.fullName} @ ${event.hTeam.fullName}`,
       'location': `${locale}`,
       'description': 'Score:',
       'id': `00000${event.gameId}`,
       'start': {
         'dateTime': `${startTime}`, // start time
->>>>>>> 722674879e60d72dfe49b0900fe3d68b6c70ba56
       },
-      end: {
-        dateTime: `${endTime}` // end time
+      'end': {
+        'dateTime': `${endTime}`// end time
       },
-      attendees: [
-        { email: "accountEmail@example.com" }, //account Email
-        { email: "sbrin@example.com" }
+      'attendees': [
+        { 'email': 'accountEmail@example.com' }, //account Email
+        { 'email': 'sbrin@example.com' },
       ],
-      reminders: {
-        useDefault: false,
-        overrides: [
-          { method: "email", minutes: 24 * 60 },
-          { method: "popup", minutes: 10 }
-        ]
-      }
+      'reminders': {
+        'useDefault': false,
+        'overrides': [
+          { 'method': 'email', 'minutes': 24 * 60 },
+          { 'method': 'popup', 'minutes': 10 },
+        ],
+      },
     };
-    API.addCalendarEvent(calendarEvent);
+    API.addCalendarEvent(calendarEvent)
     alert("Game added to calender");
   }
 
-  changeFavTeam = event => {
+  changeFavTeam = (event) => {
     const index = event.target.id;
     console.log(event.target.checked);
     console.log(index);
@@ -173,7 +147,7 @@ class Home extends Component {
         this.loadFavTeams();
       });
     }
-  };
+  }
 
   getTeamsGames(teamName) {
     API.getTeamFromName(teamName)
@@ -236,41 +210,9 @@ class Home extends Component {
         .catch(err => console.log(err));
       alert("Game Removed from Favorites!");
     }
-  }
+  };
 
   teamOnClick(teamId) {
-<<<<<<< HEAD
-    API.getAllGames(teamId).then(res => {
-      let lastGameIndex = this.findLastGame(res.data.api.games);
-      let tempArray = res.data.api.games.slice(
-        lastGameIndex - 5,
-        lastGameIndex
-      );
-      this.setState({
-        next5Games: res.data.api.games.slice(lastGameIndex, lastGameIndex + 5),
-        past5Games: []
-      });
-      for (let i = 0; i < tempArray.length; i++) {
-        API.getGameStats(tempArray[i].gameId)
-          .then(res => {
-            let gameObj = {
-              homeTeam: tempArray[i].hTeam.nickName,
-              awayTeam: tempArray[i].vTeam.nickName,
-              homeTeamLogo: tempArray[i].hTeam.logo,
-              awayTeamLogo: tempArray[i].vTeam.logo,
-              gameTime: Moment.utc(tempArray[i].startTimeUTC)
-                .utcOffset(-8)
-                .format("dddd, MMMM Do YYYY"),
-              stats: res.data.api.statistics
-            };
-            this.setState({
-              gameStats: this.state.past5Games.push(gameObj)
-            });
-          })
-          .catch(err => console.log(err));
-      }
-    });
-=======
     API.getAllGames(teamId)
       .then((res) => {
         let lastGameIndex = this.findLastGame(res.data.api.games);
@@ -299,7 +241,6 @@ class Home extends Component {
         }
       })
 
->>>>>>> 722674879e60d72dfe49b0900fe3d68b6c70ba56
   }
 
   // Loads all events and sets them to this.state.events
@@ -332,33 +273,25 @@ class Home extends Component {
     this.setState({ checked }, () => {
       console.log("favorite: " + this.state.checked);
     });
-  }
+  };
 
   render() {
     return (
       <Row>
         <Col size="md-4 sm-12">
           <Jumbotron>
+
             {this.state.teams ? (
               <SideBar
                 teams={this.state.teams}
                 favteams={this.state.favteams}
-<<<<<<< HEAD
-=======
                 changeFavTeam={this.changeFavTeam}
->>>>>>> 722674879e60d72dfe49b0900fe3d68b6c70ba56
                 clickFunc={this.teamOnClick}
-                changeFavTeam={this.changeFavTeam}
               />
             ) : (
-<<<<<<< HEAD
-              <p> LOADING </p>
-            )}
-=======
                 <p> LOADING </p>
               )}
 
->>>>>>> 722674879e60d72dfe49b0900fe3d68b6c70ba56
           </Jumbotron>
         </Col>
         <Col size="md-8 sm-12">
