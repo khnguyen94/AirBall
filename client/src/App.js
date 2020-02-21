@@ -182,11 +182,6 @@ class App extends Component {
           </div>
           */}
           <br />
-          <div>
-            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
-            <SignInBTN handleSignIn={this.handleSignIn} />
-            <Logout handleSignOut={this.handleSignOut} />
-          </div>
           <Nav logo={logo} links={navLinks} />
 
           <br />

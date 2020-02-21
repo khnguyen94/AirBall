@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
+
+body {
+    overflow-x: hidden;
+    font-family: 'Lato';
+    color: #505962;
+}
+
+.jumbotron {
+    padding: 1.5rem;
+}

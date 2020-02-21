@@ -1,5 +1,38 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:400,700&display=swap');
 
-jumbotron {
-
+body {
+    overflow-x: hidden;
+    font-family: 'Lato';
+    color: #505962;
 }
+
+.home-inner {
+    background-image: url('../Logo/background.jpg');
+    background-size: cover;
+}
+
+.home {
+    position: relative;
+    width: 100%;
+    z-index: -1;
+  }
+  .home-wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .home-inner {
+    position: fixed;
+    display: table;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    will-change: transform;
+  }
