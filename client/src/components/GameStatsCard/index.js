@@ -58,9 +58,9 @@ function GameStatsCard(props) {
             <Image src={props.homeTeamLogo} fluid />
           </Col>
           <Col size="md-6">
-            <h4>
+            <h2>
               {props.homeTeam} VS. {props.awayTeam}
-            </h4>
+            </h2>
           </Col>
           <Col size="md-3">
             <Image src={props.awayTeamLogo} fluid />

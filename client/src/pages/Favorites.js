@@ -191,7 +191,7 @@ class Events extends Component {
                             <SideBar teams={this.state.teams} />
                         </Jumbotron>
                     </Col> */}
-                    <Col size="md-9 sm-12">
+                    <Col size="md-12 sm-12">
                         <Jumbotron>
                             <h1>Air Ball</h1>
                         </Jumbotron>
@@ -247,6 +247,8 @@ class Events extends Component {
                                                         deleteButton={true}
                                                         onClick={() => this.handleSubmit(event.stats[0].gameId, true)}
                                                     ></GameStatsCard>
+                                                    <br></br>
+                                                    <br></br>
                                                 </Col>
                                             ))
                                 })

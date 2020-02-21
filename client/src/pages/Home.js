@@ -265,8 +265,8 @@ class Home extends Component {
 
           </Jumbotron>
         </Col>
-        <Col size="md-8 sm-12">
           {!this.state.next5Games.length ? (
+            <Col size="md-8 sm-12">
             <Jumbotron
               style={{
                 position: "absolute",
@@ -296,11 +296,13 @@ class Home extends Component {
                 </p>
               </div>
             </Jumbotron>
+            </Col>
           ) : (
-              <Row>
+            <Col size="md-8 sm-12">
                 <Col size="md-12">
                   <h2>Upcoming Games</h2>
                 </Col>
+                <Row>
                 {this.state.next5Games.map(event => {
                   return (
                     <Col size="md-6 sm-12">
@@ -325,6 +327,10 @@ class Home extends Component {
                     </Col>
                   );
                 })}
+                </Row>
+                </Col>
+
+                          )}
                   <Col size="md-12">
                     <h2>Past 5 Games</h2>
                   </Col>
@@ -360,9 +366,7 @@ class Home extends Component {
                       </Col>
                     );
                   })}
-                </Row>
-          )}
-          </Col>
+
       </Row>
     );
   }
