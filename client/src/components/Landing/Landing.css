@@ -11,9 +11,17 @@ body {
 }
 
 .btn-outline-light {
+  border-radius: 1.2rem;
+  border-width: .4rem;
+  border-color: #e66722;
+  padding: ;
+}
+
+.btn-outline-dark {
     border-radius: 1.2rem;
     border-width: .4rem;
     border-color: #e66722;
+    padding: ;
 }
 
 .btn-outline-light:hover {
