@@ -108,7 +108,7 @@ class Home extends Component {
       'summary': `${event.vTeam.fullName} @ ${event.hTeam.fullName}`,
       'location': `${locale}`,
       'description': 'Score:',
-      'id': `${event.gameId}`,
+      'id': `00000${event.gameId}`,
       'start': {
         'dateTime': `${startTime}`, // start time
       },
@@ -354,6 +354,7 @@ class Home extends Component {
                             this.state.favGames.includes(event.gameId)
                           )
                         }
+                        calendarClick={() => this.addGametoCalender(event)}
                         favorited={this.state.favGames.includes(event.gameId)}
                         awayTeamLogo={event.vTeam.logo}
                         homeTeamLogo={event.hTeam.logo}
