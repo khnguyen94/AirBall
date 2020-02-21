@@ -257,7 +257,16 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="home">
+      <div>
+        <div className="home">
+          <div className="home-wrap">
+            <div className="home-inner"></div>
+          </div>
+        </div>
+
+        <br />
+        <br />
+
         <Row>
           <Col size="md-4 sm-12">
             <Jumbotron>

@@ -14,7 +14,7 @@ const SignInBTN = () => {
 
     return (
         <div>
-            <Button variant="outline-dark" onClick={handleShow}>login</Button>
+            <Button variant="outline-light" onClick={handleShow}>login</Button>
 
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
