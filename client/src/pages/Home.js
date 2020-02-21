@@ -308,9 +308,10 @@ class Home extends Component {
               </Col>
             ) : (
                 <Col size="md-8 sm-12">
+                <Row>
+                <Col size="md-12 sm-12">
                   <h2>Upcoming Games</h2>
                 </Col>
-                <Row>
                 {this.state.next5Games.map(event => {
                   return (
                     <Col size="md-6 sm-12">
@@ -336,6 +337,7 @@ class Home extends Component {
                   );
                 })}
                 </Row>
+                </Col>
                             )}
                 <Col size="md-12">
                   <h2>Past 5 Games</h2>
