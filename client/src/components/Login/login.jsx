@@ -25,7 +25,6 @@ export class Login extends React.Component {
         this.setState({
             username: event.target.value
         });
-        console.log(event.target.value)
     }
 
     handlePassword(event) {
@@ -33,19 +32,17 @@ export class Login extends React.Component {
         this.setState({
             password: event.target.value
         })
-        console.log(event.target.value)
     }
 
     handleChange(event) {
         this.setState({
             value: event.target.value
         });
-        console.log(event.target.value)
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        alert("You are logged in");
+        
         console.log(event)
         const { username, password } = this.state;
 
@@ -53,13 +50,13 @@ export class Login extends React.Component {
             {
                 username: this.state.username,
                 password: this.state.password
-
+            }).then(function(data){
+                const user = data.data
+                console.log(user);
+                alert(`Welcome ${user.firstName} ${user.lastName}`);
             })
-        console.log("logged")
         //logic for matching database
     }
-
-
 
     render() {
         return (

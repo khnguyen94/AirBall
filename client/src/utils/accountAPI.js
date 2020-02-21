@@ -7,10 +7,10 @@ export default {
         return axios.post("/api/account/signup", accountData);
     },
     logInAccount: function(accountData){
-        axios.post("/api/account/login", accountData);
+        return axios.post("/api/account/login", accountData);
     },
     logOutAccount: function(){
         console.log("accountAPI - LOGOUT");
-        axios.delete("/api/account/logout");
+        return axios.delete("/api/account/logout");
     }
 }

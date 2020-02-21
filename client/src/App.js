@@ -65,22 +65,20 @@ const navLinks = [
 
 class App extends Component {
   state = {
-    teams: []
+    firstName:"",
+    lastName:""
   }
+
   componentDidMount() {
-    // API.intializeTeamData();
-    //   API.getAllTeam().then(data => {
-    //     this.setState({
-    //       teams: data.data
-    //     });
-    //     console.log(this.state.teams);
-    //   })
   }
 
   handleTestEvent = event => {
 
     //test get all team api
     switch (event.target.value) {
+      case "intialize":
+        API.intializeTeamData();
+        break;
       case "getallteam":
         API.getAllTeam().then(data => {
           console.log(data);
@@ -166,15 +164,11 @@ class App extends Component {
     }
   }
 
-  handleSubmitAccount = event => {
+  handleSignIn = () =>{
 
   }
 
-  handleSignIn = event => {
-
-  }
-
-  handleSignOut = event => {
+  handleSignOut = () => {
 
   }
 
@@ -182,10 +176,8 @@ class App extends Component {
     return (
       <Router>
         <Container fluid>
+          
           <div>
-            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
-            <SignInBTN handleSignIn={this.handleSignIn} />
-            <Logout handleSignOut={this.handleSignOut} />
             <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
             <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
             <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
@@ -200,9 +192,14 @@ class App extends Component {
             <button onClick={this.handleTestEvent} value="logout">LogOut User</button>
             <button onClick={this.handleTestEvent} value="addevent">Add Event To Calendar</button>
           </div>
-
+          
           <br />
-          <Nav logo={logo} links={navLinks}/>
+          <div>
+            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
+            <SignInBTN handleSignIn={this.handleSignIn} />
+            <Logout handleSignOut={this.handleSignOut} />
+          </div>
+          <Nav logo={logo} links={navLinks} />
 
           <br />
           {/* <Home teams={this.state.teams}/> */}
