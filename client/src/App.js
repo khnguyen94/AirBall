@@ -69,11 +69,6 @@ class App extends Component {
     firstName:"",
     lastName:""
   }
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> 722674879e60d72dfe49b0900fe3d68b6c70ba56
   componentDidMount() {
   }
 
@@ -181,10 +176,6 @@ class App extends Component {
     return (
       <Router>
         <Container fluid>
-<<<<<<< HEAD
-          <br />
-          <Nav logo={logo} />
-=======
           {/*
           <div>
             <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
@@ -209,7 +200,6 @@ class App extends Component {
             <Logout handleSignOut={this.handleSignOut} />
           </div>
           <Nav logo={logo} links={navLinks} />
->>>>>>> 722674879e60d72dfe49b0900fe3d68b6c70ba56
 
           <br />
           {/* <Home teams={this.state.teams}/> */}
