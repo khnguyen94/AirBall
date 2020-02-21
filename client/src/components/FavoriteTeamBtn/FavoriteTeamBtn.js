@@ -15,7 +15,6 @@ class FavoriteTeamBtn extends Component {
         <Switch
           height={15}
           width={30}
-          // onChange={{checked}, () => {this.props.handleFaveChange}}
           checked={this.state.checked}
           teamid={this.props.teamId}
           className="react-switch"

@@ -101,36 +101,41 @@ class Home extends Component {
 
   addGametoCalender(event) {
     let locale = event.hTeam.fullName.split(" ")[0];
-    let startTime = Moment.utc(event.startTimeUTC).utcOffset(-8).format();
-    let endTime = Moment.utc(event.startTimeUTC).utcOffset(-8).add(3, 'h').format();
+    let startTime = Moment.utc(event.startTimeUTC)
+      .utcOffset(-8)
+      .format();
+    let endTime = Moment.utc(event.startTimeUTC)
+      .utcOffset(-8)
+      .add(3, "h")
+      .format();
     let calendarEvent = {
-      'summary': `${event.vTeam.fullName} @ ${event.hTeam.fullName}`,
-      'location': `${locale}`,
-      'description': 'Score:',
-      'id': `${event.gameId}`,
-      'start': {
-        'dateTime': `${startTime}`, // start time
+      summary: `${event.vTeam.fullName} @ ${event.hTeam.fullName}`,
+      location: `${locale}`,
+      description: "Score:",
+      id: `${event.gameId}`,
+      start: {
+        dateTime: `${startTime}` // start time
       },
-      'end': {
-        'dateTime': `${endTime}`// end time
+      end: {
+        dateTime: `${endTime}` // end time
       },
-      'attendees': [
-        { 'email': 'accountEmail@example.com' }, //account Email
-        { 'email': 'sbrin@example.com' },
+      attendees: [
+        { email: "accountEmail@example.com" }, //account Email
+        { email: "sbrin@example.com" }
       ],
-      'reminders': {
-        'useDefault': false,
-        'overrides': [
-          { 'method': 'email', 'minutes': 24 * 60 },
-          { 'method': 'popup', 'minutes': 10 },
-        ],
-      },
+      reminders: {
+        useDefault: false,
+        overrides: [
+          { method: "email", minutes: 24 * 60 },
+          { method: "popup", minutes: 10 }
+        ]
+      }
     };
-    API.addCalendarEvent(calendarEvent)
+    API.addCalendarEvent(calendarEvent);
     alert("Game added to calender");
   }
 
-  changeFavTeam = (event) => {
+  changeFavTeam = event => {
     const index = event.target.id;
     console.log(event.target.checked);
     console.log(index);
@@ -208,36 +213,39 @@ class Home extends Component {
         .catch(err => console.log(err));
       alert("Game Removed from Favorites!");
     }
-  };
+  }
 
   teamOnClick(teamId) {
-    API.getAllGames(teamId)
-      .then((res) => {
-        let lastGameIndex = this.findLastGame(res.data.api.games);
-        let tempArray = res.data.api.games.slice(lastGameIndex - 5, lastGameIndex)
-        this.setState({
-          next5Games: res.data.api.games.slice(lastGameIndex, lastGameIndex + 5),
-          past5Games: []
-        })
-        for (let i = 0; i < tempArray.length; i++) {
-          API.getGameStats(tempArray[i].gameId)
-            .then((res) => {
-              let gameObj = {
-                homeTeam: tempArray[i].hTeam.nickName,
-                awayTeam: tempArray[i].vTeam.nickName,
-                homeTeamLogo: tempArray[i].hTeam.logo,
-                awayTeamLogo: tempArray[i].vTeam.logo,
-                gameTime: Moment.utc(tempArray[i].startTimeUTC).utcOffset(-8).format("dddd, MMMM Do YYYY"),
-                stats: res.data.api.statistics
-              }
-              this.setState({
-                gameStats: this.state.past5Games.push(gameObj)
-              })
-            })
-            .catch(err => console.log(err));
-        }
-      })
-
+    API.getAllGames(teamId).then(res => {
+      let lastGameIndex = this.findLastGame(res.data.api.games);
+      let tempArray = res.data.api.games.slice(
+        lastGameIndex - 5,
+        lastGameIndex
+      );
+      this.setState({
+        next5Games: res.data.api.games.slice(lastGameIndex, lastGameIndex + 5),
+        past5Games: []
+      });
+      for (let i = 0; i < tempArray.length; i++) {
+        API.getGameStats(tempArray[i].gameId)
+          .then(res => {
+            let gameObj = {
+              homeTeam: tempArray[i].hTeam.nickName,
+              awayTeam: tempArray[i].vTeam.nickName,
+              homeTeamLogo: tempArray[i].hTeam.logo,
+              awayTeamLogo: tempArray[i].vTeam.logo,
+              gameTime: Moment.utc(tempArray[i].startTimeUTC)
+                .utcOffset(-8)
+                .format("dddd, MMMM Do YYYY"),
+              stats: res.data.api.statistics
+            };
+            this.setState({
+              gameStats: this.state.past5Games.push(gameObj)
+            });
+          })
+          .catch(err => console.log(err));
+      }
+    });
   }
 
   // Loads all events and sets them to this.state.events

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import logo from "../../Logo/logo.jpg";
 import NavList from "./NavList";
 import "./Nav.css";
 
@@ -7,15 +6,15 @@ class Nav extends Component {
   // Render function
   render() {
     let links = [
-      { label: 'Home', link: '/', active: true },
+      { label: 'Home', link: '/'},
       { label: 'Favorites', link: 'favorites' },
-      { label: 'Link 3', link: '#link3' },
+      { label: 'Calendar', link: 'calendar' },
       { label: 'Link 4', link: '#link4' },
     ];
 
     return (
       <div>
-        <NavList links={links} logo={logo}/>
+        <NavList links={links}/>
       </div>
     );
   }

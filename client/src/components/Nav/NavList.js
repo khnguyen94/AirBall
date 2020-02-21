@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import logo from "../../Logo/logo.png";
 import "./NavList.css";
 
 class NavList extends Component {
@@ -7,39 +8,41 @@ class NavList extends Component {
   }
 
   render() {
-    let navLinksMarkup = this.props.links.map((link, index) => {
-      let navLinkMarkup = link.active ? (
-        <a className="menu__link menu__link--active" href={link.link}>
-          {link.label}
-        </a>
-      ) : (
-        <a className="menu__link" href={link.link}>
-          {link.label}
-        </a>
-      );
-
+    let renderLinkMarkup = this.props.links.map((link, index) => {
       return (
-        <li key={index} className="menu__list-item">
-          {navLinkMarkup}
+        <li className="nav-item">
+          <a className="nav-link" href={link.link}>
+            {link.label}
+          </a>
         </li>
       );
     });
 
     return (
-      <nav className="menu">
-        <div 
-          style={{
-            backgroundImage: "url(" + this.props.logo + ")"
-          }}
-          className="menu__logo"
-        ></div>
+      <nav className="navbar navbar-expand-md bg-dark fixed-top">
+        <a className="navbar-brand" href="#">
+          <img src={logo} />
+        </a>
 
-        <div>
-          <h1>Air Ball</h1>
-        </div>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarResponsive"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-        <div className="menu__right">
-          <ul className="menu__list">{navLinksMarkup}</ul>
+        <div className="collapse navbar-collapse" id="navbarResponsive">
+          <ul className="navbar-nav ml-auto">
+            {renderLinkMarkup}
+            </ul>
+
+          <div className="">
+            <button className="btn btn-outline-light" type="button">Register</button>
+            <button className="btn btn-outline-light" type="button">Login</button>
+          </div>
+
         </div>
       </nav>
     );

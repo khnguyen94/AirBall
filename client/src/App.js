@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import logo from "./Logo/logo.jpg";
+import logo from "./Logo/logo.png";
 import { Col, Row, Container } from "../src/components/Grid";
 import "./App.css";
 import Nav from "./components/Nav";
@@ -9,6 +9,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import API from "./utils/API";
 import { set } from "mongoose";
 import { PageItem } from "react-bootstrap";
+import LandingPage from "./pages/LandingPage";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -178,31 +179,14 @@ class App extends Component {
     return (
       <Router>
         <Container fluid>
-          <div>
-            <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
-            <SignInBTN handleSignIn={this.handleSignIn} />
-            <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
-            <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
-            <button onClick={this.handleTestEvent} value="getallteam">Get All Teams</button>
-            <button onClick={this.handleTestEvent} value="saveteamtofav">Save Team To Favorite</button>
-            <button onClick={this.handleTestEvent} value="unfavoriteteam">Remove Team From Favorite</button>
-            <button onClick={this.handleTestEvent} value="getallgame">Get All Games</button>
-            <button onClick={this.handleTestEvent} value="getfavgame">Get All Favorite Games</button>
-            <button onClick={this.handleTestEvent} value="favoritegame">Save Game To Favorite</button>
-            <button onClick={this.handleTestEvent} value="unfavoritegame">Remove Game From Favorite</button>
-            <button onClick={this.handleTestEvent} value="register">Register User</button>
-            <button onClick={this.handleTestEvent} value="signin">SignIn User</button>
-            <button onClick={this.handleTestEvent} value="logout">LogOut User</button>
-            <button onClick={this.handleTestEvent} value="addevent">Add Event To Calendar</button>
-          </div>
-
           <br />
           <Nav logo={logo} />
 
           <br />
           {/* <Home teams={this.state.teams}/> */}
           <Switch>
-            <Route exact path="/" component={Home} />
+          <Route exact path="/" component={LandingPage} />
+            <Route exact path="/home" component={Home} />
             <Route exact path="/favorites" component={Favorites} />
           </Switch>
         </Container>

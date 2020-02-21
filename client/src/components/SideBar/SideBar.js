@@ -4,46 +4,45 @@ import { Row } from "../Grid";
 import FavoriteTeamBtn from "../FavoriteTeamBtn";
 
 function SideBar(props) {
-  
   let allSortedTeams = props.teams.sort(function(teamA, teamB) {
     return teamA.teamId - teamB.teamId;
   });
 
   // Function to render all of the teams from allTeamsFiltered
-  let renderAllTeams = allSortedTeams
-    .map((team, index) => {
-      return (
-        <li className="listItem">
-          <a
-            className="listItemText"
-            eventKey={index}
-            href="#"
-            data-teamId={team.teamId}
-            onClick={() => props.clickFunc(team.teamId)}
-          >
-            {team.fullName}
-          </a>
-          <div className="faveBtnContainer" >
-            <input className="star" type="checkbox" id={index} onChange={props.changeFavTeam} checked={team.favorite}/>
-          </div>
-        </li>
-      );
-    });
+  let renderAllTeams = allSortedTeams.map((team, index) => {
+    return (
+      <li className="listItem">
+        <a
+          className="listItemText"
+          eventKey={index}
+          href="#"
+          data-teamId={team.teamId}
+          onClick={() => props.clickFunc(team.teamId)}
+        >
+          {team.fullName}
+        </a>
+        <input
+          className="star"
+          type="checkbox"
+          id={index}
+          onChange={props.changeFavTeam}
+          checked={team.favorite}
+        />
+      </li>
+    );
+  });
 
   // Function to render all the favorite teams from faveTeamsFiltered
-  let renderFaveTeams = props.teams
-    .map((team, index) => {
-      return (
-        <li className="listItem">
-          <a className="listItemText" eventKey={index} href="#">
-            {team.fullName}
-          </a>
-          <div className="faveBtnContainer">
-            {/* <FavoriteTeamBtn clickFaveFunc={props.onChangeFunc} teamId={team.teamId}/> */}
-          </div>
-        </li>
-      );
-    });
+  let renderFaveTeams = props.favteams.map((team, index) => {
+    console.log(team);
+    return (
+      <li className="listItem">
+        <a className="listItemText" eventKey={index} href="#">
+          {team.fullName}
+        </a>
+      </li>
+    );
+  });
 
   return (
     <div className="wrapper">
