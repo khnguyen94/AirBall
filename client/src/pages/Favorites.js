@@ -151,6 +151,37 @@ class Events extends Component {
         }
     };
 
+    addGametoCalender(event) {
+        let locale = event.hTeam.fullName.split(" ")[0];
+        let startTime = Moment.utc(event.startTimeUTC).utcOffset(-8).format();
+        let endTime = Moment.utc(event.startTimeUTC).utcOffset(-8).add(3, 'h').format();
+        let calendarEvent = {
+          'summary': `${event.vTeam.fullName} @ ${event.hTeam.fullName}`,
+          'location': `${locale}`,
+          'description': 'Score:',
+          'id': `00000${event.gameId}`,
+          'start': {
+            'dateTime': `${startTime}`, // start time
+          },
+          'end': {
+            'dateTime': `${endTime}`// end time
+          },
+          'attendees': [
+            { 'email': 'accountEmail@example.com' }, //account Email
+            { 'email': 'sbrin@example.com' },
+          ],
+          'reminders': {
+            'useDefault': false,
+            'overrides': [
+              { 'method': 'email', 'minutes': 24 * 60 },
+              { 'method': 'popup', 'minutes': 10 },
+            ],
+          },
+        };
+        API.addCalendarEvent(calendarEvent)
+        alert("Game added to calender");
+      }
+
     render() {
         return (
             <Container fluid>
@@ -183,6 +214,7 @@ class Events extends Component {
                                                     favorited={this.state.favGames.includes(event.game.games[0].gameId)}
                                                     awayTeamLogo={event.game.games[0].vTeam.logo}
                                                     homeTeamLogo={event.game.games[0].hTeam.logo}
+                                                    calendarClick={() => this.addGametoCalender(event.game.games[0])}
                                                 >
                                                 </EventCard>
                                             </Col>
