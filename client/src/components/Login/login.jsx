@@ -21,14 +21,12 @@ export class Login extends React.Component {
     };
 
     handleUsername(event) {
-        console.log(event.target.value)
         this.setState({
             username: event.target.value
         });
     }
 
     handlePassword(event) {
-        console.log(event.target.value)
         this.setState({
             password: event.target.value
         })

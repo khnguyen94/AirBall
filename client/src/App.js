@@ -176,7 +176,7 @@ class App extends Component {
     return (
       <Router>
         <Container fluid>
-          
+          {/*
           <div>
             <button onClick={this.handleTestEvent} value="intialize">Click One Time</button>
             <button onClick={this.handleTestEvent} value="findfavteam">Get All Fav Teams</button>
@@ -192,7 +192,7 @@ class App extends Component {
             <button onClick={this.handleTestEvent} value="logout">LogOut User</button>
             <button onClick={this.handleTestEvent} value="addevent">Add Event To Calendar</button>
           </div>
-          
+          */}
           <br />
           <div>
             <RegisterBTN handleSubmitAccount={this.handleSubmitAccount} />
