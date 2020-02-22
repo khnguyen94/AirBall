@@ -40,7 +40,7 @@ export class Login extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        
+
         console.log(event)
         const { username, password } = this.state;
 
@@ -48,7 +48,7 @@ export class Login extends React.Component {
             {
                 username: this.state.username,
                 password: this.state.password
-            }).then(function(data){
+            }).then(function (data) {
                 const user = data.data
                 console.log(user);
                 alert(`Welcome ${user.firstName} ${user.lastName}`);
@@ -77,15 +77,15 @@ export class Login extends React.Component {
                                 <label htmlFor="password" value={this.state.password}>Password</label>
                                 <input type="password" name="password" placeholder="password" onChange={this.handlePassword} />
                             </div>
-                            <div className="footer">
-                                <div className="form-group">
-                                    <Button variant="warning" type="submit">Login</Button>
-                                </div>
 
-                                {/* <div className="form-group">
+                            <div className="form-group">
+                                <Button variant="warning" type="submit">Login</Button>
+                            </div>
+
+                            {/* <div className="form-group">
                                     <Button variant="secondary" >Close</Button>
                                 </div> */}
-                            </div>
+
                         </div>
                     </div>
                 </div >

@@ -148,16 +148,16 @@ export class Register extends React.Component {
                             <input type="password" value={this.state.confirmPassword} onChange={this.handleConfirmPassword} name="passwordc" placeholder="*******" />
                         </div>
 
-                        <div className="footer">
-                            <div className="form-group">
-                                <Button variant="warning" type="submit" >Create Account </Button>
 
-                            </div>
+                        <div className="form-group">
+                            <Button variant="warning" type="submit" >Create Account </Button>
 
-                            {/* <div className="form-group">
+                        </div>
+
+                        {/* <div className="form-group">
                                 <Button variant="secondary" href="/" >Close</Button>
                             </div> */}
-                        </div>
+
 
                     </div >
 
