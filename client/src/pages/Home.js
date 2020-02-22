@@ -33,8 +33,6 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    // API.intializeTeamData();
-    this.loadAllTeams();
     this.loadFavTeams();
   }
 
