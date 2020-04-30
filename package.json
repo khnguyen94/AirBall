@@ -34,7 +34,7 @@
     "express-session": "^1.17.0",
     "googleapis": "^39.2.0",
     "if-env": "^1.0.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "method-override": "^3.0.0",
     "moment": "^2.24.0",
     "mongoose": "^5.8.11",
