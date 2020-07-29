@@ -8,11 +8,11 @@ This application spins together all the major utilities offered by many of the m
 
 
 ## Key Technologies
-axios
-Google API
-bootstrap 
-express 
-mongoose
+* axios
+* Google API
+* bootstrap 
+* express 
+* mongoose
 
 
 ## APIs Used
@@ -46,7 +46,7 @@ Pick your favorite teams
 Visit your favorite team's page to see their upcoming 5 games and summaries of their previous 5 games
 
 ## Contributors
-Khoa Nguyen - khnguyen94
-Chad Prybell - cprybell
-Gloria Lee - gklee001
-Xiaoji Li - metacmm
+* Khoa Nguyen - khnguyen94
+* Chad Prybell - cprybell
+* Gloria Lee - gklee001
+* Xiaoji Li - metacmm
