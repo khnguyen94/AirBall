@@ -16,8 +16,8 @@ This application spins together all the major utilities offered by many of the m
 
 
 ## APIs Used
-NBA Game Data API : https://rapidapi.com/blog/nba-basketball-stats-api/
-Google Calendar API : https://developers.google.com/calendar
+* NBA Game Data API : https://rapidapi.com/blog/nba-basketball-stats-api/
+* Google Calendar API : https://developers.google.com/calendar
 
 
 ## Get Started
